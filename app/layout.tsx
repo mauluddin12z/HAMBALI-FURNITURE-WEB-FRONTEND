@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import "./globals.css";
+import FooterSection from "./section/FooterSection";
+import HeaderSection from "./section/HeaderSection";
 
 export const metadata = {
   title: "Hambali Furniture",
@@ -28,7 +30,22 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+
+      <body>
+        <div className="flex flex-col justify-between min-h-screen">
+          <div>
+            <section>
+              <HeaderSection />
+            </section>
+            {children}
+          </div>
+          <div className="mt-28">
+            <section>
+              <FooterSection />
+            </section>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

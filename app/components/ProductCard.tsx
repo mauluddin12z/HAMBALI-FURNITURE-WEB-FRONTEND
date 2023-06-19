@@ -1,20 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Image, { ImageLoader } from "next/image";
-import useSWR from "swr";
 import Link from "next/link";
-import Modal from "@/app/components/Modal";
-import URLGenerator from "@/app/utils/URLGenerator";
+import URLGenerator from "../utils/URLGenerator";
+import Modal from "./Modal";
+import useSWR from "swr";
+import axios from "axios";
 import { FormatRupiah } from "@arismun/format-rupiah";
-import ProductCard from "@/app/components/ProductCard";
-
-const getProducts = async () => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}products`
-  );
-  return res.data;
-};
 
 const getProductById = async (id: number) => {
   const res = await axios.get(
@@ -22,15 +14,16 @@ const getProductById = async (id: number) => {
   );
   return res.data;
 };
-
-export default function ProductsSection() {
+export default function ProductCard({
+  imageUrl,
+  product_name,
+  product_id,
+}: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
 
-  const [productId, setProductId] = useState();
-  const { data } = useSWR("products", getProducts);
-  const limitedProducts = data?.slice(0, 6);
+  const [productId, setProductId] = useState(product_id);
 
   const productById: any = useSWR(
     productId ? ["productById", productId] : null,
@@ -38,54 +31,54 @@ export default function ProductsSection() {
   );
 
   const [showModal, setShowModal] = useState(false);
-
-  const renderItems = [];
-
-  for (let i = 0; i < 6; i++) {
-    renderItems.push(
-      <div
-        key={i}
-        className="h-[400px] w-full border border-gray-200 rounded-lg shadow"
-      >
-        <div className="flex flex-col w-full h-[400px] justify-center items-center">
-          <div className="w-[80%] h-[60%] aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
-          <div className="w-[80%] h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="lg:max-w-7xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-8">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Products</div>
-          <Link
-            href={"/products"}
-            className="font-semibold text-[18px] hover:underline decoration-2 underline-offset-2"
-          >
-            View All
-          </Link>
-        </div>
-        <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-8 lg:px-8 px-0">
-          {limitedProducts
-            ? limitedProducts?.map((products: any, index: number) => (
-                <ProductCard
-                  key={index}
-                  imageUrl={products.imageUrl}
-                  product_id={products.product_id}
-                  product_name={products.product_name}
-                />
-              ))
-            : renderItems}
+    <>
+      <div
+        className={`hover:border-primary-color/60 border-[1px] border-gray-200 hover:scale-[103%] transition-transform ${
+          showModal &&
+          "border-primary-color/60 scale-[103%] ring-3 ring-blue-200"
+        } shadow overflow-hidden rounded-lg`}
+      >
+        <div className="flex flex-col h-[350px]">
+          <div className="relative flex-grow h-[80%]">
+            <div className="absolute w-full h-full flex justify-center items-center p-3">
+              <div className="bg-secondary-color w-full h-full rounded-lg"></div>
+            </div>
+            <div
+              className="relative flex-grow h-full drop-shadow-[0px_0px_5px_rgba(0,0,5,0.5)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,5,1)] transition-shadow cursor-pointer overflow-hidden z-20 flex justify-center items-center"
+              onClick={() => {
+                setShowModal(true);
+                setProductId(product_id);
+              }}
+            >
+              <Image
+                className={`object-contain h-full rounded-t-lg scale-[110%] hover:scale-[115%] ${
+                  showModal && "scale-[115%]"
+                } transition-transform duration-400`}
+                loader={myLoader}
+                src={imageUrl}
+                width={500}
+                height={500}
+                alt={product_name}
+              />
+            </div>
+          </div>
+          <div className="px-5 h-[20%] flex justify-center items-center z-20">
+            <Link
+              href={`/products/${URLGenerator(product_name)}`}
+              className="text-[16px] font-semibold tracking-tight text-gray-900 text-center hover:underline decoration-2 underline-offset-4"
+            >
+              {product_name}
+            </Link>
+          </div>
         </div>
       </div>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-        <div className="flex lg:flex-row flex-col justify-center items-center lg:p-10 p-2">
+        <div className="flex lg:flex-row flex-col justify-center items-center lg:p-10 p-2 z-[50]">
           <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)]">
             {productById.data?.imageUrl ? (
               <Image
-                className="object-contain h-full rounded-t-lg transition-all -mt-16 -ml-10"
+                className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
                 src={productById.data?.imageUrl}
                 loader={myLoader}
                 width={500}
@@ -96,7 +89,7 @@ export default function ProductsSection() {
               <div>No image available</div>
             )}
           </div>
-          <div className="flex flex-col flex-grow">
+          <div className="flex flex-col flex-grow lg:w-auto w-full">
             {productById.data?.product_name ? (
               <>
                 <div className="font-bold lg:text-[18px] text-[14px]">
@@ -115,17 +108,6 @@ export default function ProductsSection() {
                 </div>
                 <div className="text-gray-600 lg:text-[16px] text-[14px]">
                   {productById.data?.Category.category}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.description ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Deskripsi:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.description}
                 </div>
                 <div className="w-full h-[1px] bg-black mb-3"></div>
               </>
@@ -183,6 +165,6 @@ export default function ProductsSection() {
           </div>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
