@@ -66,6 +66,11 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="max-w-5xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col w-full">
+        <div className="flex lg:justify-start justify-between items-center w-full mb-8">
+          <div className="font-semibold lg:text-[36px] text-[28px]">
+            Products
+          </div>
+        </div>
         <div className="flex lg:flex-row flex-col mb-16">
           {data ? (
             <>
