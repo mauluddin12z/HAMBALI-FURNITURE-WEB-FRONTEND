@@ -82,7 +82,7 @@ export default function CategoriesSection() {
                     <SwiperSlide key={index}>
                       <Link
                         href={`/categories/${URLGenerator(
-                          categories.category
+                          categories?.category
                         )}`}
                         className="w-full h-full"
                       >

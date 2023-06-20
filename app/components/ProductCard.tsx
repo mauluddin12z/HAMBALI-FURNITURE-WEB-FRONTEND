@@ -101,13 +101,13 @@ export default function ProductCard({
                 <div className="w-full h-[1px] bg-black mb-3"></div>
               </>
             ) : null}
-            {productById.data?.Category.category ? (
+            {productById.data?.category.category ? (
               <>
                 <div className="font-bold lg:text-[18px] text-[14px]">
                   Kategori:
                 </div>
                 <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.Category.category}
+                  {productById.data?.category.category}
                 </div>
                 <div className="w-full h-[1px] bg-black mb-3"></div>
               </>
