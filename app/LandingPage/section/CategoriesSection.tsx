@@ -50,7 +50,7 @@ export default function CategoriesSection() {
     renderItems.push(
       <div
         key={i}
-        className="border w-full border-gray-200 shadow h-[450px] flex justify-center items-center p-3"
+        className="border w-full border-gray-200 shadow h-[450px] flex justify-center items-center p-4"
       >
         <div className="w-full h-full aspect-square bg-secondary-color animate-pulse"></div>
       </div>

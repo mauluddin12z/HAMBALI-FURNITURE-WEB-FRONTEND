@@ -35,7 +35,7 @@ export default function ProductsSection() {
   }
 
   return (
-    <div className="lg:max-w-7xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-8">
+    <div className="lg:max-w-7xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-4">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
           <div className="font-semibold lg:text-[36px] text-[28px]">Products</div>

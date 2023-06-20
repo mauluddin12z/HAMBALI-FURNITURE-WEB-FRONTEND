@@ -77,7 +77,7 @@ export default function FooterSection() {
                       className="text-gray-600 hover:text-black text-[14px]"
                     >
                       <Link
-                        href={`/categories/${URLGenerator(
+                        href={`/products/${URLGenerator(
                           products.product_name
                         )}`}
                       >
