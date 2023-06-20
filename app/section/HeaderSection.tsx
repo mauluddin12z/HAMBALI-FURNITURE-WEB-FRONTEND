@@ -127,7 +127,6 @@ export default function HeaderSection() {
                 ></i>
               </button>
               <div
-                id="searchForm"
                 className={`absolute -right-4 left-auto transition-all z-20 w-96 ${
                   searchFormVisible
                     ? "opacity-100 top-20"
@@ -170,28 +169,33 @@ export default function HeaderSection() {
 
         <div className={mediaQuery?.matches ? "block" : "hidden"}>
           <div
-            id="searchForm"
             className={`w-full h-auto fixed inset-0 transition-all flex justify-center ${
               searchFormVisible
                 ? "opacity-100 top-[110px]"
                 : "opacity-0 top-[130px] -z-10 pointer-events-none"
             }`}
           >
-            <form onSubmit={handleSearch} className="relative w-[90%]">
-              <input
-                className="focus:ring-4 focus:ring-blue-400 focus:outline-none pl-4 pr-14 py-5 w-full shadow-lg border"
-                type="text"
-                value={searchValue}
-                onChange={handleChangeSearchValue}
-                placeholder="Cari lemari, meja, rak..."
-              />
-              <button
-                type="submit"
-                className="absolute text-[22px] right-4 top-4"
-              >
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </form>
+            <div className="relative w-full flex justify-center">
+              <div
+                className="w-full h-full"
+                onClick={() => setSearchFormVisible(false)}
+              ></div>
+              <form onSubmit={handleSearch} className="z-50 absolute top-0 w-[90%]">
+                <input
+                  className="focus:ring-4 focus:ring-blue-400 focus:outline-none pl-4 pr-14 py-5 w-full shadow-lg border"
+                  type="text"
+                  value={searchValue}
+                  onChange={handleChangeSearchValue}
+                  placeholder="Cari lemari, meja, rak..."
+                />
+                <button
+                  type="submit"
+                  className="absolute text-[22px] right-4 top-4"
+                >
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
           </div>
           <div className="flex gap-x-4">
             <button
