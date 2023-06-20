@@ -11,7 +11,7 @@ import TextEllipsis from "../utils/TextEllipsis";
 
 const getBlogById = async (id: number) => {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs/${id}`
+    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blog/${id}`
   );
   return res.data;
 };
