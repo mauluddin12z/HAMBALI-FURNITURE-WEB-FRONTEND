@@ -114,9 +114,9 @@ export default function Page() {
         key={i}
         className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
       >
-        <div className="flex flex-col w-full h-[350px] justify-center items-center">
-          <div className="w-[80%] h-[60%] aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
-          <div className="w-[80%] h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
+        <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
+          <div className="w-full h-full aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
+          <div className="w-full h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
         </div>
       </div>
     );

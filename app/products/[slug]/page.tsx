@@ -57,8 +57,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         key={i}
         className="w-full h-full border border-gray-200 rounded-lg shadow"
       >
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="w-[80%] h-[80%] aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
+        <div className="w-full h-full flex justify-center items-center p-3">
+          <div className="w-full h-full aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
         </div>
       </div>
     );
