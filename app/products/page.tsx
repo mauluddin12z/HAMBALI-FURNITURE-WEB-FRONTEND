@@ -108,13 +108,13 @@ export default function Page() {
     pageNumbers.push(i);
   }
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < limit; i++) {
     renderItems.push(
       <div
         key={i}
-        className="h-[400px] w-full border border-gray-200 rounded-lg shadow"
+        className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
       >
-        <div className="flex flex-col w-full h-[400px] justify-center items-center">
+        <div className="flex flex-col w-full h-[350px] justify-center items-center">
           <div className="w-[80%] h-[60%] aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
           <div className="w-[80%] h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
         </div>
