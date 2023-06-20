@@ -16,14 +16,14 @@ export default function Modal({ isVisible, onClose, children }: any) {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-30 lg:mt-0 mt-20"
       onClick={handleClose}
     >
-      <div className="lg:w-[600px] w-[350px] h-[470px] lg:h-auto bg-white p-4 rounded flex flex-col lg:overflow-hidden overflow-y-scroll">
+      <div className="lg:w-[600px] w-[350px] h-[470px] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden">
         <button
-          className="text-gray-600 hover:text-black text-xl place-self-end text-[32px] fixed"
+          className="text-gray-600 hover:text-black text-xl place-self-end text-[32px] fixed z-40"
           onClick={() => onClose()}
         >
           <i className="fa-solid fa-xmark"></i>
         </button>
-        <div className="">{children}</div>
+        <div className="overflow-y-scroll lg:overflow-hidden z-30">{children}</div>
       </div>
     </div>
   );

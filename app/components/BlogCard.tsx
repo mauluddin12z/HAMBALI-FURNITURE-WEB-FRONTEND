@@ -7,6 +7,7 @@ import useSWR from "swr";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import axios from "axios";
+import TextEllipsis from "../utils/TextEllipsis";
 
 const getBlogById = async (id: number) => {
   const res = await axios.get(
@@ -30,11 +31,11 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
   return (
     <>
       <div className={`border border-gray-200 overflow-hidden p-6`}>
-        <div className="flex flex-col h-[350px]">
-          <div className="relative flex-grow h-[80%]">
+        <div className="flex flex-col h-[370px]">
+          <div className="relative h-[80%] flex-shrink-0">
             <Link
               href={`/blogs/${URLGenerator(title)}`}
-              className="relative flex-grow h-full cursor-pointer overflow-hidden z-20 flex justify-center items-center"
+              className="relative h-full cursor-pointer overflow-hidden z-20 flex justify-center items-center"
             >
               <div
                 className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
@@ -57,17 +58,17 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
               />
             </Link>
           </div>
-          <div className="h-[10%] z-20 text-gray-400 mt-1">
+          <div className="h-[10%] z-20 text-gray-400 mt-1 text-[14px]">
             {format(new Date(createdAt), "EEEE, d MMMM yyyy HH:mm 'WIB'", {
               locale: id,
             })}
           </div>
-          <div className="h-[10%] flex items-center z-20">
+          <div className="h-[20%] flex items-center z-20 mt-2">
             <Link
               href={`/blogs/${URLGenerator(title)}`}
-              className="text-[16px] font-semibold tracking-tight text-gray-900 text-left text-ellipsis hover:underline decoration-2 underline-offset-4"
+              className="text-[18px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4"
             >
-              {title}
+              {TextEllipsis(title, 56)}
             </Link>
           </div>
         </div>
