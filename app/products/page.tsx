@@ -116,7 +116,7 @@ export default function Page() {
       >
         <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
           <div className="w-full h-full aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
-          <div className="w-full h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
+          <div className="w-full h-[10%] bg-primary-color/20 rounded-lg mt-4 animate-pulse"></div>
         </div>
       </div>
     );
@@ -125,7 +125,9 @@ export default function Page() {
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
         <div className="flex lg:justify-start justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Products</div>
+          <div className="font-semibold lg:text-[36px] text-[28px]">
+            Products
+          </div>
           <button
             className="border border-gray-200/80 rounded-lg p-2 flex justify-center items-center lg:hidden"
             onClick={() => setFilterVisible(true)}
@@ -145,7 +147,7 @@ export default function Page() {
             } mr-4 border lg:static bg-white`}
           >
             <button
-              className={`p-4 absolute top-0 right-0 text-[24px] ${
+              className={`p-4 absolute top-0 right-0 text-[24px] z-50 ${
                 !filterVisible && "hidden"
               }`}
               onClick={() => setFilterVisible(false)}
@@ -228,7 +230,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="lg:w-[80%] w-full flex flex-col rounded-lg items-center justify-between">
+          <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
             {data?.length == 0 ? (
               <div className="w-full h-full flex justify-center items-center">
                 No product available.

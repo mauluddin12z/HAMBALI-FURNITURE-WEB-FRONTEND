@@ -75,94 +75,118 @@ export default function ProductCard({
       </div>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
         <div className="flex lg:flex-row flex-col justify-center items-center lg:p-10 p-2 z-[50]">
-          <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)]">
-            {productById.data?.imageUrl ? (
-              <Image
-                className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
-                src={productById.data?.imageUrl}
-                loader={myLoader}
-                width={500}
-                height={500}
-                alt={productById.data?.product_name}
-              />
-            ) : (
-              <div>No image available</div>
-            )}
-          </div>
-          <div className="flex flex-col flex-grow lg:w-auto w-full">
-            {productById.data?.product_name ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Nama Produk:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.product_name}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.category.category ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Kategori:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.category.category}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.dimensions ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Dimensi:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.dimensions}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.material ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Material:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.material}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.color ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Warna:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {productById.data?.color}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            {productById.data?.price ? (
-              <>
-                <div className="font-bold lg:text-[18px] text-[14px]">
-                  Harga:
-                </div>
-                <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                  {<FormatRupiah value={productById.data?.price} />}
-                </div>
-                <div className="w-full h-[1px] bg-black mb-3"></div>
-              </>
-            ) : null}
-            <Link
-              href={`/products/${URLGenerator(productById.data?.product_name)}`}
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-4"
-            >
-              See details
-            </Link>
-          </div>
+          {productById ? (
+            <>
+              <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)] overflow-hidden">
+                {productById.data?.imageUrl ? (
+                  <Image
+                    className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
+                    src={productById.data?.imageUrl}
+                    loader={myLoader}
+                    width={500}
+                    height={500}
+                    alt={productById.data?.product_name}
+                    priority
+                  />
+                ) : (
+                  <div>No image available</div>
+                )}
+              </div>
+              <div className="flex flex-col flex-grow lg:w-auto w-full">
+                {productById.data?.product_name ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Nama Produk:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {productById.data?.product_name}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                {productById.data?.category.category ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Kategori:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {productById.data?.category.category}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                {productById.data?.dimensions ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Dimensi:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {productById.data?.dimensions}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                {productById.data?.material ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Material:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {productById.data?.material}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                {productById.data?.color ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Warna:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {productById.data?.color}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                {productById.data?.price ? (
+                  <>
+                    <div className="font-bold lg:text-[18px] text-[14px]">
+                      Harga:
+                    </div>
+                    <div className="text-gray-600 lg:text-[16px] text-[14px]">
+                      {<FormatRupiah value={productById.data?.price} />}
+                    </div>
+                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                  </>
+                ) : null}
+                <Link
+                  href={`/products/${URLGenerator(
+                    productById.data?.product_name
+                  )}`}
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-4"
+                >
+                  See details
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-[80%] h-8 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
+              <div className="w-[30%] h-4 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
+              <div className="relative overflow-hidden lg:w-[40%] w-full aspect-square flex bg-secondary-color rounded-lg animate-pulse mr-14 mb-6 border"></div>
+              <div className="flex flex-col gap-4 flex-grow">
+                <div className="w-[200px] h-8 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
+                <div className="w-full h-[200px] bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
+                <div className="w-full h-10 bg-secondary-color rounded-full animate-pulse"></div>
+              </div>
+            </>
+          )}
         </div>
       </Modal>
     </>

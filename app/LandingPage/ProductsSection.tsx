@@ -4,10 +4,10 @@ import axios from "axios";
 import Image, { ImageLoader } from "next/image";
 import useSWR from "swr";
 import Link from "next/link";
-import Modal from "@/app/components/Modal";
-import URLGenerator from "@/app/utils/URLGenerator";
+import Modal from "../components/Modal";
 import { FormatRupiah } from "@arismun/format-rupiah";
-import ProductCard from "@/app/components/ProductCard";
+import URLGenerator from "../utils/URLGenerator";
+import ProductCard from "../components/ProductCard";
 
 const getProducts = async () => {
   const res = await axios.get(
@@ -49,7 +49,7 @@ export default function ProductsSection() {
       >
         <div className="flex flex-col w-full h-[400px] justify-center items-center p-3">
           <div className="w-full h-full aspect-square bg-primary-color/20 rounded-lg animate-pulse"></div>
-          <div className="w-full h-[10%] bg-primary-color/20 rounded-lg mt-10 animate-pulse"></div>
+          <div className="w-full h-[10%] bg-primary-color/20 rounded-lg mt-4 animate-pulse"></div>
         </div>
       </div>
     );

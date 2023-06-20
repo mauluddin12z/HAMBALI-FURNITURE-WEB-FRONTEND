@@ -1,7 +1,8 @@
 import React from "react";
-import OpeningSection from "./section/LandingPage/OpeningSection";
-import ProductsSection from "./section/LandingPage/ProductsSection";
-import CategoriesSection from "./section/LandingPage/CategoriesSection";
+import OpeningSection from "./LandingPage/section/OpeningSection";
+import CategoriesSection from "./LandingPage/section/CategoriesSection";
+import ProductsSection from "./LandingPage/section/ProductsSection";
+import BlogsSection from "./LandingPage/section/BlogsSection";
 
 export default function page() {
   return (
@@ -12,8 +13,11 @@ export default function page() {
       <section className="lg:mb-28 mb-16">
         <CategoriesSection />
       </section>
-      <section className="lg:mb-28 mb-16" id="products">
+      <section className="lg:mb-28 mb-16">
         <ProductsSection />
+      </section>
+      <section className="lg:mb-28 mb-16">
+        <BlogsSection />
       </section>
     </>
   );

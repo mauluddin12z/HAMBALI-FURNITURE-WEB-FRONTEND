@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable @next/next/no-page-custom-font */;
+import FooterSection from "./components/FooterSection";
+import HeaderSection from "./components/HeaderSection";
 import "./globals.css";
-import FooterSection from "./section/FooterSection";
-import HeaderSection from "./section/HeaderSection";
 
 export const metadata = {
   title: "Hambali Furniture",

@@ -17,6 +17,10 @@ export default function HeaderSection() {
       link: "/categories",
     },
     {
+      name: "Blogs",
+      link: "/blogs",
+    },
+    {
       name: "About Us",
       link: "/aboutus",
     },

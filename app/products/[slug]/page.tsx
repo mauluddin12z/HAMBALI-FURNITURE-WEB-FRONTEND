@@ -66,11 +66,6 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="max-w-5xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col w-full">
-        <div className="flex lg:justify-start justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">
-            Products
-          </div>
-        </div>
         <div className="flex lg:flex-row flex-col mb-16">
           {data ? (
             <>
@@ -92,7 +87,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </Link>
                 </div>
               ) : null}
-              <div className="relative overflow-hidden lg:w-[450px] w-full flex rounded-lg mr-14 mb-6 bg-secondary-color flex-shrink-0 justify-center items-center">
+              <div className="relative overflow-hidden lg:w-[350px] w-full flex rounded-lg mr-14 mb-6 bg-secondary-color flex-shrink-0 justify-center items-center">
                 <Image
                   loader={myLoader}
                   src={data?.imageUrl}
@@ -165,7 +160,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <>
               <div className="w-[80%] h-8 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
               <div className="w-[30%] h-4 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
-              <div className="relative overflow-hidden lg:w-[40%] w-full aspect-square flex bg-secondary-color rounded-lg animate-pulse mr-14 mb-6 border"></div>
+              <div className="relative overflow-hidden lg:w-[35%] w-full aspect-square flex bg-secondary-color rounded-lg animate-pulse mr-14 mb-6"></div>
               <div className="flex flex-col gap-4 flex-grow">
                 <div className="w-[200px] h-8 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>

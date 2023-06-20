@@ -51,7 +51,7 @@ export default function FooterSection() {
                 menyediakan furnitur modern dan minimalis yang menghadirkan
                 sentuhan elegan dan fungsional untuk rumah dan ruang kerja Anda.
               </div>
-              <div className="flex gap-x-4">
+              <div className="flex gap-x-1">
                 {socialMedia &&
                   socialMedia?.map((socialMedia: any, index: number) => (
                     <a
