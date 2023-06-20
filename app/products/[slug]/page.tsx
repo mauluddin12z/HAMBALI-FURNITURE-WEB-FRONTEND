@@ -81,14 +81,14 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </div>
                 </>
               ) : null}
-              {data?.Category.category ? (
+              {data?.category.category ? (
                 <div className="block lg:hidden text-[16px] font-semibold text-gray-400 mb-6">
                   <Link
                     href={`/categories/${URLGenerator(
-                      data?.Category.category
+                      data?.category.category
                     )}`}
                   >
-                    {data.Category.category}
+                    {data.category.category}
                   </Link>
                 </div>
               ) : null}
@@ -110,14 +110,14 @@ export default function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </>
                 ) : null}
-                {data?.Category.category ? (
+                {data?.category.category ? (
                   <div className="lg:block hidden text-[16px] font-semibold text-gray-400 mb-6">
                     <Link
                       href={`/categories/${URLGenerator(
-                        data?.Category.category
+                        data?.category.category
                       )}`}
                     >
-                      {data.Category.category}
+                      {data.category.category}
                     </Link>
                   </div>
                 ) : null}
