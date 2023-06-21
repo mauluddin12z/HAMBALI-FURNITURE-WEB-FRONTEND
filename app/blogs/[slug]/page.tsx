@@ -93,14 +93,6 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="w-full h-72 bg-secondary-color animate-pulse rounded-lg mt-4"></div>
           </>
         )}
-        <div className="text-[14px] text-gray-600 mt-8">
-          Jika Anda ingin informasi lebih lanjut, silahkan hubungi kami melalui
-          nomor di bawah ini atau ke sosial media kami.
-        </div>
-        <div className="flex">
-          <div className="">Whatsapp</div>
-          <div className="">Whatsapp</div>
-        </div>
       </div>
     </div>
   );
