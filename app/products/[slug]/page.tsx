@@ -64,8 +64,26 @@ export default function Page({ params }: { params: { slug: string } }) {
     );
   }
   return (
-    <div className="max-w-5xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
+    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col w-full">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/30 rounded-lg p-10 text-[12px] lg:text-[16px]">
+          <Link href={"/"} className="text-black hover:text-primary-color">
+            Home
+          </Link>
+          <div className="text-black text-[14px]">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <Link
+            href={"/products"}
+            className="text-black hover:text-primary-color"
+          >
+            Products
+          </Link>
+          <div className="text-black">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div className="text-gray-400">{data?.product_name}</div>
+        </div>
         <div className="flex lg:flex-row flex-col mb-16">
           {data ? (
             <>
@@ -147,13 +165,15 @@ export default function Page({ params }: { params: { slug: string } }) {
                     <span> {<FormatRupiah value={data?.price} />}</span>
                   </div>
                 ) : null}
-                <Link
-                  href={"https://wa.me/6281369982678"}
-                  target="_blank"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 mt-6 text-center"
-                >
-                  Contact Us
-                </Link>
+                <div className="mt-6">
+                  <Link
+                    href={"https://wa.me/6281369982678"}
+                    target="_blank"
+                    className="px-10 py-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm text-center"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
               </div>
             </>
           ) : (

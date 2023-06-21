@@ -24,14 +24,14 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
   const [blogId, setBlogId] = useState(blog_id);
 
   const blogById: any = useSWR(
-    blog_id ? ["productById", blog_id] : null,
+    blog_id ? ["blogById", blog_id] : null,
     () => blog_id && getBlogById(blog_id)
   );
 
   return (
     <>
-      <div className={`border border-gray-200 overflow-hidden p-6`}>
-        <div className="flex flex-col h-[370px]">
+      <div className={`border border-gray-200 overflow-hidden p-6 h-[400px]`}>
+        <div className="flex flex-col h-full">
           <div className="relative h-[80%] flex-shrink-0">
             <Link
               href={`/blogs/${URLGenerator(title)}`}
@@ -68,7 +68,7 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
               href={`/blogs/${URLGenerator(title)}`}
               className="text-[18px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4"
             >
-              {TextEllipsis(title, 56)}
+              {TextEllipsis(title, 36)}
             </Link>
           </div>
         </div>

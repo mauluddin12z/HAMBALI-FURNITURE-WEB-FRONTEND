@@ -5,6 +5,7 @@ import useSWR from "swr";
 import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import FilterIcon from "@/public/images/filterIcon.svg";
+import Link from "next/link";
 
 const getProducts = async (
   start: number,
@@ -124,6 +125,15 @@ export default function Page() {
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/30 rounded-lg p-10 text-[12px] lg:text-[16px]">
+          <Link href={"/"} className="text-black hover:text-primary-color">
+            Home
+          </Link>
+          <div className="text-black text-[14px]">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div className="text-gray-400">Products</div>
+        </div>
         <div className="flex lg:justify-start justify-between items-center w-full mb-8">
           <div className="font-semibold lg:text-[36px] text-[28px]">
             Products
@@ -232,7 +242,7 @@ export default function Page() {
           </div>
           <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
             {data?.length == 0 ? (
-              <div className="w-full h-full flex justify-center items-center">
+              <div className="w-full h-ful h-[500px] flex justify-center items-center">
                 No product available.
               </div>
             ) : (

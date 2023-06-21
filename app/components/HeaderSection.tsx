@@ -171,95 +171,110 @@ export default function HeaderSection() {
 
         {/* Mobile */}
 
-        <div className={mediaQuery?.matches ? "block" : "hidden"}>
-          <div
-            className={`w-full h-auto fixed inset-0 transition-all flex justify-center ${
-              searchFormVisible
-                ? "opacity-100 top-[110px]"
-                : "opacity-0 top-[130px] -z-10 pointer-events-none"
-            }`}
-          >
-            <div className="relative w-full flex justify-center">
-              <div
-                className="w-full h-full"
-                onClick={() => setSearchFormVisible(false)}
-              ></div>
-              <form onSubmit={handleSearch} className="z-50 absolute top-0 w-[90%]">
-                <input
-                  className="focus:ring-4 focus:ring-blue-400 focus:outline-none pl-4 pr-14 py-5 w-full shadow-lg border"
-                  type="text"
-                  value={searchValue}
-                  onChange={handleChangeSearchValue}
-                  placeholder="Cari lemari, meja, rak..."
-                />
-                <button
-                  type="submit"
-                  className="absolute text-[22px] right-4 top-4"
-                >
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </form>
-            </div>
-          </div>
-          <div className="flex gap-x-4">
-            <button
-              className="text-[22px] transition-all w-6 text-black hover:text-primary-color"
-              onClick={() => setSearchFormVisible((prev) => !prev)}
-            >
-              <i
-                className={`fa-solid ${
-                  searchFormVisible ? "fa-xmark" : "fa-magnifying-glass"
-                } `}
-              ></i>
-            </button>
-            <button
-              className={`p-2 ${
-                menuVisible
-                  ? "fixed z-50 text-black text-[24px]"
-                  : "static text-black text-[18px]"
+        {mediaQuery?.matches && (
+          <>
+            <div
+              className={`w-full h-auto fixed inset-0 transition-all flex justify-center ${
+                searchFormVisible
+                  ? "opacity-100 top-[110px]"
+                  : "opacity-0 top-[130px] -z-10 pointer-events-none"
               }`}
-              onClick={toggleMenu}
             >
-              <i
-                className={`fa-solid ${menuVisible ? "fa-xmark" : "fa-bars"} `}
-              ></i>
-            </button>
-          </div>
-          <div
-            className={`${
-              menuVisible ? "block" : "hidden"
-            } w-full h-screen fixed inset-0 bg-secondary-color overflow-hidden`}
-          >
-            <ul className="font-normal flex flex-col justify-center items-center h-full gap-y-8 text-black">
-              {navItemMenu &&
-                navItemMenu?.map((navItem: any, index: number) => (
-                  <li key={index}>
-                    <Link
-                      href={navItem.link}
-                      className="active:text-primary-color transition-all p-4"
-                      onClick={() => setMenuVisible(false)}
-                    >
-                      {navItem.name}
-                    </Link>
-                  </li>
-                ))}
-              <div className="flex gap-x-6 text-black">
-                {socialMedia &&
-                  socialMedia?.map((socialMedia: any, index: number) => (
-                    <li key={index}>
-                      <a
-                        href={socialMedia.link}
-                        target="_blank"
-                        className="hover:text-primary-color text-[24px] transition-all"
-                      >
-                        <i className={`fa-brands fa-${socialMedia.icon}`}></i>
-                      </a>
-                    </li>
-                  ))}
+              <div className="relative w-full flex justify-center">
+                <div
+                  className="w-full h-full"
+                  onClick={() => setSearchFormVisible(false)}
+                ></div>
+                <form
+                  onSubmit={handleSearch}
+                  className="z-50 absolute top-0 w-[90%]"
+                >
+                  <input
+                    className="focus:ring-4 focus:ring-blue-400 focus:outline-none pl-4 pr-14 py-5 w-full shadow-lg border"
+                    type="text"
+                    value={searchValue}
+                    onChange={handleChangeSearchValue}
+                    placeholder="Cari lemari, meja, rak..."
+                  />
+                  <button
+                    type="submit"
+                    className="absolute text-[22px] right-4 top-4"
+                  >
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </form>
               </div>
-            </ul>
-          </div>
-        </div>
+            </div>
+            <div className="flex gap-x-4">
+              <button
+                className="text-[22px] transition-all w-6 text-black hover:text-primary-color"
+                onClick={() => setSearchFormVisible((prev) => !prev)}
+              >
+                <i
+                  className={`fa-solid ${
+                    searchFormVisible ? "fa-xmark" : "fa-magnifying-glass"
+                  } `}
+                ></i>
+              </button>
+              <button
+                className={`p-2 ${
+                  menuVisible
+                    ? "fixed z-50 text-black text-[24px]"
+                    : "static text-black text-[18px]"
+                }`}
+                onClick={toggleMenu}
+              >
+                <i
+                  className={`fa-solid ${
+                    menuVisible ? "fa-xmark" : "fa-bars"
+                  } `}
+                ></i>
+              </button>
+            </div>
+            <div
+              className={`${
+                menuVisible ? "block" : "hidden"
+              } w-full h-screen fixed inset-0 bg-secondary-color overflow-hidden`}
+            >
+              <div className="relative w-full h-full z-10">
+                <div className="absolute w-[30%] aspect-square bg-white blur-3xl rounded-full bottom-0 right-0"></div>
+                <div className="absolute w-[40%] aspect-square bg-white/50 blur-3xl rounded-full top-0 left-0"></div>
+                <div className="relative flex justify-center items-center w-full h-full">
+                  <ul className="font-normal flex flex-col justify-center items-center h-full gap-y-8 text-gray-700 z-20">
+                    {navItemMenu &&
+                      navItemMenu?.map((navItem: any, index: number) => (
+                        <li key={index}>
+                          <Link
+                            href={navItem.link}
+                            className="active:text-primary-color transition-all p-4"
+                            onClick={() => setMenuVisible(false)}
+                          >
+                            {navItem.name}
+                          </Link>
+                        </li>
+                      ))}
+                    <div className="flex gap-x-6 text-gray-700">
+                      {socialMedia &&
+                        socialMedia?.map((socialMedia: any, index: number) => (
+                          <li key={index}>
+                            <a
+                              href={socialMedia.link}
+                              target="_blank"
+                              className="hover:text-primary-color text-[24px] transition-all"
+                            >
+                              <i
+                                className={`fa-brands fa-${socialMedia.icon}`}
+                              ></i>
+                            </a>
+                          </li>
+                        ))}
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );

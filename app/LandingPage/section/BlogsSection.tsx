@@ -12,12 +12,12 @@ const getBlogs = async () => {
 
 export default function BlogsSection() {
   const { data } = useSWR("blogs", getBlogs);
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(4);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
 
     if (mediaQuery.matches) {
-      setLimit(3);
+      setLimit(2);
     }
   }, []);
   const limitedBlogs = data?.slice(0, limit);
@@ -53,7 +53,7 @@ export default function BlogsSection() {
             View All
           </Link>
         </div>
-        <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-8">
+        <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-8">
           {limitedBlogs
             ? limitedBlogs?.map((blogs: any, index: number) => (
                 <BlogCard

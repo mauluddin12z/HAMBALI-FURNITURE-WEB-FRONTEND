@@ -4,6 +4,7 @@ import axios from "axios";
 import useSWR from "swr";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
+import Link from "next/link";
 
 const getBlogs = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredBlogs?start=${start}&limit=${limit}`;
@@ -20,7 +21,7 @@ const getTotalBlogs = async () => {
 
 export default function Page() {
   const [start, setStart] = useState(0);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(8);
   const [dataLength, setDataLength] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -37,7 +38,6 @@ export default function Page() {
   );
 
   const totalBlogs = useSWR("totalBlogs", getTotalBlogs);
-  console.log(totalBlogs)
 
   const renderItems = [];
 
@@ -90,18 +90,27 @@ export default function Page() {
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/30 rounded-lg p-10 text-[12px] lg:text-[16px]">
+          <Link href={"/"} className="text-black hover:text-primary-color">
+            Home
+          </Link>
+          <div className="text-black lg:text-[14px]">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div className="text-gray-400">Blogs</div>
+        </div>
         <div className="flex lg:justify-start justify-between items-center w-full mb-8">
           <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
         </div>
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
           {data?.length == 0 ? (
-            <div className="w-full h-full flex justify-center items-center">
+            <div className="w-full h-[500px] flex justify-center items-center border">
               No blog available.
             </div>
           ) : (
             <div className="hidden"></div>
           )}
-          <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
+          <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-4 mb-4">
             {data
               ? data?.map((blogs: any, index: number) => (
                   <BlogCard

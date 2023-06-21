@@ -6,6 +6,7 @@ import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
 import Image, { ImageLoader } from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import Link from "next/link";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -27,8 +28,17 @@ export default function Page({ params }: { params: { slug: string } }) {
   );
 
   return (
-    <div className="max-w-4xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
+    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col w-full">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/30 rounded-lg p-10 text-[12px] lg:text-[16px]">
+          <Link href={"/"} className="text-black hover:text-primary-color">
+            Home
+          </Link>
+          <div className="text-black lg:text-[14px]">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div className="text-gray-400">Blogs</div>
+        </div>
         <div className="relative h-96 flex-shrink-0">
           {data ? (
             <div className="relative h-full overflow-hidden z-20 flex justify-center items-center">
@@ -83,6 +93,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="w-full h-72 bg-secondary-color animate-pulse rounded-lg mt-4"></div>
           </>
         )}
+        <div className="text-[14px] text-gray-600 mt-8">
+          Jika Anda ingin informasi lebih lanjut, silahkan hubungi kami melalui
+          nomor di bawah ini atau ke sosial media kami.
+        </div>
+        <div className="flex">
+          <div className="">Whatsapp</div>
+          <div className="">Whatsapp</div>
+        </div>
       </div>
     </div>
   );

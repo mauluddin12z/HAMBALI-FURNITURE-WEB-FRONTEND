@@ -104,7 +104,7 @@ export default function ProductCard({
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.category.category ? (
+                {productById.data?.category?.category ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Kategori:

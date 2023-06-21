@@ -7,15 +7,15 @@ import backgroundOpening from "@/public/images/background_opening.jpg";
 export default function OpeningSection() {
   return (
     <div className="relative overflow-hidden">
-      <div className="flex -bottom-[400px] gap-10 absolute -rotate-45">
+      <div className="lg:flex -bottom-[400px] gap-10 absolute -rotate-45 hidden">
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
       </div>
       <div className="lg:max-w-7xl md:max-w-6xl h-screen mx-auto lg:mt-8 mt-16 lg:px-0 px-3">
-        <div className="absolute w-[600px] h-[600px] bg-blue-100/30 blur-2xl rounded-full left-0 top-0"></div>
-        <div className="absolute w-[500px] h-[500px] bg-primary-color/5 blur-3xl rounded-full left-1/2"></div>
-        <div className="absolute w-[400px] h-[400px] bg-primary-color/20 blur-2xl rounded-full right-0.5 bottom-[5%]"></div>
+        <div className="absolute w-[600px] aspect-square bg-blue-100/30 blur-2xl rounded-full left-0 top-0"></div>
+        <div className="absolute w-[500px] aspect-square bg-primary-color/5 blur-3xl rounded-full left-1/2"></div>
+        <div className="absolute lg:w-[400px] w-[200px] aspect-square bg-primary-color/20 blur-2xl rounded-full right-0.5 bottom-[5%]"></div>
         <div className="flex items-center w-full h-full">
           <div className="lg:w-6/12 pr-10 z-10">
             <div className="flex flex-col h-full justify-center">
