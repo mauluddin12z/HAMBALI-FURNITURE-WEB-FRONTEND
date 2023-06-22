@@ -33,11 +33,11 @@ export default function Page() {
             />
             <div className="text-gray-600 text-[16px] text-justify lg:ml-20 ml-0 lg:mt-0 mt-10 flex flex-col gap-y-2 mb-20">
               <p>
-                Hambali Furniture adalah perusahaan penjualan furniture
-                terkemuka yang berlokasi di kota Palembang. Kami dengan bangga
-                menyediakan koleksi lengkap furnitur modern dan minimalis yang
-                dirancang untuk memberikan sentuhan elegan dan fungsional bagi
-                rumah dan ruang kerja Anda.
+                Hambali Furniture adalah perusahaan penjualan furniture yang
+                berlokasi di kota Palembang. Kami dengan bangga menyediakan
+                koleksi lengkap furnitur modern dan minimalis yang dirancang
+                untuk memberikan sentuhan elegan dan fungsional bagi rumah dan
+                ruang kerja Anda.
               </p>
               <p>
                 Kami memiliki tim tukang yang berpengalaman dan ahli dalam
