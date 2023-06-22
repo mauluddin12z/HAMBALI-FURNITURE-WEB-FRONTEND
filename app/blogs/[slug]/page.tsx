@@ -66,9 +66,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           ) : (
             <>
               <div className="w-full h-full bg-secondary-color animate-pulse rounded-lg"></div>
-              <div className="w-full h-screen bg-dark-background-1">
-                <Loading />
-              </div>
+              <Loading />
             </>
           )}
         </div>

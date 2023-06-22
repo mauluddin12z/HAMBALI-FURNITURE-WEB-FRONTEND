@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/30 rounded-lg p-10 text-[12px] lg:text-[16px]">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
             Home
           </Link>
@@ -30,6 +30,7 @@ export default function Page() {
               height={500}
               className="object-contain h-full"
               alt="Furniture Img"
+              priority
             />
             <div className="text-gray-600 text-[16px] text-justify lg:ml-20 ml-0 lg:mt-0 mt-10 flex flex-col gap-y-2 mb-20">
               <p>
@@ -79,15 +80,15 @@ export default function Page() {
               href="https://www.instagram.com/hambalifurniture"
               className="rounded-lg flex flex-col justify-center items-center gap-2 mt-6 hover:text-primary-color transition-all duration-300"
             >
-              <span className="font-semibold text-[16px]">Instagram</span>
-              <i className="fa-brands fa-instagram text-5xl"></i>
+              <span className="font-semibold lg:text-[16px] text-[14px]">Instagram</span>
+              <i className="fa-brands fa-instagram lg:text-5xl text-4xl"></i>
             </a>
             <a
               href="https://www.instagram.com/hambalifurniture"
               className="rounded-lg flex flex-col justify-center items-center gap-2 mt-6 hover:text-primary-color transition-all duration-300"
             >
-              <span className="font-semibold text-[16px]">Facebook</span>
-              <i className="fa-brands fa-facebook text-5xl"></i>
+              <span className="font-semibold lg:text-[16px] text-[14px]">Facebook</span>
+              <i className="fa-brands fa-facebook lg:text-5xl text-4xl"></i>
             </a>
           </div>
         </div>

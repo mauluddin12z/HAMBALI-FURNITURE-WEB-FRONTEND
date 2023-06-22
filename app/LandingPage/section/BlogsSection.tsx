@@ -68,9 +68,7 @@ export default function BlogsSection() {
           ) : (
             <>
               {renderItems}
-              <div className="w-full h-screen bg-dark-background-1">
-                <Loading />
-              </div>
+              <Loading />
             </>
           )}
         </div>

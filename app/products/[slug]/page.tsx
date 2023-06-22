@@ -181,21 +181,18 @@ export default function Page({ params }: { params: { slug: string } }) {
             <>
               <div className="w-[80%] h-8 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
               <div className="w-[30%] h-4 bg-secondary-color rounded-lg animate-pulse mb-2 lg:hidden block"></div>
-              <div className="relative overflow-hidden lg:w-[35%] w-full aspect-square flex bg-secondary-color rounded-lg animate-pulse mr-14 mb-6"></div>
-              <div className="flex flex-col gap-4 flex-grow">
-                <div className="w-[200px] h-8 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
+              <div className="relative overflow-hidden lg:w-[40%] w-full h-[500px] flex bg-secondary-color rounded-lg animate-pulse mr-14 mb-6"></div>
+              <div className="flex flex-col gap-4 flex-grow w-full">
+                <div className="w-full h-8 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse hidden lg:block"></div>
                 <div className="w-full h-[200px] bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
-                <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
-                <div className="w-full h-10 bg-secondary-color rounded-full animate-pulse"></div>
+                <div className="w-[40%] h-10 bg-secondary-color rounded-full animate-pulse"></div>
               </div>
-              <div className="w-full h-screen bg-dark-background-1">
-                <Loading />
-              </div>
+              <Loading />
             </>
           )}
         </div>

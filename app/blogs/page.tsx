@@ -125,9 +125,7 @@ export default function Page() {
             ) : (
               <>
                 {renderItems}
-                <div className="w-full h-screen bg-dark-background-1">
-                  <Loading />
-                </div>
+                <Loading />
               </>
             )}
           </div>
