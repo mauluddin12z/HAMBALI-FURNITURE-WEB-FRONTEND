@@ -7,6 +7,7 @@ import Image, { ImageLoader } from "next/image";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
+import Loading from "@/app/loading";
 
 const getProductByName = async (productNameQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productByName?productNameQuery=${productNameQuery}`;
@@ -191,6 +192,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-[300px] h-5 bg-secondary-color rounded-lg animate-pulse"></div>
                 <div className="w-full h-10 bg-secondary-color rounded-full animate-pulse"></div>
+              </div>
+              <div className="w-full h-screen bg-dark-background-1">
+                <Loading />
               </div>
             </>
           )}

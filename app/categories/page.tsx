@@ -6,6 +6,7 @@ import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
 import Link from "next/link";
 import CategoryCard from "../components/CategoryCard";
+import Loading from "../loading";
 
 const getCategories = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
@@ -23,10 +24,10 @@ export default function Page() {
       <div
         key={i}
         className="h-[350px] w-full border border-gray-200 bg-secondary-color animate-pulse shadow"
-      >
-      </div>
+      ></div>
     );
   }
+
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
@@ -40,7 +41,9 @@ export default function Page() {
           <div className="text-gray-400">Categories</div>
         </div>
         <div className="flex lg:justify-start justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Categories</div>
+          <div className="font-semibold lg:text-[36px] text-[28px]">
+            Categories
+          </div>
         </div>
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
           {data?.length == 0 ? (
@@ -51,16 +54,23 @@ export default function Page() {
             <div className="hidden"></div>
           )}
           <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-4 mb-4">
-            {data
-              ? data?.map((category: any, index: number) => (
-                  <CategoryCard
-                    key={index}
-                    imageUrl={category.imageUrl}
-                    category_id={category.category_id}
-                    category={category.category}
-                  />
-                ))
-              : renderItems}
+            {data ? (
+              data?.map((category: any, index: number) => (
+                <CategoryCard
+                  key={index}
+                  imageUrl={category.imageUrl}
+                  category_id={category.category_id}
+                  category={category.category}
+                />
+              ))
+            ) : (
+              <>
+                {renderItems}
+                <div className="w-full h-screen bg-dark-background-1">
+                  <Loading />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

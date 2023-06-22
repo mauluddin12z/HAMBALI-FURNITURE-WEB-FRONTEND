@@ -4,6 +4,7 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import BlogCard from "@/app/components/BlogCard";
+import Loading from "@/app/loading";
 
 const getBlogs = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`);
@@ -54,17 +55,24 @@ export default function BlogsSection() {
           </Link>
         </div>
         <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-8">
-          {limitedBlogs
-            ? limitedBlogs?.map((blogs: any, index: number) => (
-                <BlogCard
-                  key={index}
-                  imageUrl={blogs.imageUrl}
-                  blog_id={blogs.blog_id}
-                  title={blogs.title}
-                  createdAt={blogs.createdAt}
-                />
-              ))
-            : renderItems}
+          {limitedBlogs ? (
+            limitedBlogs?.map((blogs: any, index: number) => (
+              <BlogCard
+                key={index}
+                imageUrl={blogs.imageUrl}
+                blog_id={blogs.blog_id}
+                title={blogs.title}
+                createdAt={blogs.createdAt}
+              />
+            ))
+          ) : (
+            <>
+              {renderItems}
+              <div className="w-full h-screen bg-dark-background-1">
+                <Loading />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

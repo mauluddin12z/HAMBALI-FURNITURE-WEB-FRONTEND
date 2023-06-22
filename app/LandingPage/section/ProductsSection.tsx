@@ -4,6 +4,7 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import ProductCard from "@/app/components/ProductCard";
+import Loading from "@/app/loading";
 
 const getProducts = async () => {
   const res = await axios.get(
@@ -12,9 +13,7 @@ const getProducts = async () => {
   return res.data;
 };
 
-
 export default function ProductsSection() {
-
   const { data } = useSWR("products", getProducts);
   const limitedProducts = data?.slice(0, 6);
 
@@ -38,7 +37,9 @@ export default function ProductsSection() {
     <div className="lg:max-w-7xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-4">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Products</div>
+          <div className="font-semibold lg:text-[36px] text-[28px]">
+            Products
+          </div>
           <Link
             href={"/products"}
             className="font-semibold text-[18px] hover:underline decoration-2 underline-offset-2"
@@ -47,16 +48,23 @@ export default function ProductsSection() {
           </Link>
         </div>
         <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-8">
-          {limitedProducts
-            ? limitedProducts?.map((products: any, index: number) => (
-                <ProductCard
-                  key={index}
-                  imageUrl={products.imageUrl}
-                  product_id={products.product_id}
-                  product_name={products.product_name}
-                />
-              ))
-            : renderItems}
+          {limitedProducts ? (
+            limitedProducts?.map((products: any, index: number) => (
+              <ProductCard
+                key={index}
+                imageUrl={products.imageUrl}
+                product_id={products.product_id}
+                product_name={products.product_name}
+              />
+            ))
+          ) : (
+            <>
+              {renderItems}
+              <div className="w-full h-screen bg-dark-background-1">
+                <Loading />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

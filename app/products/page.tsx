@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import FilterIcon from "@/public/images/filterIcon.svg";
 import Link from "next/link";
+import Loading from "../loading";
 
 const getProducts = async (
   start: number,
@@ -122,6 +123,7 @@ export default function Page() {
       </div>
     );
   }
+
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
@@ -249,17 +251,24 @@ export default function Page() {
               <div className="hidden"></div>
             )}
             <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
-              {data
-                ? data?.map((products: any, index: number) => (
-                    <ProductCard
-                      key={index}
-                      imageUrl={products.imageUrl}
-                      product_id={products.product_id}
-                      product_name={products.product_name}
-                      dimensions={products.dimensions}
-                    />
-                  ))
-                : renderItems}
+              {data ? (
+                data?.map((products: any, index: number) => (
+                  <ProductCard
+                    key={index}
+                    imageUrl={products.imageUrl}
+                    product_id={products.product_id}
+                    product_name={products.product_name}
+                    dimensions={products.dimensions}
+                  />
+                ))
+              ) : (
+                <>
+                  {renderItems}
+                  <div className="w-full h-screen bg-dark-background-1">
+                    <Loading />
+                  </div>
+                </>
+              )}
             </div>
             <Pagination
               currentPage={currentPage}

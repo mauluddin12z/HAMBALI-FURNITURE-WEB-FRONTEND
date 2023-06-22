@@ -5,6 +5,7 @@ import useSWR from "swr";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
 import Link from "next/link";
+import Loading from "../loading";
 
 const getBlogs = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredBlogs?start=${start}&limit=${limit}`;
@@ -111,17 +112,24 @@ export default function Page() {
             <div className="hidden"></div>
           )}
           <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-4 mb-4">
-            {data
-              ? data?.map((blogs: any, index: number) => (
-                  <BlogCard
-                    key={index}
-                    imageUrl={blogs.imageUrl}
-                    blog_id={blogs.blog_id}
-                    title={blogs.title}
-                    createdAt={blogs.createdAt}
-                  />
-                ))
-              : renderItems}
+            {data ? (
+              data?.map((blogs: any, index: number) => (
+                <BlogCard
+                  key={index}
+                  imageUrl={blogs.imageUrl}
+                  blog_id={blogs.blog_id}
+                  title={blogs.title}
+                  createdAt={blogs.createdAt}
+                />
+              ))
+            ) : (
+              <>
+                {renderItems}
+                <div className="w-full h-screen bg-dark-background-1">
+                  <Loading />
+                </div>
+              </>
+            )}
           </div>
           <Pagination
             currentPage={currentPage}
