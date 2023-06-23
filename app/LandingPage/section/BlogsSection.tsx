@@ -4,7 +4,6 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import BlogCard from "@/app/components/BlogCard";
-import Loading from "@/app/loading";
 
 const getBlogs = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`);
@@ -68,7 +67,6 @@ export default function BlogsSection() {
           ) : (
             <>
               {renderItems}
-              <Loading />
             </>
           )}
         </div>

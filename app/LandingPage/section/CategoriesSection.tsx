@@ -7,7 +7,6 @@ import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
 import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
-import Loading from "@/app/loading";
 
 const getCategories = async () => {
   const res = await axios.get(
@@ -122,7 +121,6 @@ export default function CategoriesSection() {
               ) : (
                 <>
                   {renderItems}
-                  <Loading />
                 </>
               )}
             </div>

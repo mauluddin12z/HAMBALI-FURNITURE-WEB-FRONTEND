@@ -2,12 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
-import BlogCard from "../components/BlogCard";
-import Pagination from "../components/Pagination";
 import Link from "next/link";
 import CategoryCard from "../components/CategoryCard";
-import Loading from "../loading";
-
 const getCategories = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
   const res = await axios.get(url);
@@ -66,7 +62,6 @@ export default function Page() {
             ) : (
               <>
                 {renderItems}
-                <Loading />
               </>
             )}
           </div>

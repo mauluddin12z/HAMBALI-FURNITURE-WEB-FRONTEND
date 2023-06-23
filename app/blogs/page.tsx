@@ -5,7 +5,6 @@ import useSWR from "swr";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
 import Link from "next/link";
-import Loading from "../loading";
 
 const getBlogs = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredBlogs?start=${start}&limit=${limit}`;
@@ -125,7 +124,6 @@ export default function Page() {
             ) : (
               <>
                 {renderItems}
-                <Loading />
               </>
             )}
           </div>

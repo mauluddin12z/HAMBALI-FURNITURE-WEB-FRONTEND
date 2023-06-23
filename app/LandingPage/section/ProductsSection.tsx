@@ -4,7 +4,6 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import ProductCard from "@/app/components/ProductCard";
-import Loading from "@/app/loading";
 
 const getProducts = async () => {
   const res = await axios.get(
@@ -60,7 +59,6 @@ export default function ProductsSection() {
           ) : (
             <>
               {renderItems}
-              <Loading />
             </>
           )}
         </div>

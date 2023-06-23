@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import OpeningSection from "./LandingPage/section/OpeningSection";
 import CategoriesSection from "./LandingPage/section/CategoriesSection";

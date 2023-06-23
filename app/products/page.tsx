@@ -6,7 +6,6 @@ import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import FilterIcon from "@/public/images/filterIcon.svg";
 import Link from "next/link";
-import Loading from "../loading";
 
 const getProducts = async (
   start: number,
@@ -262,10 +261,7 @@ export default function Page() {
                   />
                 ))
               ) : (
-                <>
-                  {renderItems}
-                  <Loading />
-                </>
+                <>{renderItems}</>
               )}
             </div>
             <Pagination

@@ -7,7 +7,6 @@ import Image, { ImageLoader } from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import Link from "next/link";
-import Loading from "@/app/loading";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -66,7 +65,6 @@ export default function Page({ params }: { params: { slug: string } }) {
           ) : (
             <>
               <div className="w-full h-full bg-secondary-color animate-pulse rounded-lg"></div>
-              <Loading />
             </>
           )}
         </div>
