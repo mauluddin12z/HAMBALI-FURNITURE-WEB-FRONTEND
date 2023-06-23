@@ -7,6 +7,7 @@ import Image, { ImageLoader } from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import Link from "next/link";
+import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -64,7 +65,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
           ) : (
             <>
-              <div className="w-full h-full bg-secondary-color animate-pulse rounded-lg"></div>
+              <div className="w-full h-full rounded-lg"><SkeletonLoading /></div>
             </>
           )}
         </div>
@@ -75,7 +76,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             })
           ) : (
             <>
-              <div className="w-56 h-6 bg-secondary-color animate-pulse rounded-lg"></div>
+              <div className="w-56 h-6 rounded-lg"><SkeletonLoading /></div>
             </>
           )}
         </div>
@@ -89,8 +90,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           </>
         ) : (
           <>
-            <div className="w-full h-[38px] bg-secondary-color animate-pulse rounded-lg mt-4"></div>
-            <div className="w-full h-72 bg-secondary-color animate-pulse rounded-lg mt-4"></div>
+            <div className="w-full h-[38px] rounded-lg mt-4"><SkeletonLoading /></div>
+            <div className="w-full h-72 rounded-lg mt-4"><SkeletonLoading /></div>
           </>
         )}
       </div>

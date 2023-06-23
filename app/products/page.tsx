@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import FilterIcon from "@/public/images/filterIcon.svg";
 import Link from "next/link";
+import SkeletonLoading from "../components/SkeletonLoading";
 
 const getProducts = async (
   start: number,
@@ -116,8 +117,12 @@ export default function Page() {
         className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
       >
         <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
-          <div className="w-full h-full aspect-square bg-secondary-color rounded-lg animate-pulse"></div>
-          <div className="w-full h-[10%] bg-secondary-color rounded-lg mt-4 animate-pulse"></div>
+          <div className="w-full h-full aspect-square rounded-lg">
+            <SkeletonLoading />
+          </div>
+          <div className="w-full h-[10%] rounded-lg mt-4">
+            <SkeletonLoading />
+          </div>
         </div>
       </div>
     );

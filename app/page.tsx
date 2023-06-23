@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import OpeningSection from "./LandingPage/section/OpeningSection";
 import CategoriesSection from "./LandingPage/section/CategoriesSection";
 import ProductsSection from "./LandingPage/section/ProductsSection";

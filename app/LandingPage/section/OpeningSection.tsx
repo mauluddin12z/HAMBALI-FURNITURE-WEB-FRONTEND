@@ -23,7 +23,7 @@ export default function OpeningSection() {
                 Furniture Modern untuk Ruangan Anda
               </div>
               <div className="text-[18px] text-gray-600 mb-14">
-                <span className="font-bold text-black">Hambali Furniture.</span>
+                <span className="font-bold text-black">Hambali Furniture. </span>
                 Menghadirkan Kecantikan Minimalis dan Modern dalam Setiap
                 Ruangan!. Jika berminat silahkan hubungi kontak dibawah.
               </div>

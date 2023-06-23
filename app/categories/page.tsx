@@ -4,7 +4,8 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import CategoryCard from "../components/CategoryCard";
-const getCategories = async (start: number, limit: number) => {
+import SkeletonLoading from "../components/SkeletonLoading";
+const getCategories = async () => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
   const res = await axios.get(url);
   return res.data;
@@ -17,10 +18,9 @@ export default function Page() {
 
   for (let i = 0; i < 9; i++) {
     renderItems.push(
-      <div
-        key={i}
-        className="h-[350px] w-full border border-gray-200 bg-secondary-color animate-pulse shadow"
-      ></div>
+      <div key={i} className="h-[350px] w-full">
+        <SkeletonLoading />
+      </div>
     );
   }
 
@@ -60,9 +60,7 @@ export default function Page() {
                 />
               ))
             ) : (
-              <>
-                {renderItems}
-              </>
+              <>{renderItems}</>
             )}
           </div>
         </div>

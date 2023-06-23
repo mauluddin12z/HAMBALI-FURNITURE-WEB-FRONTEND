@@ -4,6 +4,7 @@ import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
 import BlogCard from "@/app/components/BlogCard";
+import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getBlogs = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`);
@@ -31,11 +32,17 @@ export default function BlogsSection() {
         className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
       >
         <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
-          <div className="w-full h-full aspect-square bg-secondary-color rounded-lg animate-pulse"></div>
-          <div className="w-full h-[5%]">
-            <div className="w-[50%] h-full bg-secondary-color rounded-lg mt-1 animate-pulse"></div>
+          <div className="w-full h-full aspect-square rounded-lg">
+            <SkeletonLoading />
           </div>
-          <div className="w-full h-[10%] bg-secondary-color rounded-lg mt-4 animate-pulse"></div>
+          <div className="w-full h-[5%]">
+            <div className="w-[50%] h-full rounded-lg mt-1">
+              <SkeletonLoading />
+            </div>
+          </div>
+          <div className="w-full h-[10%] rounded-lg mt-4">
+            <SkeletonLoading />
+          </div>
         </div>
       </div>
     );
@@ -65,9 +72,7 @@ export default function BlogsSection() {
               />
             ))
           ) : (
-            <>
-              {renderItems}
-            </>
+            <>{renderItems}</>
           )}
         </div>
       </div>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
 import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
+import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getCategories = async () => {
   const res = await axios.get(
@@ -52,7 +53,9 @@ export default function CategoriesSection() {
         key={i}
         className="border w-full border-gray-200 shadow h-[450px] flex justify-center items-center p-4"
       >
-        <div className="w-full h-full aspect-square bg-secondary-color animate-pulse"></div>
+        <div className="w-full h-full aspect-square">
+          <SkeletonLoading />
+        </div>
       </div>
     );
   }
@@ -119,9 +122,7 @@ export default function CategoriesSection() {
                   </SwiperSlide>
                 ))
               ) : (
-                <>
-                  {renderItems}
-                </>
+                <>{renderItems}</>
               )}
             </div>
           </SwiperComponent>
