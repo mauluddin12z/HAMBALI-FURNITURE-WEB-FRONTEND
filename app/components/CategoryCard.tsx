@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
 import URLGenerator from "../utils/URLGenerator";
@@ -23,6 +23,8 @@ export default function CategoryCard({ category_id, imageUrl, category }: any) {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const mediaQuery = window.matchMedia("(max-width: 1024px)");
+
   return (
     <>
       <div
@@ -33,7 +35,7 @@ export default function CategoryCard({ category_id, imageUrl, category }: any) {
         <Link
           href={`/categories/${URLGenerator(category)}`}
           className={`absolute top-[50%] -translate-y-[50%] bg-primary-color/80 text-center font-extrabold py-4 w-full z-40 text-white ${
-            isHovered ? "opacity-100" : "opacity-0"
+            isHovered || mediaQuery.matches ? "opacity-100" : "opacity-0"
           } transition-all duration-300`}
         >
           {category}
@@ -46,7 +48,9 @@ export default function CategoryCard({ category_id, imageUrl, category }: any) {
             >
               <div
                 className={`${
-                  isHovered ? "bg-black/80 z-30" : "bg-secondary-color/50 z-10"
+                  isHovered || mediaQuery.matches
+                    ? "bg-black/80 z-30"
+                    : "bg-secondary-color/50 z-10"
                 } backdrop-blur-sm w-full h-full absolute transition-all duration-300`}
               ></div>
               <Image
