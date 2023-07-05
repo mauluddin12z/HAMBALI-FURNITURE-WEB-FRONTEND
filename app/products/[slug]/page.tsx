@@ -7,8 +7,7 @@ import Image, { ImageLoader } from "next/image";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getProductByName = async (productNameQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productByName?productNameQuery=${productNameQuery}`;
@@ -61,7 +60,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       >
         <div className="w-full h-full flex justify-center items-center p-3">
           <div className="w-full h-full aspect-square rounded-lg">
-            <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+            <SkeletonLoading />
           </div>
         </div>
       </div>
@@ -183,38 +182,38 @@ export default function Page({ params }: { params: { slug: string } }) {
           ) : (
             <>
               <div className="w-[80%] h-8 rounded-lg mb-2 lg:hidden block">
-                <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                <SkeletonLoading />
               </div>
               <div className="w-[30%] h-4 rounded-lg mb-2 lg:hidden block">
-                <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                <SkeletonLoading />
               </div>
               <div className="lg:w-[40%] w-full h-[500px] rounded-lg mr-14 mb-6 lg:block hidden">
-                <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                <SkeletonLoading />
               </div>
               <div className="flex flex-col gap-4 flex-grow w-full">
                 <div className="w-full h-8 rounded-lg hidden lg:block">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[300px] h-5 rounded-lg hidden lg:block">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-full h-[200px] rounded-lg">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[300px] h-5 rounded-lg">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[300px] h-5 rounded-lg">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[300px] h-5 rounded-lg">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[300px] h-5 rounded-lg">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
                 <div className="w-[40%] h-10 rounded-full">
-                  <Skeleton baseColor="#E9EEFF" className="w-full h-full" />
+                  <SkeletonLoading />
                 </div>
               </div>
             </>
