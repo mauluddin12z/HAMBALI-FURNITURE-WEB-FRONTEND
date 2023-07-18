@@ -12,6 +12,18 @@ html {
 path.dot_stripe_svg__color {
   @apply fill-primary-color/10;
 }
+path.craftsman_svg__color {
+  @apply fill-gray-400;
+}
+path.customizeIcon_svg__color {
+  @apply fill-gray-400;
+}
+path.furniIcon_svg__color {
+  @apply fill-gray-400;
+}
+path.installationIcon_svg__color {
+  @apply fill-gray-400;
+}
 
 .loader-dots div {
   animation-timing-function: cubic-bezier(0, 1, 1, 0);

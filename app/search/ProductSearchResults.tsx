@@ -11,14 +11,10 @@ import ProductSearchResultsCard from "./ProductSearchResultsCard";
 const getProductSearchResults = async (
   start: number,
   limit: number,
-  categoryQuery: number,
   searchQuery: string
 ) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productSearchResults?start=${start}&limit=${limit}`;
 
-  if (categoryQuery > 0) {
-    url += `&categoryQuery=${categoryQuery}`;
-  }
   if (searchQuery !== null) {
     url += `&searchQuery=${searchQuery}`;
   }
@@ -27,10 +23,7 @@ const getProductSearchResults = async (
   return res.data;
 };
 
-const getTotalProductSearchResults = async (
-  categoryQuery: number,
-  searchQuery: string
-) => {
+const getTotalProductSearchResults = async (searchQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productSearchResults?`;
 
   if (searchQuery !== null) {
@@ -44,9 +37,6 @@ const getTotalProductSearchResults = async (
 export default function ProductSearchResults(generalSearchQuery: any) {
   const [start, setStart] = useState(0);
   const [limit, setLimit] = useState(4);
-  const [categoryQuery, setCategoryQuery] = useState(-1);
-  const [dataLength, setDataLength] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -62,47 +52,16 @@ export default function ProductSearchResults(generalSearchQuery: any) {
   }, []);
 
   const { data } = useSWR(
-    ["productSearchResults", start, limit, categoryQuery, searchQuery],
-    () => getProductSearchResults(start, limit, categoryQuery, searchQuery)
+    ["productSearchResults", start, limit, searchQuery],
+    () => getProductSearchResults(start, limit, searchQuery)
   );
 
   const totalProductSearchResults = useSWR(
-    ["totalProductSearchResults", categoryQuery, searchQuery],
-    () => getTotalProductSearchResults(categoryQuery, searchQuery)
+    ["totalProductSearchResults", searchQuery],
+    () => getTotalProductSearchResults(searchQuery)
   );
 
   const renderItems = [];
-
-  useEffect(() => {
-    if (totalProductSearchResults.data) {
-      setDataLength(totalProductSearchResults.data.length);
-    }
-    setCurrentPage(Math.floor(start / limit) + 1);
-  }, [totalProductSearchResults.data, start, limit, currentPage]);
-
-  const totalPages = Math.ceil(dataLength / limit);
-
-  const pageRange = 2;
-
-  let startPage = Math.max(currentPage - pageRange, 1);
-  let endPage = Math.min(currentPage + pageRange, totalPages);
-
-  if (currentPage - pageRange <= 1) {
-    endPage = Math.min(endPage + (pageRange - (currentPage - 1)), totalPages);
-  }
-
-  if (currentPage + pageRange >= totalPages) {
-    startPage = Math.max(
-      startPage - (pageRange - (totalPages - currentPage)),
-      1
-    );
-  }
-
-  let pageNumbers = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pageNumbers.push(i);
-  }
-
   for (let i = 0; i < limit; i++) {
     renderItems.push(
       <div key={i}>
@@ -110,15 +69,21 @@ export default function ProductSearchResults(generalSearchQuery: any) {
           <div className="lg:w-[22%] w-full rounded-lg h-[400px]">
             <SkeletonLoading />
           </div>
-          <div className="w-full lg:ml-10 py-2">
-            <SkeletonLoading />
+          <div className="w-full lg:ml-10 py-2 flex flex-col gap-4">
+            <div className="w-[300px] h-8">
+              <SkeletonLoading />
+            </div>
+            <div className="w-[100px] h-4">
+              <SkeletonLoading />
+            </div>
+            <div className="w-full h-full">
+              <SkeletonLoading />
+            </div>
           </div>
         </div>
       </div>
     );
   }
-
-  console.log(data)
 
   return (
     <div className="flex w-full">
@@ -147,8 +112,8 @@ export default function ProductSearchResults(generalSearchQuery: any) {
           )}
         </div>
         <Pagination
-          currentPage={currentPage}
-          pageNumbers={pageNumbers}
+          totalData={totalProductSearchResults}
+          start={start}
           setStart={setStart}
           limit={limit}
         />

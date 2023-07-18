@@ -22,9 +22,7 @@ const getTotalBlogs = async () => {
 
 export default function Page() {
   const [start, setStart] = useState(0);
-  const [limit, setLimit] = useState(8);
-  const [dataLength, setDataLength] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimit] = useState(6);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -41,37 +39,6 @@ export default function Page() {
   const totalBlogs = useSWR("totalBlogs", getTotalBlogs);
 
   const renderItems = [];
-
-  useEffect(() => {
-    if (totalBlogs.data) {
-      setDataLength(totalBlogs.data.length);
-    }
-    setCurrentPage(Math.floor(start / limit) + 1);
-  }, [totalBlogs.data, start, limit, currentPage]);
-
-  const totalPages = Math.ceil(dataLength / limit);
-
-  const pageRange = 2;
-
-  let startPage = Math.max(currentPage - pageRange, 1);
-  let endPage = Math.min(currentPage + pageRange, totalPages);
-
-  if (currentPage - pageRange <= 1) {
-    endPage = Math.min(endPage + (pageRange - (currentPage - 1)), totalPages);
-  }
-
-  if (currentPage + pageRange >= totalPages) {
-    startPage = Math.max(
-      startPage - (pageRange - (totalPages - currentPage)),
-      1
-    );
-  }
-
-  let pageNumbers = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pageNumbers.push(i);
-  }
-
   for (let i = 0; i < limit; i++) {
     renderItems.push(
       <div
@@ -117,7 +84,7 @@ export default function Page() {
           ) : (
             <div className="hidden"></div>
           )}
-          <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-4 mb-4">
+          <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
             {data ? (
               data?.map((blogs: any, index: number) => (
                 <BlogCard
@@ -133,8 +100,8 @@ export default function Page() {
             )}
           </div>
           <Pagination
-            currentPage={currentPage}
-            pageNumbers={pageNumbers}
+            totalData={totalBlogs}
+            start={start}
             setStart={setStart}
             limit={limit}
           />
