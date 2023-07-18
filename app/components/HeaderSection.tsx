@@ -118,6 +118,7 @@ export default function HeaderSection() {
             height={90}
             alt="logoHambaliFurnitre"
             className="h-full"
+            priority
           />
         </Link>
         <div className="hidden w-full lg:block lg:w-auto">

@@ -21,8 +21,6 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
 
-  const [blogId, setBlogId] = useState(blog_id);
-
   const blogById: any = useSWR(
     blog_id ? ["blogById", blog_id] : null,
     () => blog_id && getBlogById(blog_id)
@@ -30,7 +28,7 @@ export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
 
   return (
     <>
-      <div className={`border border-gray-200 overflow-hidden p-6 h-[400px]`}>
+      <div className={`border border-gray-200 overflow-hidden p-6 h-[500px]`}>
         <div className="flex flex-col h-full">
           <div className="relative h-[80%] flex-shrink-0">
             <Link

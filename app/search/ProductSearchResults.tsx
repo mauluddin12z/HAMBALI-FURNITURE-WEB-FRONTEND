@@ -105,21 +105,20 @@ export default function ProductSearchResults(generalSearchQuery: any) {
 
   for (let i = 0; i < limit; i++) {
     renderItems.push(
-      <div
-        key={i}
-        className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
-      >
-        <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
-          <div className="w-full h-full aspect-square rounded-lg">
+      <div key={i}>
+        <div className="border lg:p-10 p-4 rounded-lg flex lg:flex-row flex-col">
+          <div className="lg:w-[22%] w-full rounded-lg h-[400px]">
             <SkeletonLoading />
           </div>
-          <div className="w-full h-[10%] rounded-lg mt-4">
+          <div className="w-full lg:ml-10 py-2">
             <SkeletonLoading />
           </div>
         </div>
       </div>
     );
   }
+
+  console.log(data)
 
   return (
     <div className="flex w-full">

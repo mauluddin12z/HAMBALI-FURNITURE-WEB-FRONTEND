@@ -50,6 +50,7 @@ export default function FooterSection() {
                   height={110}
                   alt="logoHambaliFurnitre"
                   className="mb-4"
+                  priority
                 />
               </div>
               <div className="text-[14px] text-gray-600 mb-4">

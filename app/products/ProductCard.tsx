@@ -84,7 +84,7 @@ export default function ProductCard({
                     className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
                     src={productById.data?.imageUrl}
                     loader={myLoader}
-                    fill
+                    width={500}
                     height={500}
                     alt={productById.data?.product_name}
                     priority
