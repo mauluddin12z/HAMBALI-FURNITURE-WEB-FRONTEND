@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
-import BlogCard from "../components/BlogCard";
+import BlogCard from "./BlogCard";
 import Pagination from "../components/Pagination";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";

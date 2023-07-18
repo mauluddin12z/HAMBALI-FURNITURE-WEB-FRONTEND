@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
-import BlogCard from "@/app/components/BlogCard";
+import BlogCard from "@/app/blogs/BlogCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getBlogs = async () => {

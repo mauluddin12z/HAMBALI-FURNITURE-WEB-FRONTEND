@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
 import URLGenerator from "../utils/URLGenerator";
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 import useSWR from "swr";
 import axios from "axios";
 import { FormatRupiah } from "@arismun/format-rupiah";
@@ -60,6 +60,7 @@ export default function ProductCard({
                 width={500}
                 height={500}
                 alt={product_name}
+                priority
               />
             </div>
           </div>
@@ -83,7 +84,7 @@ export default function ProductCard({
                     className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
                     src={productById.data?.imageUrl}
                     loader={myLoader}
-                    width={500}
+                    fill
                     height={500}
                     alt={productById.data?.product_name}
                     priority

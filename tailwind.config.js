@@ -8,8 +8,8 @@ module.exports = {
         serif: ["'Volkhov', serif"],
       },
       colors: {
-        "primary-color": "#6e8eff",
-        "secondary-color": "#E9EEFF",
+        "primary-color": "#1748A8",
+        "secondary-color": "#E4ECFB",
       },
       boxShadow: {
         great:

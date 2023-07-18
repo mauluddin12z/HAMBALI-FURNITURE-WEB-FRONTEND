@@ -3,6 +3,8 @@ import axios from "axios";
 import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
+import Image from "next/image";
+import LogoHambaliFurniture from "@/public/images/LogoHambaliFurniture.png";
 import URLGenerator from "../utils/URLGenerator";
 
 const getProducts = async () => {
@@ -41,9 +43,14 @@ export default function FooterSection() {
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
           <div className="flex justify-center items-center">
             <div className="flex flex-col">
-              <div className="font-bold text-[28px] mb-4">
-                <span className="text-primary-color">Hambali </span>
-                <span className="black">Furniture</span>
+              <div className="flex">
+                <Image
+                  src={LogoHambaliFurniture}
+                  width={110}
+                  height={110}
+                  alt="logoHambaliFurnitre"
+                  className="mb-4"
+                />
               </div>
               <div className="text-[14px] text-gray-600 mb-4">
                 Hambali Furniture adalah perusahaan penjualan furniture yang

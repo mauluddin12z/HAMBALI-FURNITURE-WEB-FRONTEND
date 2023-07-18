@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/app/products/ProductCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 
 const getProducts = async () => {
@@ -16,7 +16,6 @@ const getProducts = async () => {
 export default function ProductsSection() {
   const { data } = useSWR("products", getProducts);
   const limitedProducts = data?.slice(0, 6);
-
   const renderItems = [];
 
   for (let i = 0; i < 6; i++) {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import Link from "next/link";
-import CategoryCard from "../components/CategoryCard";
+import CategoryCard from "./CategoryCard";
 import SkeletonLoading from "../components/SkeletonLoading";
 const getCategories = async () => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;

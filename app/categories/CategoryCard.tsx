@@ -3,11 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
 import URLGenerator from "../utils/URLGenerator";
-import useSWR from "swr";
-import { format } from "date-fns";
-import { id } from "date-fns/locale";
 import axios from "axios";
-import TextEllipsis from "../utils/TextEllipsis";
 
 const getCategoryById = async (id: number) => {
   const res = await axios.get(

@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
+import LogoHambaliFurniture from "@/public/images/LogoHambaliFurniture.png";
+import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function HeaderSection() {
   const navItemMenu = [
@@ -37,6 +40,9 @@ export default function HeaderSection() {
     },
   ];
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = useCallback(() => {
@@ -47,12 +53,22 @@ export default function HeaderSection() {
 
   const [searchFormVisible, setSearchFormVisible] = useState(false);
 
-  const handleSearch = (e: any) => {
-    e.preventDefault();
-  };
-
   const handleChangeSearchValue = (e: any) => {
     setSearchValue(e.target.value);
+  };
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    router.push("/search" + "?" + createQueryString("searchQuery", searchValue));
   };
 
   const [scrolled, setScrolled] = useState(false);
@@ -94,13 +110,15 @@ export default function HeaderSection() {
             }`
       }
     >
-      <div className="lg:max-w-7xl md:max-w-6xl flex items-center justify-between mx-auto py-6 px-8 lg:px-0">
-        <Link
-          href="/"
-          className="self-center lg:text-[24px] text-[18px] font-semibold flex flex-col"
-        >
-          <span className="text-primary-color">Hambali</span>
-          <span className="text-black -mt-1">Furniture</span>
+      <div className="lg:max-w-7xl md:max-w-6xl flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
+        <Link href="/" className="flex flex-col justify-center">
+          <Image
+            src={LogoHambaliFurniture}
+            width={90}
+            height={90}
+            alt="logoHambaliFurnitre"
+            className="h-full"
+          />
         </Link>
         <div className="hidden w-full lg:block lg:w-auto">
           <ul className="font-medium flex items-center gap-x-3">
@@ -133,7 +151,7 @@ export default function HeaderSection() {
               <div
                 className={`absolute -right-4 left-auto transition-all z-20 w-96 ${
                   searchFormVisible
-                    ? "opacity-100 top-20"
+                    ? "opacity-100 top-[90px]"
                     : "opacity-0 top-32 -z-10 pointer-events-none"
                 }`}
               >
@@ -176,8 +194,8 @@ export default function HeaderSection() {
             <div
               className={`w-full h-auto fixed inset-0 transition-all flex justify-center ${
                 searchFormVisible
-                  ? "opacity-100 top-[110px]"
-                  : "opacity-0 top-[130px] -z-10 pointer-events-none"
+                  ? "opacity-100 top-[120px]"
+                  : "opacity-0 top-[150px] -z-10 pointer-events-none"
               }`}
             >
               <div className="relative w-full flex justify-center">

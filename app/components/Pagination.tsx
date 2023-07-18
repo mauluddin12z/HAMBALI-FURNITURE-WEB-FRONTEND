@@ -1,4 +1,5 @@
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback } from "react";
 
 export default function Pagination({
   currentPage,
@@ -6,6 +7,26 @@ export default function Pagination({
   setStart,
   limit,
 }: any) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  const handlePageChange = (page: any) => {
+    const newStart = (page - 1) * limit;
+    router.push(pathname + "?" + createQueryString('page', page));
+    setStart(newStart);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex justify-center items-center gap-x-2">
       <ul className="inline-flex -space-x-px">
@@ -17,7 +38,7 @@ export default function Pagination({
                 ? "text-gray-400"
                 : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             }`}
-            onClick={() => setStart((prev: any) => prev - limit)}
+            onClick={() => handlePageChange(currentPage - 1)}
           >
             <i className="fa-solid fa-arrow-left"></i>
           </button>
@@ -30,7 +51,7 @@ export default function Pagination({
                   ? "text-white border border-gray-300 bg-blue-500"
                   : `text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700`
               } px-3 py-2 leading-tight`}
-              onClick={() => setStart(page * limit - limit)}
+              onClick={() => handlePageChange(page)}
             >
               {page}
             </button>
@@ -44,7 +65,7 @@ export default function Pagination({
                 ? "text-gray-400"
                 : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             }`}
-            onClick={() => setStart((prev: any) => prev + limit)}
+            onClick={() => handlePageChange(currentPage + 1)}
           >
             <i className="fa-solid fa-arrow-right"></i>
           </button>
