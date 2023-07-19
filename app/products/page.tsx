@@ -20,7 +20,7 @@ const getProducts = async (
   if (categoryQuery > 0) {
     url += `&categoryQuery=${categoryQuery}`;
   }
-  if (searchQuery !== null) {
+  if (searchQuery !== "") {
     url += `&searchQuery=${searchQuery}`;
   }
 
@@ -34,18 +34,11 @@ const getTotalProducts = async (categoryQuery: number, searchQuery: string) => {
   if (categoryQuery > 0) {
     url += `&categoryQuery=${categoryQuery}`;
   }
-  if (searchQuery !== null) {
+  if (searchQuery !== "") {
     url += `&searchQuery=${searchQuery}`;
   }
 
   const res = await axios.get(url);
-  return res.data;
-};
-
-const getCategories = async () => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`
-  );
   return res.data;
 };
 
@@ -62,12 +55,12 @@ export default function Page() {
     }
   }, []);
 
-  const { data } = useSWR(
+  const { data: products } = useSWR(
     ["products", start, limit, categoryQuery, searchQuery],
     () => getProducts(start, limit, categoryQuery, searchQuery)
   );
 
-  const totalProducts = useSWR(
+  const { data: totalProducts } = useSWR(
     ["totalProducts", categoryQuery, searchQuery],
     () => getTotalProducts(categoryQuery, searchQuery)
   );
@@ -131,16 +124,16 @@ export default function Page() {
             setCategoryQuery={setCategoryQuery}
           />
           <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-            {data?.length == 0 ? (
-              <div className="w-full h-ful h-[500px] flex justify-center items-center">
+            {products?.length == 0 ? (
+              <div className="w-full h-[500px] flex justify-center items-center">
                 No product available.
               </div>
             ) : (
               <div className="hidden"></div>
             )}
             <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
-              {data ? (
-                data?.map((products: any, index: number) => (
+              {products ? (
+                products?.map((products: any, index: number) => (
                   <ProductCard
                     key={index}
                     imageUrl={products.imageUrl}

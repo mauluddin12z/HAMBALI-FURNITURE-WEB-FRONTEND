@@ -3,28 +3,14 @@ import React, { useState } from "react";
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
 import URLGenerator from "../utils/URLGenerator";
-import useSWR from "swr";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import axios from "axios";
 import TextEllipsis from "../utils/TextEllipsis";
 
-const getBlogById = async (id: number) => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blog/${id}`
-  );
-  return res.data;
-};
-
-export default function BlogCard({ blog_id, imageUrl, title, createdAt }: any) {
+export default function BlogCard({ imageUrl, title, createdAt }: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
-
-  const blogById: any = useSWR(
-    blog_id ? ["blogById", blog_id] : null,
-    () => blog_id && getBlogById(blog_id)
-  );
 
   return (
     <>

@@ -25,7 +25,7 @@ export default function ProductCard({
 
   const [productId, setProductId] = useState(product_id);
 
-  const productById: any = useSWR(
+  const { data: productById } = useSWR(
     productId ? ["productById", productId] : null,
     () => productId && getProductById(productId)
   );
@@ -42,7 +42,7 @@ export default function ProductCard({
         <div className="flex flex-col h-[350px]">
           <div className="relative flex-grow h-[80%]">
             <div className="absolute w-full h-full flex justify-center items-center p-3">
-              <div className="bg-secondary-color w-full h-full rounded-lg"></div>
+              <div className="w-full h-full rounded-lg"></div>
             </div>
             <div
               className="relative flex-grow h-full drop-shadow-[0px_0px_5px_rgba(0,0,5,0.5)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,5,1)] transition-shadow cursor-pointer overflow-hidden z-20 flex justify-center items-center"
@@ -78,15 +78,15 @@ export default function ProductCard({
         <div className="flex lg:flex-row flex-col justify-center items-center lg:p-10 p-2 z-[50]">
           {productById ? (
             <>
-              <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)] overflow-hidden">
-                {productById.data?.imageUrl ? (
+              <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)]">
+                {productById?.imageUrl ? (
                   <Image
                     className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
-                    src={productById.data?.imageUrl}
+                    src={productById?.imageUrl}
                     loader={myLoader}
                     width={500}
                     height={500}
-                    alt={productById.data?.product_name}
+                    alt={productById?.product_name}
                     priority
                   />
                 ) : (
@@ -94,75 +94,75 @@ export default function ProductCard({
                 )}
               </div>
               <div className="flex flex-col flex-grow lg:w-auto w-full">
-                {productById.data?.product_name ? (
+                {productById?.product_name ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Nama Produk:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {productById.data?.product_name}
+                      {productById?.product_name}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.category?.category ? (
+                {productById?.category?.category ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Kategori:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {productById.data?.category.category}
+                      {productById?.category.category}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.dimensions ? (
+                {productById?.dimensions ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Dimensi:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {productById.data?.dimensions}
+                      {productById?.dimensions}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.material ? (
+                {productById?.material ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Material:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {productById.data?.material}
+                      {productById?.material}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.color ? (
+                {productById?.color ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Warna:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {productById.data?.color}
+                      {productById?.color}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
-                {productById.data?.price ? (
+                {productById?.price ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">
                       Harga:
                     </div>
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
-                      {<FormatRupiah value={productById.data?.price} />}
+                      {<FormatRupiah value={productById?.price} />}
                     </div>
                     <div className="w-full h-[1px] bg-black mb-3"></div>
                   </>
                 ) : null}
                 <Link
                   href={`/products/${URLGenerator(
-                    productById.data?.product_name
+                    productById?.product_name
                   )}`}
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-4"
                 >

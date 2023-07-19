@@ -51,12 +51,12 @@ export default function ProductSearchResults(generalSearchQuery: any) {
     }
   }, []);
 
-  const { data } = useSWR(
+  const { data: productSearchResults } = useSWR(
     ["productSearchResults", start, limit, searchQuery],
     () => getProductSearchResults(start, limit, searchQuery)
   );
 
-  const totalProductSearchResults = useSWR(
+  const { data: totalProductSearchResults } = useSWR(
     ["totalProductSearchResults", searchQuery],
     () => getTotalProductSearchResults(searchQuery)
   );
@@ -88,7 +88,7 @@ export default function ProductSearchResults(generalSearchQuery: any) {
   return (
     <div className="flex w-full">
       <div className="w-full lg:min-h-[500px] min-h-[250px] flex flex-col rounded-lg items-center justify-between">
-        {data?.length == 0 ? (
+        {productSearchResults?.length == 0 ? (
           <div className="w-full flex justify-center items-center h-full">
             No product available.
           </div>
@@ -96,8 +96,8 @@ export default function ProductSearchResults(generalSearchQuery: any) {
           <div className="hidden"></div>
         )}
         <div className="w-full flex flex-col gap-y-4 mb-4">
-          {data ? (
-            data?.map((products: any, index: number) => (
+          {productSearchResults ? (
+            productSearchResults?.map((products: any, index: number) => (
               <ProductSearchResultsCard
                 key={index}
                 productId={products.product_id}

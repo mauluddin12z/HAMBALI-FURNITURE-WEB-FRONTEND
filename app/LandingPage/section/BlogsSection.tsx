@@ -12,7 +12,7 @@ const getBlogs = async () => {
 };
 
 export default function BlogsSection() {
-  const { data } = useSWR("blogs", getBlogs);
+  const { data:blogs } = useSWR("blogs", getBlogs);
   const [limit, setLimit] = useState(4);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -21,7 +21,7 @@ export default function BlogsSection() {
       setLimit(2);
     }
   }, []);
-  const limitedBlogs = data?.slice(0, limit);
+  const limitedBlogs = blogs?.slice(0, limit);
 
   const renderItems = [];
 

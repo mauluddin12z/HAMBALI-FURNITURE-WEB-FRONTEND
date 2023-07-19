@@ -29,21 +29,22 @@ export default function Pagination({ totalData, start, setStart, limit }: any) {
     setStart(newStart);
 
     setIsLoading(false);
+    window.moveTo(0, 0);
   };
 
   useEffect(() => {
-    if (totalData.data) {
-      setDataLength(totalData.data.length);
+    if (totalData) {
+      setDataLength(totalData?.length);
     }
     setCurrentPage(pageQuery ? Number(pageQuery) : 1);
-  }, [pageQuery, totalData.data, currentPage]);
+  }, [pageQuery, totalData, currentPage]);
 
   useEffect(() => {
-    if (totalData.data) {
-      setDataLength(totalData.data.length);
+    if (totalData) {
+      setDataLength(totalData.length);
     }
     setStart(limit * (currentPage - 1));
-  }, [totalData.data, setStart, limit, currentPage]);
+  }, [totalData, setStart, limit, currentPage]);
 
   const totalPages = Math.ceil(dataLength / limit);
 

@@ -30,25 +30,25 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [productNameQuery, setProductNameQuery] = useState(
     URLToStringGenerator(params.slug)
   );
-  const { data }: any = useSWR(
+  const { data: productByName }: any = useSWR(
     productNameQuery ? ["productByName", productNameQuery] : null,
     () => productNameQuery && getProductByName(productNameQuery)
   );
 
   const [categoryQuery, setCategoryQuery] = useState();
-  const productByCategory: any = useSWR(
+  const { data: productByCategory }: any = useSWR(
     categoryQuery ? ["productByCategory", categoryQuery] : null,
     () => categoryQuery && getProductCategory(categoryQuery)
   );
 
   const [visibleRelatedItem, setvisibleRelatedItem] = useState(4);
-  const relatedProduct = productByCategory.data?.slice(0, visibleRelatedItem);
+  const relatedProduct = productByCategory?.slice(0, visibleRelatedItem);
 
   useEffect(() => {
-    if (data && data.category_id) {
-      setCategoryQuery(data.category_id);
+    if (productByName && productByName.category_id) {
+      setCategoryQuery(productByName.category_id);
     }
-  }, [data]);
+  }, [productByName]);
 
   const renderItems = [];
 
@@ -85,87 +85,90 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="text-black">
             <i className="fa-solid fa-chevron-right"></i>
           </div>
-          <div className="text-gray-400">{data?.product_name}</div>
+          <div className="text-gray-400">{productByName?.product_name}</div>
         </div>
         <div className="flex lg:flex-row flex-col mb-16">
-          {data ? (
+          {productByName ? (
             <>
-              {data?.product_name ? (
+              {productByName?.product_name ? (
                 <>
                   <div className="block lg:hidden font-bold text-[28px]">
-                    {data?.product_name}
+                    {productByName?.product_name}
                   </div>
                 </>
               ) : null}
-              {data?.category.category ? (
+              {productByName?.category.category ? (
                 <div className="block lg:hidden text-[16px] font-semibold text-gray-400 mb-6">
                   <Link
                     href={`/categories/${URLGenerator(
-                      data?.category.category
+                      productByName?.category.category
                     )}`}
                   >
-                    {data.category.category}
+                    {productByName.category.category}
                   </Link>
                 </div>
               ) : null}
               <div className="relative overflow-hidden lg:w-[350px] w-full flex rounded-lg mr-14 mb-6 bg-secondary-color flex-shrink-0 justify-center items-center">
                 <Image
                   loader={myLoader}
-                  src={data?.imageUrl}
+                  src={productByName?.imageUrl}
                   width={500}
                   height={500}
-                  alt={data?.product_name}
+                  alt={productByName?.product_name}
                   className="object-contain"
                 />
               </div>
               <div className="flex flex-col flex-grow">
-                {data?.product_name ? (
+                {productByName?.product_name ? (
                   <>
                     <div className="lg:block hidden font-bold lg:text-[24px] text-[14px]">
-                      {data?.product_name}
+                      {productByName?.product_name}
                     </div>
                   </>
                 ) : null}
-                {data?.category.category ? (
+                {productByName?.category.category ? (
                   <div className="lg:block hidden text-[16px] font-semibold text-gray-400 mb-6">
                     <Link
                       href={`/categories/${URLGenerator(
-                        data?.category.category
+                        productByName?.category.category
                       )}`}
                     >
-                      {data.category.category}
+                      {productByName.category.category}
                     </Link>
                   </div>
                 ) : null}
-                {data?.description ? (
+                {productByName?.description ? (
                   <div className="mb-3">
                     <div className="text-justify text-gray-600 text-[14px]">
-                      {data.description}
+                      {productByName.description}
                     </div>
                   </div>
                 ) : null}
-                {data?.dimensions ? (
+                {productByName?.dimensions ? (
                   <div className="mb-3">
                     <span className="font-bold">Dimensi:</span>
-                    <span> {data.dimensions}</span>
+                    <span> {productByName.dimensions}</span>
                   </div>
                 ) : null}
-                {data?.material ? (
+                {productByName?.material ? (
                   <div className="mb-3">
                     <span className="font-bold">Material:</span>
-                    <span> {data.material}</span>
+                    <span> {productByName.material}</span>
                   </div>
                 ) : null}
-                {data?.color ? (
+                {productByName?.color ? (
                   <div className="mb-3">
                     <span className="font-bold">Warna:</span>
-                    <span> {data.color}</span>
+                    <span> {productByName.color}</span>
                   </div>
                 ) : null}
-                {data?.price ? (
+                {productByName?.price ? (
                   <div className="mb-3">
                     <span className="font-bold">Harga:</span>
-                    <span> {<FormatRupiah value={data?.price} />}</span>
+                    <span>
+                      {" "}
+                      {<FormatRupiah value={productByName?.price} />}
+                    </span>
                   </div>
                 ) : null}
                 <div className="mt-6">

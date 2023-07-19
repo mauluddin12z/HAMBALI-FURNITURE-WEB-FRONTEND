@@ -32,11 +32,11 @@ export default function Page() {
     }
   }, []);
 
-  const { data } = useSWR(["blogs", start, limit], () =>
+  const { data: blogs } = useSWR(["blogs", start, limit], () =>
     getBlogs(start, limit)
   );
 
-  const totalBlogs = useSWR("totalBlogs", getTotalBlogs);
+  const { data: totalBlogs } = useSWR("totalBlogs", getTotalBlogs);
 
   const renderItems = [];
   for (let i = 0; i < limit; i++) {
@@ -77,7 +77,7 @@ export default function Page() {
           <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
         </div>
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-          {data?.length == 0 ? (
+          {blogs?.length == 0 ? (
             <div className="w-full h-[500px] flex justify-center items-center border">
               No blog available.
             </div>
@@ -85,8 +85,8 @@ export default function Page() {
             <div className="hidden"></div>
           )}
           <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
-            {data ? (
-              data?.map((blogs: any, index: number) => (
+            {blogs ? (
+              blogs?.map((blogs: any, index: number) => (
                 <BlogCard
                   key={index}
                   imageUrl={blogs.imageUrl}

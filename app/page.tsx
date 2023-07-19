@@ -12,7 +12,7 @@ export default function page() {
       <section className="opening-background lg:mb-28 mb-16">
         <OpeningSection />
       </section>
-      <section className="opening-background lg:mb-28 mb-16">
+      <section className="lg:mb-28 mb-16">
         <BenefitsSection />
       </section>
       <section className="lg:mb-28 mb-16">

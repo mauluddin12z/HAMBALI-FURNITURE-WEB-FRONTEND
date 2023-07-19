@@ -14,8 +14,8 @@ const getProducts = async () => {
 };
 
 export default function ProductsSection() {
-  const { data } = useSWR("products", getProducts);
-  const limitedProducts = data?.slice(0, 6);
+  const { data:products } = useSWR("products", getProducts);
+  const limitedProducts = products?.slice(0, 6);
   const renderItems = [];
 
   for (let i = 0; i < 6; i++) {

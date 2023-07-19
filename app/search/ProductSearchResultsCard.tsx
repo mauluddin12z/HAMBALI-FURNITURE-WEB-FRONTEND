@@ -7,7 +7,6 @@ import URLGenerator from "../utils/URLGenerator";
 export default function ProductSearchResultsCard({
   imageUrl,
   product_name,
-  product_id,
   description,
   category,
 }: any) {
@@ -36,12 +35,14 @@ export default function ProductSearchResultsCard({
               {product_name}
             </Link>
             <Link
-              href={`/products/${URLGenerator(product_name)}`}
+              href={`/categories/${URLGenerator(category)}`}
               className="text-gray-400 text-[14px] hover:underline decoration-1 underline-offset-2 mb-6"
             >
               {category}
             </Link>
-            <div className="mb-4 text-justify text-[14px] lg:text-[16px]">{description}</div>
+            <div className="mb-4 text-justify text-[14px] lg:text-[16px]">
+              {description}
+            </div>
           </div>
         </div>
       </div>

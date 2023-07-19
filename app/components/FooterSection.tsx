@@ -119,7 +119,7 @@ export default function FooterSection() {
                     </li>
                   ))}
                 <li className="text-gray-600 hover:text-black text-[14px]">
-                  <Link href={"/products"}>View more</Link>
+                  <Link href={"/categories"}>View more</Link>
                 </li>
               </ul>
             </div>

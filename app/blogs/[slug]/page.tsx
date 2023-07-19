@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [titleQuery, setTitleQuery] = useState(
     URLToStringGenerator(params.slug)
   );
-  const { data }: any = useSWR(
+  const { data:blogByName }: any = useSWR(
     titleQuery ? ["blogByName", titleQuery] : null,
     () => titleQuery && getBlogByTitle(titleQuery)
   );
@@ -41,7 +41,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="text-gray-400">Blogs</div>
         </div>
         <div className="relative h-96 flex-shrink-0">
-          {data ? (
+          {blogByName ? (
             <div className="relative h-full overflow-hidden z-20 flex justify-center items-center">
               <div
                 className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
@@ -49,18 +49,18 @@ export default function Page({ params }: { params: { slug: string } }) {
               <Image
                 className={`absolute w-full h-full`}
                 loader={myLoader}
-                src={data?.imageUrl}
+                src={blogByName?.imageUrl}
                 width={500}
                 height={500}
-                alt={data?.title}
+                alt={blogByName?.title}
               />
               <Image
                 className={`object-contain w-full h-full z-20 transition-transform duration-500`}
                 loader={myLoader}
-                src={data?.imageUrl}
+                src={blogByName?.imageUrl}
                 width={500}
                 height={500}
-                alt={data?.title}
+                alt={blogByName?.title}
               />
             </div>
           ) : (
@@ -70,8 +70,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           )}
         </div>
         <div className="mt-2 text-[16px] text-gray-400">
-          {data ? (
-            format(new Date(data?.createdAt), "EEEE, d MMMM yyyy HH:mm 'WIB'", {
+          {blogByName ? (
+            format(new Date(blogByName?.createdAt), "EEEE, d MMMM yyyy HH:mm 'WIB'", {
               locale: id,
             })
           ) : (
@@ -80,12 +80,12 @@ export default function Page({ params }: { params: { slug: string } }) {
             </>
           )}
         </div>
-        {data ? (
+        {blogByName ? (
           <>
-            <div className="text-[26px] font-extrabold mt-4">{data?.title}</div>
+            <div className="text-[26px] font-extrabold mt-4">{blogByName?.title}</div>
             <div
               className="text-[14px] text-gray-600 mt-4 text-justify"
-              dangerouslySetInnerHTML={{ __html: data?.description }}
+              dangerouslySetInnerHTML={{ __html: blogByName?.description }}
             />
           </>
         ) : (

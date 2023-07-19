@@ -21,7 +21,7 @@ export default function FilterByCategory({
 }: any) {
   const router = useRouter();
   const pathname = usePathname();
-  const categories = useSWR("categories", getCategories);
+  const { data: categories } = useSWR("categories", getCategories);
   return (
     <div
       className={`lg:w-[20%] w-full flex-grow lg:rounded-lg p-5 lg:flex flex-col ${
@@ -68,7 +68,7 @@ export default function FilterByCategory({
       </div>
       <div className="p-2 overflow-y-auto lg:overflow-visible">
         <div className="flex flex-col items-center justify-center gap-y-2">
-          {categories.data?.map((categories: any, index: number) => (
+          {categories?.map((categories: any, index: number) => (
             <button
               key={index}
               className={`w-full py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none ${

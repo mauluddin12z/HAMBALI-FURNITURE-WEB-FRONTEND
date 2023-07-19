@@ -31,7 +31,7 @@ export default function CategoriesSection() {
     setcardIsHovered(-1);
   };
 
-  const { data } = useSWR("categories", getCategories);
+  const { data:categories } = useSWR("categories", getCategories);
 
   const [slidePerViewSwiper, setslidePerViewSwiper] = useState(4);
 
@@ -78,13 +78,13 @@ export default function CategoriesSection() {
           <SwiperComponent slidePerViewSwiper={slidePerViewSwiper}>
             <div
               className={`w-full h-full ${
-                data
+                categories
                   ? "flex"
                   : `lg:grid lg:grid-cols-4 flex flex-nowrap lg:flex-wrap gap-2`
               }`}
             >
-              {data ? (
-                data?.map((categories: any, index: number) => (
+              {categories ? (
+                categories?.map((categories: any, index: number) => (
                   <SwiperSlide key={index}>
                     <Link
                       href={`/categories/${URLGenerator(categories?.category)}`}

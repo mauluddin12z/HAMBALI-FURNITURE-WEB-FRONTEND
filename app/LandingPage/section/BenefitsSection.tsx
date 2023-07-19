@@ -8,7 +8,7 @@ export default function BenefitSection() {
   return (
     <div className="lg:max-w-5xl md:max-w-6xl mx-auto lg:px-0 px-4">
       <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-4">
-        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color/50 p-6">
+        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6">
           <div className="w-[50px] aspect-square mb-4">
             <CustomizeIcon />
           </div>
@@ -16,7 +16,7 @@ export default function BenefitSection() {
             Bisa Custom sesuai keinginan
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color/50 p-6">
+        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6">
           <div className="w-[50px] aspect-square mb-4">
             <CraftsMan />
           </div>
@@ -24,7 +24,7 @@ export default function BenefitSection() {
             Tenaga ahli yang berpengalaman
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color/50 p-6">
+        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6">
           <div className="w-[50px] aspect-square mb-4">
             <FurniIcon />
           </div>
@@ -32,7 +32,7 @@ export default function BenefitSection() {
             Menyediakan Furniture untuk Exterior dan Interior
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color/50 p-6">
+        <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6">
           <div className="w-[50px] aspect-square mb-4">
             <InstallationIcon />
           </div>
