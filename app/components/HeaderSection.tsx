@@ -92,7 +92,7 @@ export default function HeaderSection() {
 
     const handleScroll = () => {
       const position = typeof window !== "undefined" ? window.pageYOffset : 0;
-      const threshold = 200;
+      const threshold = 100;
       setScrolled(position > threshold);
     };
 
