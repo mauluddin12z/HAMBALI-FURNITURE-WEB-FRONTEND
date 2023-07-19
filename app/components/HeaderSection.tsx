@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import LogoHambaliFurniture from "@/public/images/LogoHambaliFurniture.png";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Loading from "./Loading";
 
 export default function HeaderSection() {
   const navItemMenu = [
@@ -57,6 +58,7 @@ export default function HeaderSection() {
     setSearchValue(e.target.value);
   };
 
+  const [isLoading, setIsLoading] = useState(false);
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -66,9 +68,16 @@ export default function HeaderSection() {
     [searchParams]
   );
 
-  const handleSearch = (e: any) => {
+  const handleSearch = async (e: any) => {
     e.preventDefault();
-    router.push("/search" + "?" + createQueryString("searchQuery", searchValue));
+    setIsLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    setIsLoading(false);
+    router.push(
+      "/search" + "?" + createQueryString("searchQuery", searchValue)
+    );
   };
 
   const [scrolled, setScrolled] = useState(false);
@@ -295,6 +304,11 @@ export default function HeaderSection() {
           </>
         )}
       </div>
+      {isLoading && (
+        <span>
+          <Loading />
+        </span>
+      )}
     </nav>
   );
 }
