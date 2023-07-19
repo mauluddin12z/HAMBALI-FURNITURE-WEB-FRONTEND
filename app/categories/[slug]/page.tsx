@@ -83,7 +83,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   for (let i = 0; i < 1; i++) {
     const cardRenderItems = [];
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 8; j++) {
       cardRenderItems.push(
         <div
           key={j}
@@ -135,7 +135,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="text-gray-400">{categoryParams}</div>
         </div>
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-          {categoryByName ? (
+          {categoryByName && (
             <div className="flex flex-col w-full mb-28">
               <div className="mb-6">
                 <div className="font-bold text-[24px]">
@@ -161,9 +161,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                 )}
               </div>
             </div>
-          ) : (
-            <>{renderItems}</>
           )}
+          {!productsByCategory && <>{renderItems}</>}
           <Pagination
             totalData={totalProductsByCategory}
             start={start}

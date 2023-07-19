@@ -81,7 +81,7 @@ export default function Page() {
           </div>
         </div>
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-          {categories ? (
+          {categories &&
             categories?.map((category: any, index: number) => (
               <div key={index} className="flex flex-col w-full mb-28">
                 <div className="text-center mb-6">
@@ -124,10 +124,8 @@ export default function Page() {
                     )}
                 </div>
               </div>
-            ))
-          ) : (
-            <>{renderItems}</>
-          )}
+            ))}
+          {!productsByCategory && <>{renderItems}</>}
         </div>
       </div>
     </div>
