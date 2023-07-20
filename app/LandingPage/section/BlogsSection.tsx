@@ -60,7 +60,7 @@ export default function BlogsSection() {
             View All
           </Link>
         </div>
-        <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-8">
+        <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-4">
           {limitedBlogs ? (
             limitedBlogs?.map((blogs: any, index: number) => (
               <BlogCard

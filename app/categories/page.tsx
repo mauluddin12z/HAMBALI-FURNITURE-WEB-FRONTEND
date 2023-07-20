@@ -30,20 +30,18 @@ export default function Page() {
   const { data: categories } = useSWR(["categories", start, limit], () =>
     getCategories(start, limit)
   );
-  const { data: TotalCategories } = useSWR("categories", () =>
-    getCategories(start, limit)
-  );
+  const { data: TotalCategories } = useSWR("categories", getTotalCategories);
   const { data: productsByCategory } = useSWR(
     "productsByCategory",
     getProductByCategory
   );
 
-  const [limitCheck, setLimitCheck] = useState(
+  const [limitThreshold, setLimitThreshold] = useState(
     limit >= TotalCategories?.length
   );
 
   useEffect(() => {
-    setLimitCheck(limit >= TotalCategories?.length);
+    setLimitThreshold(limit >= TotalCategories?.length);
   }, [limit, TotalCategories?.length]);
 
   const handleLoadMore = async () => {
@@ -92,9 +90,6 @@ export default function Page() {
       </div>
     );
   }
-
-  console.log(limit);
-  console.log(categories?.length);
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
@@ -167,7 +162,7 @@ export default function Page() {
               : "text-gray-900 hover:text-blue-700"
           }  bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
           onClick={() => handleLoadMore()}
-          disabled={limitCheck}
+          disabled={limitThreshold}
         >
           {loadMoreDataIsLoading ? (
             <>
