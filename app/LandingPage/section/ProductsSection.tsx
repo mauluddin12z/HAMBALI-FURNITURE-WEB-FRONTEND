@@ -15,7 +15,7 @@ const getProducts = async () => {
 
 export default function ProductsSection() {
   const { data:products } = useSWR("products", getProducts);
-  const limitedProducts = products?.slice(0, 6);
+  const limitedProducts = products?.slice(0, 8);
   const renderItems = [];
 
   for (let i = 0; i < 6; i++) {
@@ -50,7 +50,7 @@ export default function ProductsSection() {
             View All
           </Link>
         </div>
-        <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-8">
+        <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-8">
           {limitedProducts ? (
             limitedProducts?.map((products: any, index: number) => (
               <ProductCard

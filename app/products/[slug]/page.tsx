@@ -16,8 +16,11 @@ const getProductByName = async (productNameQuery: string) => {
   return res.data;
 };
 
-const getProductCategory = async (categoryQuery: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?categoryQuery=${categoryQuery}`;
+const getProductCategory = async (
+  categoryQuery: string,
+  productNameQuery: string
+) => {
+  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}relatedProducts?categoryQuery=${categoryQuery}&productNameQuery=${productNameQuery}`;
 
   const res = await axios.get(url);
   return res.data;
@@ -37,8 +40,10 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const [categoryQuery, setCategoryQuery] = useState();
   const { data: productByCategory }: any = useSWR(
-    categoryQuery ? ["productByCategory", categoryQuery] : null,
-    () => categoryQuery && getProductCategory(categoryQuery)
+    categoryQuery
+      ? ["productByCategory", categoryQuery, productNameQuery]
+      : null,
+    () => categoryQuery && getProductCategory(categoryQuery, productNameQuery)
   );
 
   const [visibleRelatedItem, setvisibleRelatedItem] = useState(4);
@@ -97,17 +102,20 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </div>
                 </>
               ) : null}
+
+              {/* Mobile */}
               {productByName?.category.category ? (
-                <div className="block lg:hidden text-[16px] font-semibold text-gray-400 mb-6">
+                <div className="block lg:hidden text-[16px] font-medium mb-6">
                   <Link
                     href={`/categories/${URLGenerator(
                       productByName?.category.category
                     )}`}
                   >
-                    {productByName.category.category}
+                    {productByName.category.category.toUpperCase()}
                   </Link>
                 </div>
               ) : null}
+
               <div className="relative overflow-hidden lg:w-[350px] w-full flex rounded-lg mr-14 mb-6 bg-secondary-color flex-shrink-0 justify-center items-center">
                 <Image
                   loader={myLoader}
@@ -127,13 +135,13 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </>
                 ) : null}
                 {productByName?.category.category ? (
-                  <div className="lg:block hidden text-[16px] font-semibold text-gray-400 mb-6">
+                  <div className="lg:block hidden text-[16px] font-medium mb-6">
                     <Link
                       href={`/categories/${URLGenerator(
                         productByName?.category.category
                       )}`}
                     >
-                      {productByName.category.category}
+                      {productByName.category.category.toUpperCase()}
                     </Link>
                   </div>
                 ) : null}

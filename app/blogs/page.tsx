@@ -22,7 +22,7 @@ const getTotalBlogs = async () => {
 
 export default function Page() {
   const [start, setStart] = useState(0);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(8);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -84,7 +84,7 @@ export default function Page() {
           ) : (
             <div className="hidden"></div>
           )}
-          <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
+          <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-4 mb-4">
             {blogs ? (
               blogs?.map((blogs: any, index: number) => (
                 <BlogCard

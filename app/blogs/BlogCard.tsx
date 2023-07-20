@@ -14,7 +14,7 @@ export default function BlogCard({ imageUrl, title, createdAt }: any) {
 
   return (
     <>
-      <div className={`border border-gray-200 overflow-hidden p-6 h-[500px]`}>
+      <div className={`border border-gray-200 overflow-hidden p-4 h-[500px]`}>
         <div className="flex flex-col h-full">
           <div className="relative h-[80%] flex-shrink-0">
             <Link
