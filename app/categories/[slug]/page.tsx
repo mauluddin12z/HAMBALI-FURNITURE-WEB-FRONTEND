@@ -60,6 +60,13 @@ export default function Page({ params }: { params: { slug: string } }) {
     URLToStringGenerator(params.slug)
   );
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    if (mediaQuery.matches) {
+      setLimit(4);
+    }
+  }, []);
+
   const { data: categoryByName }: any = useSWR(
     categoryParams ? ["categoryByName", categoryParams] : null,
     () => categoryParams && getCategoryByName(categoryParams)

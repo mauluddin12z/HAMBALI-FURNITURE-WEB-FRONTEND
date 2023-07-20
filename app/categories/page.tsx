@@ -6,7 +6,12 @@ import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import URLGenerator from "../utils/URLGenerator";
 import ProductCard from "../products/ProductCard";
-const getCategories = async () => {
+const getCategories = async (start: Number, limit: Number) => {
+  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category?start=${start}&limit=${limit}`;
+  const res = await axios.get(url);
+  return res.data;
+};
+const getTotalCategories = async () => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
   const res = await axios.get(url);
   return res.data;
@@ -19,14 +24,30 @@ const getProductByCategory = async () => {
 };
 
 export default function Page() {
-  const { data: categories } = useSWR("categories", getCategories);
+  const [start, setStart] = useState(0);
+  const [limit, setLimit] = useState(2);
+  const [loadMoreDataIsLoading, setLoadMoreDataIsLoading] = useState(false);
+  const { data: categories } = useSWR(["categories", start, limit], () =>
+    getCategories(start, limit)
+  );
+  const { data: TotalCategories } = useSWR("categories", () =>
+    getCategories(start, limit)
+  );
   const { data: productsByCategory } = useSWR(
     "productsByCategory",
     getProductByCategory
   );
 
-  const renderItems = [];
+  const handleLoadMore = async () => {
+    setLoadMoreDataIsLoading(true);
 
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setLimit((prev) => prev + 2);
+
+    setLoadMoreDataIsLoading(false);
+  };
+
+  const renderItems = [];
   for (let i = 0; i < 2; i++) {
     const cardRenderItems = [];
     for (let j = 0; j < 4; j++) {
@@ -46,6 +67,7 @@ export default function Page() {
         </div>
       );
     }
+
     renderItems.push(
       <div key={i} className="flex flex-col w-full mb-28">
         <div className="w-full flex flex-col justify-center items-center">
@@ -62,6 +84,8 @@ export default function Page() {
       </div>
     );
   }
+
+  console.log(categories?.length);
 
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
@@ -84,7 +108,7 @@ export default function Page() {
           {categories &&
             categories?.map((category: any, index: number) => (
               <div key={index} className="flex flex-col w-full mb-28">
-                <div className="text-center mb-6">
+                <div className="text-center mb-4">
                   <div className="font-bold text-[24px]">
                     {category.category.toUpperCase()}
                   </div>
@@ -127,6 +151,34 @@ export default function Page() {
             ))}
           {!productsByCategory && <>{renderItems}</>}
         </div>
+        <button
+          type="button"
+          className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${
+            limit >= TotalCategories?.length
+              ? "text-gray-400"
+              : "text-gray-900 hover:text-blue-700"
+          }  bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
+          onClick={() => handleLoadMore()}
+          disabled={limit >= TotalCategories?.length}
+        >
+          {loadMoreDataIsLoading ? (
+            <>
+              <div className="bg-white rounded-lg flex items-center flex-col">
+                <div className="loader-dots block relative w-20 h-5 mt-2">
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                </div>
+                <div className="text-gray-500 text-xs font-light mt-2 text-center">
+                  Please wait...
+                </div>
+              </div>
+            </>
+          ) : (
+            "Load More"
+          )}
+        </button>
       </div>
     </div>
   );

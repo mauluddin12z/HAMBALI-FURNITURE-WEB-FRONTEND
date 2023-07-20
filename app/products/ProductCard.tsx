@@ -75,13 +75,13 @@ export default function ProductCard({
         </div>
       </div>
       <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-        <div className="flex lg:flex-row flex-col justify-center items-center lg:p-10 p-2 z-[50]">
+        <div className="flex flex-col lg:flex-row flex-grow justify-center items-center lg:p-10 p-2 z-[50]">
           {productById ? (
             <>
-              <div className="lg:w-[50%] flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)]">
+              <div className="lg:w-[50%] h-full flex justify-center items-center drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)]">
                 {productById?.imageUrl ? (
                   <Image
-                    className="object-contain h-full rounded-t-lg transition-all -mt-16 lg:-ml-10"
+                    className="object-cover h-full w-full rounded-t-lg transition-all lg:-ml-10"
                     src={productById?.imageUrl}
                     loader={myLoader}
                     width={500}
@@ -161,9 +161,7 @@ export default function ProductCard({
                   </>
                 ) : null}
                 <Link
-                  href={`/products/${URLGenerator(
-                    productById?.product_name
-                  )}`}
+                  href={`/products/${URLGenerator(productById?.product_name)}`}
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-4"
                 >
                   See details

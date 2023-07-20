@@ -75,9 +75,13 @@ export default function HeaderSection() {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     setIsLoading(false);
-    router.push(
-      "/search" + "?" + createQueryString("searchQuery", searchValue)
-    );
+    const newParams = new URLSearchParams();
+    newParams.set("searchQuery", searchValue);
+    const newUrl = `/search?${newParams.toString()}`;
+
+    router.push(newUrl);
+
+    setSearchValue("");
   };
 
   const [scrolled, setScrolled] = useState(false);
@@ -111,7 +115,7 @@ export default function HeaderSection() {
     <nav
       className={
         mediaQuery?.matches
-          ? `w-full h-50 bg-white shadow-sm border-b fixed z-50`
+          ? `w-full h-[16%] bg-white shadow-sm border-b fixed z-50 flex justify-center items-center`
           : `w-full z-50 transition-all ${
               scrolled
                 ? " bg-white shadow-[0px_0px_10px] shadow-black/10 border-b fixed -top-[100px] translate-y-[100px]"
@@ -119,7 +123,7 @@ export default function HeaderSection() {
             }`
       }
     >
-      <div className="lg:max-w-7xl md:max-w-6xl flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
+      <div className="lg:max-w-7xl md:max-w-6xl w-full flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
         <Link href="/" className="flex flex-col justify-center">
           <Image
             src={LogoHambaliFurniture}
