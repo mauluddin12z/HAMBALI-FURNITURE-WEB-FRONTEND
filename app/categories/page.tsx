@@ -38,6 +38,14 @@ export default function Page() {
     getProductByCategory
   );
 
+  const [limitCheck, setLimitCheck] = useState(
+    limit >= TotalCategories?.length
+  );
+
+  useEffect(() => {
+    setLimitCheck(limit >= TotalCategories?.length);
+  }, [limit, TotalCategories?.length]);
+
   const handleLoadMore = async () => {
     setLoadMoreDataIsLoading(true);
 
@@ -85,8 +93,8 @@ export default function Page() {
     );
   }
 
+  console.log(limit);
   console.log(categories?.length);
-
   return (
     <div className="lg:max-w-7xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
       <div className="flex flex-col justify-center items-center">
@@ -159,7 +167,7 @@ export default function Page() {
               : "text-gray-900 hover:text-blue-700"
           }  bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
           onClick={() => handleLoadMore()}
-          disabled={limit >= TotalCategories?.length}
+          disabled={limitCheck}
         >
           {loadMoreDataIsLoading ? (
             <>
