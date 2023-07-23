@@ -44,24 +44,26 @@ export default function ProductCard({
             <div className="absolute w-full h-full flex justify-center items-center p-3">
               <div className="w-full h-full rounded-lg"></div>
             </div>
-            <div
-              className="relative flex-grow h-full drop-shadow-[0px_0px_5px_rgba(0,0,5,0.5)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,5,1)] transition-shadow cursor-pointer overflow-hidden z-20 flex justify-center items-center"
-              onClick={() => {
-                setShowModal(true);
-                setProductId(product_id);
-              }}
-            >
-              <Image
-                className={`object-contain h-full rounded-t-lg scale-[110%] hover:scale-[115%] ${
-                  showModal && "scale-[115%]"
-                } transition-transform duration-400`}
-                loader={myLoader}
-                src={imageUrl}
-                width={500}
-                height={500}
-                alt={product_name}
-                priority
-              />
+            <div className="flex-grow flex justify-center relative h-full bg-secondary-color">
+              <div
+                className="drop-shadow-[0px_0px_5px_rgba(0,0,5,0.5)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,5,1)] transition-shadow cursor-pointer overflow-hidden z-20 flex justify-center items-center"
+                onClick={() => {
+                  setShowModal(true);
+                  setProductId(product_id);
+                }}
+              >
+                <Image
+                  className={`object-contain h-full rounded-t-lg scale-[110%] hover:scale-[115%] ${
+                    showModal && "scale-[115%]"
+                  } transition-transform duration-400`}
+                  loader={myLoader}
+                  src={imageUrl}
+                  width={500}
+                  height={500}
+                  alt={product_name}
+                  priority
+                />
+              </div>
             </div>
           </div>
           <div className="px-5 h-[20%] flex justify-center items-center z-20">

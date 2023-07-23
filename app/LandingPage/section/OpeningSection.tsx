@@ -12,7 +12,7 @@ export default function OpeningSection() {
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
       </div>
-      <div className="lg:max-w-7xl md:max-w-6xl h-screen mx-auto lg:px-0 px-3">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl h-screen mx-auto lg:px-0 px-3">
         <div className="absolute w-[600px] aspect-square bg-blue-100/30 blur-2xl rounded-full left-0 top-0"></div>
         <div className="absolute w-[500px] aspect-square bg-primary-color/5 blur-3xl rounded-full left-1/2"></div>
         <div className="absolute lg:w-[400px] w-[200px] aspect-square bg-primary-color/10 blur-3xl rounded-full right-0.5 bottom-[5%]"></div>
@@ -23,7 +23,7 @@ export default function OpeningSection() {
                 Furniture Modern untuk Ruangan Anda
               </div>
               <div className="text-[18px] text-gray-600 mb-14">
-                <span className="font-bold text-black">Hambali Furniture. </span>
+                <span className="font-bold text-black">Hambali Furniture, </span>
                 Menghadirkan Kecantikan Minimalis dan Modern dalam Setiap
                 Ruangan!. Jika berminat silahkan hubungi kontak dibawah.
               </div>

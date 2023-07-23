@@ -114,7 +114,7 @@ export default function HeaderSection() {
             }`
       }
     >
-      <div className="lg:max-w-7xl md:max-w-6xl w-full flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl w-full flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
         <Link href="/" className="flex flex-col justify-center">
           <Image
             src={LogoHambaliFurniture}

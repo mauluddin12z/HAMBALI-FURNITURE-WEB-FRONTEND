@@ -39,7 +39,7 @@ export default function FooterSection() {
 
   return (
     <div className="bg-secondary-color min-h-[300px]">
-      <div className="lg:max-w-7xl md:max-w-6xl flex items-center justify-between mx-auto lg:py-24 py-16 px-8 lg:px-0">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl flex items-center justify-between mx-auto lg:py-24 py-16 px-8 lg:px-0">
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
           <div className="flex justify-center items-center">
             <div className="flex flex-col">

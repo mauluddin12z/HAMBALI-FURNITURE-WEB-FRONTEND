@@ -6,9 +6,6 @@ html {
   scroll-behavior: smooth !important;
 }
 
-.opening-background {
-  background-color: whitesmoke;
-}
 path.dot_stripe_svg__color {
   @apply fill-primary-color/10;
 }
