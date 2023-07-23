@@ -45,7 +45,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="text-black">
             <i className="fa-solid fa-chevron-right"></i>
           </div>
-          <div className="text-gray-400">{blogByName.title}</div>
+          <div className="text-gray-400">{blogByName?.title}</div>
         </div>
         <div className="relative h-96 flex-shrink-0">
           {blogByName ? (

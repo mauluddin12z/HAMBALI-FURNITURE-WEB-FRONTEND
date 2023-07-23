@@ -57,7 +57,7 @@ export default function OtherBlogs({ blogId }: any) {
                 <div className="flex flex-col h-full">
                   <div className="relative h-[80%]">
                     <Link
-                      href={`/blogs/${URLGenerator(otherBlogs.title)}`}
+                      href={`/blogs/${URLGenerator(otherBlogs?.title)}`}
                       className="relative h-full cursor-pointer overflow-hidden z-20 flex justify-center items-center"
                     >
                       <div
@@ -66,24 +66,24 @@ export default function OtherBlogs({ blogId }: any) {
                       <Image
                         className={`absolute w-full h-full`}
                         loader={myLoader}
-                        src={otherBlogs.imageUrl}
+                        src={otherBlogs?.imageUrl}
                         width={500}
                         height={500}
-                        alt={otherBlogs.title}
+                        alt={otherBlogs?.title}
                       />
                       <Image
                         className={`object-contain w-full h-full z-20 transition-transform duration-500`}
                         loader={myLoader}
-                        src={otherBlogs.imageUrl}
+                        src={otherBlogs?.imageUrl}
                         width={500}
                         height={500}
-                        alt={otherBlogs.title}
+                        alt={otherBlogs?.title}
                       />
                     </Link>
                   </div>
                   <div className="z-20 text-gray-400 mt-1 text-[14px]">
                     {format(
-                      new Date(otherBlogs.createdAt),
+                      new Date(otherBlogs?.createdAt),
                       "EEEE, d MMMM yyyy HH:mm 'WIB'",
                       {
                         locale: id,
@@ -92,10 +92,10 @@ export default function OtherBlogs({ blogId }: any) {
                   </div>
                   <div className="flex items-center z-20 mt-2">
                     <Link
-                      href={`/blogs/${URLGenerator(otherBlogs.title)}`}
+                      href={`/blogs/${URLGenerator(otherBlogs?.title)}`}
                       className="text-[18px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4 truncate line-clamp-2 whitespace-pre-wrap"
                     >
-                      {otherBlogs.title}
+                      {otherBlogs?.title}
                     </Link>
                   </div>
                 </div>
