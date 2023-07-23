@@ -24,7 +24,7 @@ export default function BlogCard({
           className={`border border-gray-200 shadow overflow-hidden p-4 h-[400px]`}
         >
           <div className="flex flex-col h-full">
-            <div className="relative h-[75%]">
+            <div className="relative h-[75%] rounded-lg overflow-hidden">
               <Link
                 href={`/blogs/${URLGenerator(title)}`}
                 className="relative h-full cursor-pointer overflow-hidden z-20 flex justify-center items-center"
@@ -73,7 +73,7 @@ export default function BlogCard({
         <div className="border p-4 rounded-lg flex lg:flex-row flex-col h-[300px]">
           <Link
             href={`/blogs/${URLGenerator(title)}`}
-            className="w-[30%] relative h-full overflow-hidden z-20 flex justify-center items-center"
+            className="w-[30%] relative h-full overflow-hidden z-20 flex justify-center items-center rounded-lg"
           >
             <div
               className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}

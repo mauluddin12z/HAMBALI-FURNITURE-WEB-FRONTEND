@@ -202,8 +202,8 @@ export default function HeaderSection() {
             <div
               className={`w-full h-auto fixed inset-0 transition-all flex justify-center ${
                 searchFormVisible
-                  ? "opacity-100 top-[120px]"
-                  : "opacity-0 top-[150px] -z-10 pointer-events-none"
+                  ? "opacity-100 top-[18%]"
+                  : "opacity-0 top-[30%] -z-10 pointer-events-none"
               }`}
             >
               <div className="relative w-full flex justify-center">

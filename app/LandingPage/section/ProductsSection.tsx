@@ -14,8 +14,19 @@ const getProducts = async () => {
 };
 
 export default function ProductsSection() {
-  const { data:products } = useSWR("products", getProducts);
-  const limitedProducts = products?.slice(0, 8);
+  const { data: products } = useSWR("products", getProducts);
+  const [limit, setLimit] = useState(8);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    if (mediaQuery.matches) {
+      setLimit(4);
+    } else {
+      setLimit(8);
+    }
+  }, []);
+
+  const limitedProducts = products?.slice(0, limit);
   const renderItems = [];
 
   for (let i = 0; i < 6; i++) {

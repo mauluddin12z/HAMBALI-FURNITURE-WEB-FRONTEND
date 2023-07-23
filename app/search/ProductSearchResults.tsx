@@ -65,7 +65,7 @@ export default function ProductSearchResults(generalSearchQuery: any) {
   for (let i = 0; i < limit; i++) {
     renderItems.push(
       <div key={i}>
-        <div className="border lg:p-10 p-4 rounded-lg flex lg:flex-row flex-col">
+        <div className="border p-4 rounded-lg flex lg:flex-row flex-col">
           <div className="lg:w-[22%] w-full rounded-lg h-[400px]">
             <SkeletonLoading />
           </div>
@@ -73,7 +73,16 @@ export default function ProductSearchResults(generalSearchQuery: any) {
             <div className="w-[300px] h-8">
               <SkeletonLoading />
             </div>
-            <div className="w-[100px] h-4">
+            <div className="w-[200px] h-4">
+              <SkeletonLoading />
+            </div>
+            <div className="w-[200px] h-4">
+              <SkeletonLoading />
+            </div>
+            <div className="w-[200px] h-4">
+              <SkeletonLoading />
+            </div>
+            <div className="w-[200px] h-4">
               <SkeletonLoading />
             </div>
             <div className="w-full h-full">
@@ -105,6 +114,10 @@ export default function ProductSearchResults(generalSearchQuery: any) {
                 product_name={products.product_name}
                 description={products.description}
                 category={products.category.category}
+                dimensions={products.dimensions}
+                material={products.material}
+                color={products.color}
+                price={products.price}
               />
             ))
           ) : (
