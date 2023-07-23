@@ -15,7 +15,7 @@ export default function ProductSearchResultsCard({
   };
   return (
     <>
-      <div className="border lg:p-10 p-4 rounded-lg flex lg:flex-row flex-col">
+      <div className="border lg:p-8 p-4 rounded-lg flex lg:flex-row flex-col">
         <div className="lg:w-[22%] w-full border rounded-lg">
           <Image
             loader={myLoader}

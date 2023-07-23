@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import Link from "next/link";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
+import OtherBlogs from "./otherBlogs";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -23,13 +24,13 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [titleQuery, setTitleQuery] = useState(
     URLToStringGenerator(params.slug)
   );
-  const { data:blogByName }: any = useSWR(
+  const { data: blogByName }: any = useSWR(
     titleQuery ? ["blogByName", titleQuery] : null,
     () => titleQuery && getBlogByTitle(titleQuery)
   );
 
   return (
-    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
+    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-44">
       <div className="flex flex-col w-full">
         <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
@@ -38,7 +39,13 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="text-black lg:text-[14px]">
             <i className="fa-solid fa-chevron-right"></i>
           </div>
-          <div className="text-gray-400">Blogs</div>
+          <Link href={"/blogs"} className="text-black hover:text-primary-color">
+            Blogs
+          </Link>
+          <div className="text-black">
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div className="text-gray-400">{blogByName.title}</div>
         </div>
         <div className="relative h-96 flex-shrink-0">
           {blogByName ? (
@@ -65,24 +72,34 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
           ) : (
             <>
-              <div className="w-full h-full rounded-lg"><SkeletonLoading /></div>
+              <div className="w-full h-full rounded-lg">
+                <SkeletonLoading />
+              </div>
             </>
           )}
         </div>
         <div className="mt-2 text-[16px] text-gray-400">
           {blogByName ? (
-            format(new Date(blogByName?.createdAt), "EEEE, d MMMM yyyy HH:mm 'WIB'", {
-              locale: id,
-            })
+            format(
+              new Date(blogByName?.createdAt),
+              "EEEE, d MMMM yyyy HH:mm 'WIB'",
+              {
+                locale: id,
+              }
+            )
           ) : (
             <>
-              <div className="w-56 h-6 rounded-lg"><SkeletonLoading /></div>
+              <div className="w-56 h-6 rounded-lg">
+                <SkeletonLoading />
+              </div>
             </>
           )}
         </div>
         {blogByName ? (
           <>
-            <div className="text-[26px] font-extrabold mt-4">{blogByName?.title}</div>
+            <div className="font-semibold text-[26px] mt-4">
+              {blogByName?.title}
+            </div>
             <div
               className="text-[14px] text-gray-600 mt-4 text-justify"
               dangerouslySetInnerHTML={{ __html: blogByName?.description }}
@@ -90,10 +107,17 @@ export default function Page({ params }: { params: { slug: string } }) {
           </>
         ) : (
           <>
-            <div className="w-full h-[38px] rounded-lg mt-4"><SkeletonLoading /></div>
-            <div className="w-full h-72 rounded-lg mt-4"><SkeletonLoading /></div>
+            <div className="w-full h-[38px] rounded-lg mt-4">
+              <SkeletonLoading />
+            </div>
+            <div className="w-full h-72 rounded-lg mt-4">
+              <SkeletonLoading />
+            </div>
           </>
         )}
+      </div>
+      <div className="mt-20">
+        <OtherBlogs blogId={blogByName?.blog_id} />
       </div>
     </div>
   );

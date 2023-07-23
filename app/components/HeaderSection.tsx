@@ -43,7 +43,6 @@ export default function HeaderSection() {
 
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams()!;
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = useCallback(() => {
@@ -59,14 +58,6 @@ export default function HeaderSection() {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams]
-  );
 
   const handleSearch = async (e: any) => {
     e.preventDefault();
@@ -141,7 +132,10 @@ export default function HeaderSection() {
                 <li key={index}>
                   <Link
                     href={navItem.link}
-                    className="text-black hover:text-primary-color font-medium transition-all px-4"
+                    className={`text-black hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
+                      pathname.split("/")[1] == navItem.name.toLowerCase() &&
+                      "bg-secondary-color text-primary-color"
+                    }`}
                   >
                     {navItem.name}
                   </Link>

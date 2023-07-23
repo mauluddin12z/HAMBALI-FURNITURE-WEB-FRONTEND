@@ -8,19 +8,10 @@ import { FormatRupiah } from "@arismun/format-rupiah";
 import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
+import RelatedProducts from "./relatedProducts";
 
 const getProductByName = async (productNameQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productByName?productNameQuery=${productNameQuery}`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getProductCategory = async (
-  categoryQuery: string,
-  productNameQuery: string
-) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}relatedProducts?categoryQuery=${categoryQuery}&productNameQuery=${productNameQuery}`;
 
   const res = await axios.get(url);
   return res.data;
@@ -39,15 +30,6 @@ export default function Page({ params }: { params: { slug: string } }) {
   );
 
   const [categoryQuery, setCategoryQuery] = useState();
-  const { data: productByCategory }: any = useSWR(
-    categoryQuery
-      ? ["productByCategory", categoryQuery, productNameQuery]
-      : null,
-    () => categoryQuery && getProductCategory(categoryQuery, productNameQuery)
-  );
-
-  const [visibleRelatedItem, setvisibleRelatedItem] = useState(4);
-  const relatedProduct = productByCategory?.slice(0, visibleRelatedItem);
 
   useEffect(() => {
     if (productByName && productByName.category_id) {
@@ -55,24 +37,9 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }, [productByName]);
 
-  const renderItems = [];
 
-  for (let i = 0; i < visibleRelatedItem; i++) {
-    renderItems.push(
-      <div
-        key={i}
-        className="w-full h-full border border-gray-200 rounded-lg shadow"
-      >
-        <div className="w-full h-full flex justify-center items-center p-3">
-          <div className="w-full h-full aspect-square rounded-lg">
-            <SkeletonLoading />
-          </div>
-        </div>
-      </div>
-    );
-  }
   return (
-    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-36">
+    <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-4 mt-44">
       <div className="flex flex-col w-full">
         <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
@@ -230,30 +197,10 @@ export default function Page({ params }: { params: { slug: string } }) {
             </>
           )}
         </div>
-        <div className="flex-col">
-          <div className="font-semibold text-[26px] mb-10">Related Product</div>
-          <div className="grid gap-2 grid-cols-2 lg:grid-cols-4">
-            {relatedProduct
-              ? relatedProduct?.map((product: any, index: number) => (
-                  <Link
-                    href={URLGenerator(product?.product_name)}
-                    key={index}
-                    className="w-full h-[250px] border flex relative"
-                  >
-                    <Image
-                      loader={myLoader}
-                      src={product.imageUrl}
-                      width={500}
-                      height={500}
-                      className="object-contain"
-                      alt={product.product_name}
-                    />
-                    <div className="absolute w-full h-full hover:bg-black/50 z-10 transition-all"></div>
-                  </Link>
-                ))
-              : renderItems}
-          </div>
-        </div>
+        <RelatedProducts
+          categoryQuery={categoryQuery}
+          productNameQuery={productNameQuery}
+        />
       </div>
     </div>
   );
