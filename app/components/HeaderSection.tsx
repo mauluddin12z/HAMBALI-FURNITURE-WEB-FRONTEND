@@ -133,7 +133,7 @@ export default function HeaderSection() {
                   <Link
                     href={navItem.link}
                     className={`text-black hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
-                      pathname.split("/")[1] == navItem.name.toLowerCase() &&
+                      "/" + pathname.split("/")[1] == navItem.link &&
                       "bg-secondary-color text-primary-color"
                     }`}
                   >
@@ -243,28 +243,26 @@ export default function HeaderSection() {
                 ></i>
               </button>
               <button
-                className={`p-2 ${
-                  menuVisible
-                    ? "fixed z-50 text-black text-[24px]"
-                    : "static text-black text-[18px]"
-                }`}
+                className="p-2 text-black text-[20px]"
                 onClick={toggleMenu}
               >
-                <i
-                  className={`fa-solid ${
-                    menuVisible ? "fa-xmark" : "fa-bars"
-                  } `}
-                ></i>
+                <i className="fa-solid fa-bars"></i>
               </button>
             </div>
             <div
-              className={`${
-                menuVisible ? "block" : "hidden"
-              } w-full h-screen fixed inset-0 bg-secondary-color overflow-hidden`}
+              className={`shadow border ${
+                menuVisible ? "translate-x-[0%]" : "translate-x-[100%]"
+              } w-full h-screen fixed inset-0 bg-gradient-to-b from-secondary-color to-blue-50 overflow-hidden transition-transform duration-300`}
             >
               <div className="relative w-full h-full z-10">
-                <div className="absolute w-[30%] aspect-square bg-white blur-3xl rounded-full bottom-0 right-0"></div>
-                <div className="absolute w-[40%] aspect-square bg-white/50 blur-3xl rounded-full top-0 left-0"></div>
+                <button
+                  className={`p-2 transition-opacity duration-300 absolute z-50 text-black text-[20px] opacity-100 top-[5%] right-[10%] ease-out`}
+                  onClick={toggleMenu}
+                >
+                  <i
+                    className={`fa-solid fa-xmark`}
+                  ></i>
+                </button>
                 <div className="relative flex justify-center items-center w-full h-full">
                   <ul className="font-normal flex flex-col justify-center items-center h-full gap-y-8 text-gray-700 z-20">
                     {navItemMenu &&

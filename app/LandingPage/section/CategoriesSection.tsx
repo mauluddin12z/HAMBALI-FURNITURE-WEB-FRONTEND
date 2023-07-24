@@ -31,7 +31,7 @@ export default function CategoriesSection() {
     setcardIsHovered(-1);
   };
 
-  const { data:categories } = useSWR("categories", getCategories);
+  const { data: categories } = useSWR("categories", getCategories);
 
   const [slidePerViewSwiper, setslidePerViewSwiper] = useState(4);
 
@@ -90,11 +90,13 @@ export default function CategoriesSection() {
                       href={`/categories/${URLGenerator(categories?.category)}`}
                       className="w-full h-full"
                     >
-                      <div className="flex flex-col h-[400px] relative">
+                      <div className="flex flex-col justify-center items-center h-[400px] relative rounded-lg overflow-hidden border shadow">
                         <div className="drop-shadow-[0px_0px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)] transition-all cursor-pointer w-full h-full">
                           <Image
-                            className={`object-contain w-full h-full rounded-t-lg transition-all duration-1000 ${
-                              cardIsHovered === index ? "scale-90" : "scale-75 "
+                            className={`object-contain w-full h-full rounded-t-lg transition-all duration-300 ${
+                              cardIsHovered === index
+                                ? "scale-100"
+                                : "scale-75 "
                             } transition-all`}
                             loader={myLoader}
                             src={categories.imageUrl}
@@ -104,19 +106,38 @@ export default function CategoriesSection() {
                           />
                         </div>
                         <div
-                          className="absolute flex justify-center items-center w-full h-full scale-90 border-[5px] border-white z-20"
+                          className={`absolute flex justify-center items-center w-[80%] h-10 transition-opacity duration-300 hover:bg-white/20 ${
+                            cardIsHovered === index
+                              ? "border-[2px] border-white"
+                              : ""
+                          } transition- z-20`}
                           onMouseEnter={() => handleOutsideLayerHover(index)}
                           onMouseLeave={handleOutsideLayerLeave}
                         >
-                          <div className="place-self-center text-[24px] font-bold tracking-tight text-white hover:text-blue text-center hover:underline underline-offset-4 decoration-3 z-30 flex justify-center items-center">
-                            <span className="">{categories.category}</span>
+                          <div
+                            className={`place-self-center text-[16px] tracking-tight text-white hover:text-blue text-center z-30 flex justify-center items-center opacity-0 transition-all duration-300 ${
+                              cardIsHovered === index ? "opacity-100" : ""
+                            }`}
+                          >
+                            View More
                           </div>
                         </div>
                         <div
-                          className="absolute w-full h-full bg-black/50 backdrop-blur-sm z-10"
+                          className={`absolute w-full h-full z-10 transition-all duration-300 ${
+                            cardIsHovered === index
+                              ? "bg-black/80 backdrop-blur-sm"
+                              : ""
+                          }`}
                           onMouseEnter={() => handleOutsideLayerHover(index)}
                           onMouseLeave={handleOutsideLayerLeave}
                         ></div>
+                        <div
+                          className={`absolute bottom-[7%] font-semibold text-[18px] transition-opacity duration-300 ${
+                            cardIsHovered === index ? "opacity-0" : ""
+                          }`}
+                        >
+                          {categories.category.toUpperCase()}
+                        </div>
                       </div>
                     </Link>
                   </SwiperSlide>

@@ -13,10 +13,10 @@ export default function Modal({ isVisible, onClose, children }: any) {
   return (
     <div
       id="wrapper"
-      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center lg:items-center items-end z-30"
+      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center lg:items-center items-center z-30"
       onClick={handleClose}
     >
-      <div className="lg:w-[600px] w-[350px] h-[80%] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden mb-[6%] lg:mt-[15%]">
+      <div className="lg:w-[600px] w-[350px] h-auto max-h-[80%] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden mt-[25%] lg:mt-[15%]">
         <button
           className="text-gray-600 hover:text-black text-xl place-self-end text-[32px] fixed z-40"
           onClick={() => onClose()}

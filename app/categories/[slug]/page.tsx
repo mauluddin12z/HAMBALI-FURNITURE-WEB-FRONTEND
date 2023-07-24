@@ -145,11 +145,11 @@ export default function Page({ params }: { params: { slug: string } }) {
           {categoryByName && (
             <div className="flex flex-col w-full mb-28">
               <div className="mb-6">
-                <div className="font-bold text-[24px]">
+                <div className="font-bold text-[24px] mb-4">
                   {categoryByName.category.toUpperCase()}
                 </div>
               </div>
-              <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b py-10">
+              <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b pb-10">
                 {productsByCategory &&
                   productsByCategory?.map((products: any, index: number) => (
                     <div key={index} className={`w-full h-full`}>

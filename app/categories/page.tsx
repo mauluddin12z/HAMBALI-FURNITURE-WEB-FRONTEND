@@ -6,8 +6,8 @@ import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import URLGenerator from "../utils/URLGenerator";
 import ProductCard from "../products/ProductCard";
-const getCategories = async (start: Number, limit: Number) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category?start=${start}&limit=${limit}`;
+const getCategories = async () => {
+  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
   const res = await axios.get(url);
   return res.data;
 };
@@ -24,12 +24,9 @@ const getProductByCategory = async () => {
 };
 
 export default function Page() {
-  const [start, setStart] = useState(0);
   const [limit, setLimit] = useState(2);
   const [loadMoreDataIsLoading, setLoadMoreDataIsLoading] = useState(false);
-  const { data: categories } = useSWR(["categories", start, limit], () =>
-    getCategories(start, limit)
-  );
+  let { data: categories } = useSWR("categories", getCategories);
   const { data: TotalCategories } = useSWR("categories", getTotalCategories);
   const { data: productsByCategory } = useSWR(
     "productsByCategory",
@@ -39,6 +36,8 @@ export default function Page() {
   const [limitThreshold, setLimitThreshold] = useState(
     limit >= TotalCategories?.length
   );
+
+  categories = categories?.slice(0, limit);
 
   useEffect(() => {
     setLimitThreshold(limit >= TotalCategories?.length);
@@ -110,7 +109,7 @@ export default function Page() {
         <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
           {categories &&
             categories?.map((category: any, index: number) => (
-              <div key={index} className="flex flex-col w-full mb-28">
+              <div key={index} className="flex flex-col w-full mb-10">
                 <div className="text-center mb-4">
                   <div className="font-bold text-[24px]">
                     {category.category.toUpperCase()}
@@ -122,7 +121,7 @@ export default function Page() {
                     {"View More >>"}
                   </Link>
                 </div>
-                <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b py-10">
+                <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b py-10 mb-10">
                   {productsByCategory &&
                     productsByCategory
                       ?.filter(
@@ -166,7 +165,7 @@ export default function Page() {
         >
           {loadMoreDataIsLoading ? (
             <>
-              <div className="bg-white rounded-lg flex items-center flex-col">
+              <div className="rounded-lg flex items-center flex-col">
                 <div className="loader-dots block relative w-20 h-5 mt-2">
                   <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
                   <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>

@@ -95,7 +95,7 @@ export default function ProductCard({
                   <div>No image available</div>
                 )}
               </div>
-              <div className="flex flex-col flex-grow lg:w-auto w-full">
+              <div className="flex flex-col lg:w-[50%] w-full">
                 {productById?.product_name ? (
                   <>
                     <div className="font-bold lg:text-[18px] text-[14px]">

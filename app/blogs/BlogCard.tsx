@@ -21,10 +21,10 @@ export default function BlogCard({
     <>
       {gridCols === 3 || gridCols === 0 || !gridButtonShow ? (
         <div
-          className={`border border-gray-200 shadow overflow-hidden p-4 h-[400px]`}
+          className={`border border-gray-200 rounded-lg shadow overflow-hidden h-[440px]`}
         >
           <div className="flex flex-col h-full">
-            <div className="relative h-[75%] rounded-lg overflow-hidden">
+            <div className="relative h-[75%] overflow-hidden">
               <Link
                 href={`/blogs/${URLGenerator(title)}`}
                 className="relative h-full cursor-pointer overflow-hidden z-20 flex justify-center items-center"
@@ -52,16 +52,16 @@ export default function BlogCard({
                 />
               </Link>
             </div>
-            <div className="flex flex-col h-[25%]">
-              <div className="z-20 text-gray-400 mt-1 text-[14px]">
+            <div className="flex flex-col h-[25%] p-4">
+              <div className="z-20 text-gray-400 text-[14px]">
                 {format(new Date(createdAt), "EEEE, d MMMM yyyy HH:mm 'WIB'", {
                   locale: id,
                 })}
               </div>
-              <div className="flex items-center z-20 mt-2">
+              <div className="flex items-center z-20 mt-1">
                 <Link
                   href={`/blogs/${URLGenerator(title)}`}
-                  className="text-[16px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4 truncate line-clamp-2 whitespace-pre-wrap"
+                  className="text-[18px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4 truncate line-clamp-2 whitespace-pre-wrap"
                 >
                   {title}
                 </Link>
