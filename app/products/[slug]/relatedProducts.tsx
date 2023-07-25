@@ -59,6 +59,8 @@ export default function OtherBlogs({ categoryQuery, productNameQuery }: any) {
     );
   }
 
+  console.log(visibleRelatedItem, relatedProductSliced);
+
   return (
     <div className="flex-col">
       <div className="font-semibold text-[26px] mb-10">Related Product</div>
