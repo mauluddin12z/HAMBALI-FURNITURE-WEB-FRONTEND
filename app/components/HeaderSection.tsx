@@ -62,17 +62,13 @@ export default function HeaderSection() {
   const handleSearch = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    setIsLoading(false);
     const newParams = new URLSearchParams();
     newParams.set("searchQuery", searchValue);
     const newUrl = `/search?${newParams.toString()}`;
-
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     router.push(newUrl);
-
     setSearchValue("");
+    setIsLoading(false);
   };
 
   const [scrolled, setScrolled] = useState(false);
@@ -259,9 +255,7 @@ export default function HeaderSection() {
                   className={`p-2 transition-opacity duration-300 absolute z-50 text-black text-[20px] opacity-100 top-[5%] right-[10%] ease-out`}
                   onClick={toggleMenu}
                 >
-                  <i
-                    className={`fa-solid fa-xmark`}
-                  ></i>
+                  <i className={`fa-solid fa-xmark`}></i>
                 </button>
                 <div className="relative flex justify-center items-center w-full h-full">
                   <ul className="font-normal flex flex-col justify-center items-center h-full gap-y-8 text-gray-700 z-20">

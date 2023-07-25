@@ -33,17 +33,18 @@ export default function CategoriesSection() {
 
   const { data: categories } = useSWR("categories", getCategories);
 
-  const [slidePerViewSwiper, setslidePerViewSwiper] = useState(4);
+  const [slidePerViewSwiper, setSlidePerViewSwiper] = useState(4);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
 
     if (mediaQuery.matches) {
-      setslidePerViewSwiper(1);
+      setSlidePerViewSwiper(1);
     } else {
-      setslidePerViewSwiper(4);
+      setSlidePerViewSwiper(4);
     }
   }, []);
+
 
   const renderItems = [];
 

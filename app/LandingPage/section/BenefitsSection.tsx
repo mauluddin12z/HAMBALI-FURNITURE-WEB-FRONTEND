@@ -12,7 +12,7 @@ export default function BenefitSection() {
           <div className="w-[50px] aspect-square mb-4">
             <CustomizeIcon />
           </div>
-          <div className="text-[12px] lg:text-[14px] text-center text-gray-400">
+          <div className="text-[12px] lg:text-[14px] text-center text-gray-600">
             Bisa Custom sesuai keinginan
           </div>
         </div>
@@ -20,7 +20,7 @@ export default function BenefitSection() {
           <div className="w-[50px] aspect-square mb-4">
             <CraftsMan />
           </div>
-          <div className="text-[12px] lg:text-[14px] text-center text-gray-400">
+          <div className="text-[12px] lg:text-[14px] text-center text-gray-600">
             Tenaga ahli yang berpengalaman
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function BenefitSection() {
           <div className="w-[50px] aspect-square mb-4">
             <FurniIcon />
           </div>
-          <div className="text-[12px] lg:text-[14px] text-center text-gray-400">
+          <div className="text-[12px] lg:text-[14px] text-center text-gray-600">
             Menyediakan Furniture untuk Exterior dan Interior
           </div>
         </div>
@@ -36,7 +36,7 @@ export default function BenefitSection() {
           <div className="w-[50px] aspect-square mb-4">
             <InstallationIcon />
           </div>
-          <div className="text-[12px] lg:text-[14px] text-center text-gray-400">
+          <div className="text-[12px] lg:text-[14px] text-center text-gray-600">
             Menyediakan layanan pengiriman dan pemasangan
           </div>
         </div>

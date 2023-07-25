@@ -29,7 +29,7 @@ export default function ProductsSection() {
   const limitedProducts = products?.slice(0, limit);
   const renderItems = [];
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < limit; i++) {
     renderItems.push(
       <div
         key={i}

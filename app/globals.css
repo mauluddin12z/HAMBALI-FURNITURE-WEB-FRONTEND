@@ -10,16 +10,16 @@ path.dot_stripe_svg__color {
   @apply fill-primary-color/10;
 }
 path.craftsman_svg__color {
-  @apply fill-gray-400;
+  @apply fill-gray-600;
 }
 path.customizeIcon_svg__color {
-  @apply fill-gray-400;
+  @apply fill-gray-600;
 }
 path.furniIcon_svg__color {
-  @apply fill-gray-400;
+  @apply fill-gray-600;
 }
 path.installationIcon_svg__color {
-  @apply fill-gray-400;
+  @apply fill-gray-600;
 }
 
 .loader-dots div {
