@@ -16,7 +16,7 @@ export default function Modal({ isVisible, onClose, children }: any) {
       className="fixed inset-0 bg-black/25 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={handleClose}
     >
-      <div className="lg:w-[600px] w-[350px] h-auto max-h-[80%] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden mt-[25%] lg:mt-0">
+      <div className="lg:w-[600px] w-[350px] h-auto max-h-[80%] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden">
         <button
           className="text-gray-600 hover:text-black text-xl place-self-end text-[32px] fixed z-40"
           onClick={() => onClose()}

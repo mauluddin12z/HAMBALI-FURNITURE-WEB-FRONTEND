@@ -12,7 +12,7 @@ const getBlogs = async () => {
 };
 
 export default function BlogsSection() {
-  const { data:blogs } = useSWR("blogs", getBlogs);
+  const { data: blogs } = useSWR("blogs", getBlogs);
   const [limit, setLimit] = useState(4);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -49,10 +49,12 @@ export default function BlogsSection() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-4">
+    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-2">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
+          <div className="font-semibold lg:text-[32px] text-[28px]">
+            Newest Blogs
+          </div>
           <Link
             href={"/blogs"}
             className="font-semibold text-[18px] hover:underline decoration-2 underline-offset-2"
@@ -63,13 +65,7 @@ export default function BlogsSection() {
         <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-4">
           {limitedBlogs ? (
             limitedBlogs?.map((blogs: any, index: number) => (
-              <BlogCard
-                key={index}
-                imageUrl={blogs.imageUrl}
-                blog_id={blogs.blog_id}
-                title={blogs.title}
-                createdAt={blogs.createdAt}
-              />
+              <BlogCard key={index} data={blogs} />
             ))
           ) : (
             <>{renderItems}</>

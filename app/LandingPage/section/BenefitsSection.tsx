@@ -6,7 +6,7 @@ import InstallationIcon from "@/public/images/installationIcon.svg";
 
 export default function BenefitSection() {
   return (
-    <div className="lg:max-w-5xl md:max-w-6xl mx-auto lg:px-0 px-4">
+    <div className="lg:max-w-5xl md:max-w-6xl mx-auto lg:px-0 px-2">
       <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-4">
         <div className="flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow">
           <div className="w-[50px] aspect-square mb-4">

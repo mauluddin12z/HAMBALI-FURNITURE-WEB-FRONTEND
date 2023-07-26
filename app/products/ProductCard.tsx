@@ -14,16 +14,12 @@ const getProductById = async (id: number) => {
   );
   return res.data;
 };
-export default function ProductCard({
-  imageUrl,
-  product_name,
-  product_id,
-}: any) {
+export default function ProductCard({ data }: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
 
-  const [productId, setProductId] = useState(product_id);
+  const [productId, setProductId] = useState(data?.product_id);
 
   const { data: productById } = useSWR(
     productId ? ["productById", productId] : null,
@@ -34,9 +30,9 @@ export default function ProductCard({
   return (
     <>
       <div
-        className={`hover:border-primary-color/60 border-[1px] border-gray-200 hover:scale-[103%] transition-transform ${
+        className={`lg:hover:border-primary-color/60 border-[1px] border-gray-200 lg:hover:scale-[103%] transition-transform ${
           showModal &&
-          "border-primary-color/60 scale-[103%] ring-3 ring-blue-200"
+          "border-primary-color/60 lg:scale-[103%] ring-3 ring-blue-200"
         } shadow overflow-hidden rounded-lg`}
       >
         <div className="flex flex-col h-[350px]">
@@ -49,7 +45,7 @@ export default function ProductCard({
                 className="drop-shadow-[0px_0px_5px_rgba(0,0,5,0.5)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,5,1)] transition-shadow cursor-pointer overflow-hidden z-20 flex justify-center items-center"
                 onClick={() => {
                   setShowModal(true);
-                  setProductId(product_id);
+                  setProductId(data?.product_id);
                 }}
               >
                 <Image
@@ -57,10 +53,10 @@ export default function ProductCard({
                     showModal && "scale-[115%]"
                   } transition-transform duration-400`}
                   loader={myLoader}
-                  src={imageUrl}
+                  src={data?.imageUrl}
                   width={500}
                   height={500}
-                  alt={product_name}
+                  alt={data?.product_name}
                   priority
                 />
               </div>
@@ -68,10 +64,10 @@ export default function ProductCard({
           </div>
           <div className="px-5 h-[20%] flex justify-center items-center z-20">
             <Link
-              href={`/products/${URLGenerator(product_name)}`}
+              href={`/products/${URLGenerator(data?.product_name)}`}
               className="text-[16px] font-semibold tracking-tight text-gray-900 text-center hover:underline decoration-2 underline-offset-4"
             >
-              {product_name}
+              {data?.product_name}
             </Link>
           </div>
         </div>

@@ -45,7 +45,6 @@ export default function CategoriesSection() {
     }
   }, []);
 
-
   const renderItems = [];
 
   for (let i = 0; i < 4; i++) {
@@ -65,7 +64,7 @@ export default function CategoriesSection() {
     <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto px-2">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">
+          <div className="font-semibold lg:text-[32px] text-[28px]">
             Categories
           </div>
           <Link
@@ -107,16 +106,16 @@ export default function CategoriesSection() {
                           />
                         </div>
                         <div
-                          className={`absolute flex justify-center items-center w-[80%] h-10 transition-opacity duration-300 hover:bg-white/20 ${
+                          className={`absolute bottom-[-40px] flex justify-center items-center w-[80%] h-10 transition-all duration-200 hover:bg-white/20 ${
                             cardIsHovered === index
-                              ? "border-[2px] border-white"
+                              ? "border-[2px] border-white bottom-[50%] translate-y-[50%]"
                               : ""
                           } transition- z-20`}
                           onMouseEnter={() => handleOutsideLayerHover(index)}
                           onMouseLeave={handleOutsideLayerLeave}
                         >
                           <div
-                            className={`place-self-center text-[16px] tracking-tight text-white hover:text-blue text-center z-30 flex justify-center items-center opacity-0 transition-all duration-300 ${
+                            className={`text-[16px] tracking-tight text-white hover:text-blue text-center z-30 flex justify-center items-center opacity-0 transition-all duration-200 ${
                               cardIsHovered === index ? "opacity-100" : ""
                             }`}
                           >
@@ -124,7 +123,7 @@ export default function CategoriesSection() {
                           </div>
                         </div>
                         <div
-                          className={`absolute w-full h-full z-10 transition-all duration-300 ${
+                          className={`absolute w-full h-full z-10 transition-all duration-200 ${
                             cardIsHovered === index
                               ? "bg-black/80 backdrop-blur-sm"
                               : ""

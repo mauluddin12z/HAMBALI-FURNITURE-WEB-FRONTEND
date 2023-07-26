@@ -56,7 +56,6 @@ export default function Page() {
     getBlogs(start, limit)
   );
 
-
   const { data: totalBlogs } = useSWR("totalBlogs", getTotalBlogs);
 
   const renderItems = [];
@@ -84,7 +83,7 @@ export default function Page() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-44">
+    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
       <div className="flex flex-col justify-center items-center">
         <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
@@ -147,10 +146,7 @@ export default function Page() {
                   key={index}
                   gridCols={gridCols}
                   gridButtonShow={gridButtonShow}
-                  imageUrl={blogs.imageUrl}
-                  title={blogs.title}
-                  createdAt={blogs.createdAt}
-                  description={blogs.description}
+                  data={blogs}
                 />
               ))
             ) : (

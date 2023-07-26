@@ -121,7 +121,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     );
   }
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-4 mt-44">
+    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
       <div className="flex flex-col justify-center items-center">
         <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
@@ -153,12 +153,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 {productsByCategory &&
                   productsByCategory?.map((products: any, index: number) => (
                     <div key={index} className={`w-full h-full`}>
-                      <ProductCard
-                        imageUrl={products.imageUrl}
-                        product_id={products.product_id}
-                        product_name={products.product_name}
-                        dimensions={products.dimensions}
-                      />
+                      <ProductCard data={products} />
                     </div>
                   ))}
                 {productsByCategory && productsByCategory?.length == 0 && (

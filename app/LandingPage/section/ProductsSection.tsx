@@ -48,10 +48,10 @@ export default function ProductsSection() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-4">
+    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-2">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">
+          <div className="font-semibold lg:text-[32px] text-[28px]">
             Products
           </div>
           <Link
@@ -64,12 +64,7 @@ export default function ProductsSection() {
         <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-8">
           {limitedProducts ? (
             limitedProducts?.map((products: any, index: number) => (
-              <ProductCard
-                key={index}
-                imageUrl={products.imageUrl}
-                product_id={products.product_id}
-                product_name={products.product_name}
-              />
+              <ProductCard key={index} data={products} />
             ))
           ) : (
             <>{renderItems}</>
