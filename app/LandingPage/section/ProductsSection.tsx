@@ -79,7 +79,7 @@ export default function ProductsSection() {
         </div>
         <div
           className={`w-full grid lg:grid-cols-4 grid-cols-1 gap-8 transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            inView ? "opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
           {limitedProducts ? (

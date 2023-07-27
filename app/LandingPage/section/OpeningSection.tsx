@@ -23,7 +23,7 @@ export default function OpeningSection() {
         <div className="absolute lg:w-[400px] w-[200px] aspect-square bg-primary-color/10 blur-3xl rounded-full right-0.5 bottom-[5%]"></div>
         <div className="flex items-center w-full h-full lg:mt-8 mt-16">
           <div className="lg:w-6/12 pr-10 z-10">
-            <div className="flex flex-col h-full justify-center overflow-hidden">
+            <div className="flex flex-col h-full justify-center overflow-hidden lg:overflow-visible">
               <div
                 ref={ref}
                 className={`font-extrabold lg:text-[52px] text-[36px] text-black text-left lg:mb-14 mb-8 z-10 transition-all duration-1000 ${
