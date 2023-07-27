@@ -3,8 +3,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import backgroundOpening from "@/public/images/background_opening.jpg";
+import { useInView } from "react-intersection-observer";
 
 export default function OpeningSection() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
+
   return (
     <div className="relative overflow-hidden">
       <div className="lg:flex -bottom-[400px] gap-10 absolute -rotate-45 hidden">
@@ -19,15 +24,38 @@ export default function OpeningSection() {
         <div className="flex items-center w-full h-full lg:mt-8 mt-16">
           <div className="lg:w-6/12 pr-10 z-10">
             <div className="flex flex-col h-full justify-center">
-              <div className="font-extrabold lg:text-[52px] text-[36px] text-black text-left lg:mb-14 mb-8 z-10">
+              <div
+                ref={ref}
+                className={`font-extrabold lg:text-[52px] text-[36px] text-black text-left lg:mb-14 mb-8 z-10 transition-all duration-1000 ${
+                  inView
+                    ? "translate-x-[0%] opacity-100"
+                    : "translate-x-[-100%] opacity-0"
+                }`}
+              >
                 Furniture Modern untuk Ruangan Anda
               </div>
-              <div className="text-[18px] text-gray-600 mb-14">
-                <span className="font-bold text-black">Hambali Furniture, </span>
+              <div
+                ref={ref}
+                className={`text-[18px] text-gray-600 mb-14 transition-all duration-1000 delay-150 ${
+                  inView
+                    ? "translate-x-[0%] opacity-100"
+                    : "translate-x-[-100%] opacity-0"
+                }`}
+              >
+                <span className="font-bold text-black">
+                  Hambali Furniture,{" "}
+                </span>
                 Menghadirkan Kecantikan Minimalis dan Modern dalam Setiap
                 Ruangan!. Jika berminat silahkan hubungi kontak dibawah.
               </div>
-              <div className="h-[60px] z-10">
+              <div
+                ref={ref}
+                className={`h-[60px] z-10 transition-all duration-1000 ${
+                  inView
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
+              >
                 <Link
                   href={"https://wa.me/6281274278235"}
                   target="_blank"
@@ -39,7 +67,13 @@ export default function OpeningSection() {
             </div>
           </div>
           <div className="lg:block hidden w-6/12 pl-10">
-            <div className="flex justify-center items-center relative">
+            <div
+              className={`flex justify-center items-center relative transition-all duration-1000 ${
+                inView
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+            >
               <div className="w-[600px] h-[600px] border-[10px] border-secondary-color absolute -top-[50px] -right-[50px]"></div>
               <Image
                 className="z-10 w-[600px] h-[600px]"

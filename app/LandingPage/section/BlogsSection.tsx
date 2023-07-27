@@ -5,6 +5,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import BlogCard from "@/app/blogs/BlogCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
+import { useInView } from "react-intersection-observer";
 
 const getBlogs = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`);
@@ -12,8 +13,11 @@ const getBlogs = async () => {
 };
 
 export default function BlogsSection() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   const { data: blogs } = useSWR("blogs", getBlogs);
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(3);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
 
@@ -29,9 +33,9 @@ export default function BlogsSection() {
     renderItems.push(
       <div
         key={i}
-        className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
+        className="h-[440px] w-full border border-gray-200 rounded-lg shadow"
       >
-        <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
+        <div className="flex flex-col w-full h-full justify-center items-center p-3">
           <div className="w-full h-full aspect-square rounded-lg">
             <SkeletonLoading />
           </div>
@@ -52,17 +56,34 @@ export default function BlogsSection() {
     <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-2">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[32px] text-[28px]">
+          <div
+            ref={ref}
+            className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${
+              inView
+                ? "translate-x-[0%] opacity-100"
+                : "translate-x-[-100%] opacity-0"
+            }`}
+          >
             Newest Blogs
           </div>
           <Link
             href={"/blogs"}
-            className="font-semibold text-[18px] hover:underline decoration-2 underline-offset-2"
+            ref={ref}
+            className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2 transition-all duration-1000 ${
+              inView
+                ? "translate-x-[0%] opacity-100"
+                : "translate-x-[100%] opacity-0"
+            }`}
           >
             View All
           </Link>
         </div>
-        <div className="w-full grid md:grid-cols-4 grid-cols-1 gap-4">
+        <div
+          ref={ref}
+          className={`w-full grid lg:grid-cols-3 grid-cols-1 gap-4 transition-all duration-1000 ${
+            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           {limitedBlogs ? (
             limitedBlogs?.map((blogs: any, index: number) => (
               <BlogCard key={index} data={blogs} />

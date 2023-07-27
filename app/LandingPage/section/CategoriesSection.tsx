@@ -8,6 +8,7 @@ import URLGenerator from "@/app/utils/URLGenerator";
 import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
+import { useInView } from "react-intersection-observer";
 
 const getCategories = async () => {
   const res = await axios.get(
@@ -20,7 +21,9 @@ export default function CategoriesSection() {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
-
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   const [cardIsHovered, setcardIsHovered] = useState(-1);
 
   const handleOutsideLayerHover = (index: number) => {
@@ -64,17 +67,34 @@ export default function CategoriesSection() {
     <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto px-2">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[32px] text-[28px]">
+          <div
+            ref={ref}
+            className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${
+              inView
+                ? "translate-x-[0%] opacity-100"
+                : "translate-x-[-100%] opacity-0"
+            }`}
+          >
             Categories
           </div>
           <Link
             href={"/categories"}
-            className="font-semibold text-[18px] hover:underline decoration-2 underline-offset-2"
+            ref={ref}
+            className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2 transition-all duration-1000 ${
+              inView
+                ? "translate-x-[0%] opacity-100"
+                : "translate-x-[100%] opacity-0"
+            }`}
           >
             View All
           </Link>
         </div>
-        <div className="w-full h-full flex justify-center items-center">
+        <div
+          ref={ref}
+          className={`w-full h-full flex justify-center items-center transition-all duration-1000 ${
+            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <SwiperComponent slidePerViewSwiper={slidePerViewSwiper}>
             <div
               className={`w-full h-full ${
