@@ -53,8 +53,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <div className="text-gray-400">{blogByName?.title}</div>
         </div>
-        <div className="flex flex-col lg:flex-row gap-10">
-          <div className="flex flex-col lg:w-[70%] w-full">
+        <div className="flex flex-col gap-10">
+          <div className="flex flex-col w-full">
             <div className="font-semibold text-[32px] mb-8">Blogs</div>
             {blogByName ? (
               <>
@@ -146,7 +146,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
             </div>
           </div>
-          <div className="lg:w-[30%] w-full">
+          <div className="w-full">
             <OtherBlogs blogId={blogByName?.blog_id} />
           </div>
         </div>

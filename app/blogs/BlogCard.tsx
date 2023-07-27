@@ -75,7 +75,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   router.push(`/blogs/${URLGenerator(data?.title)}`)
                 }
                 type="button"
-                className="w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+                className="w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
               >
                 Read More <i className="fa-solid fa-arrow-right ml-4"></i>
               </button>
@@ -83,10 +83,10 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
           </div>
         </div>
       ) : (
-        <div className="border p-4 rounded-lg flex lg:flex-row flex-col h-[300px]">
+        <div className="border p-4 rounded-lg flex lg:flex-row flex-col min-h-[340px] shadow">
           <Link
             href={`/blogs/${URLGenerator(data?.title)}`}
-            className="w-[30%] relative h-full overflow-hidden z-20 flex justify-center items-center rounded-lg"
+            className="w-[30%] h-[324px] relative overflow-hidden z-20 flex justify-center items-center rounded-lg"
           >
             <div
               className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
@@ -128,9 +128,18 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                 )}
               </div>
               <div
-                className="text-[14px] text-gray-600 mt-4 text-justify truncate line-clamp-[8] whitespace-pre-wrap leading-8"
+                className="text-[14px] text-gray-600 mt-4 text-justify truncate line-clamp-[5] whitespace-pre-wrap leading-8"
                 dangerouslySetInnerHTML={{ __html: data?.description }}
               />
+              <button
+                onClick={() =>
+                  router.push(`/blogs/${URLGenerator(data?.title)}`)
+                }
+                type="button"
+                className="place-self-end w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300   rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+              >
+                Read More <i className="fa-solid fa-arrow-right ml-4"></i>
+              </button>
             </div>
           </div>
         </div>

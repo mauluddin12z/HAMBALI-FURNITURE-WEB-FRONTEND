@@ -55,7 +55,7 @@ export default function BlogsSection() {
   return (
     <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-2">
       <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-between items-center w-full mb-8">
+        <div className="flex justify-between items-center w-full mb-8 overflow-hidden">
           <div
             ref={ref}
             className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${

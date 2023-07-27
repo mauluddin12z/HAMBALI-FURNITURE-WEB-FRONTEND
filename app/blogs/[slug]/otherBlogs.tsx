@@ -64,7 +64,7 @@ export default function OtherBlogs({ blogId }: any) {
       <div className="font-semibold text-[32px] mb-8">Other Blogs</div>
 
       {isMediaLG ? (
-        <div className="grid lg:gap-4 gap-2 lg:grid-cols-1 grid-cols-1">
+        <div className="grid lg:gap-4 gap-2 lg:grid-cols-4 grid-cols-1">
           {otherProductSliced
             ? otherProductSliced?.map((otherBlogs: any, index: number) => (
                 <BlogCard key={index} data={otherBlogs} />
