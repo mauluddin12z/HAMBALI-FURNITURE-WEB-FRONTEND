@@ -9,6 +9,7 @@ import { id } from "date-fns/locale";
 import Link from "next/link";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import OtherBlogs from "./otherBlogs";
+import BlogImageSwiper from "./BlogImageSwiper";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -58,30 +59,10 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="font-semibold text-[32px] mb-8">Blogs</div>
             {blogByName ? (
               <>
-                <div className="relative h-96 overflow-hidden z-20 flex justify-center items-center">
-                  <div
-                    className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
-                  ></div>
-                  <Image
-                    className={`absolute w-full h-full`}
-                    loader={myLoader}
-                    src={blogByName?.imageUrl}
-                    width={500}
-                    height={500}
-                    alt={blogByName?.title}
-                    priority
-                  />
-                  <Image
-                    className={`object-contain w-full h-full z-20 transition-transform duration-500`}
-                    loader={myLoader}
-                    src={blogByName?.imageUrl}
-                    width={500}
-                    height={500}
-                    alt={blogByName?.title}
-                    priority
-                  />
-                </div>
-                <div className="font-semibold text-[24px] mt-4">
+                {blogByName.blog_images && (
+                  <BlogImageSwiper data={blogByName} />
+                )}
+                <div className="font-bold text-[26px] mt-10">
                   {blogByName?.title}
                 </div>
                 <div className="mt-2 text-[16px] text-gray-400">
@@ -94,35 +75,28 @@ export default function Page({ params }: { params: { slug: string } }) {
                   )}
                 </div>
                 <div
-                  className="text-[14px] text-gray-600 mt-4 text-justify"
+                  className="text-[14px] text-gray-600 mt-4 text-justify leading-8 flex flex-col description"
                   dangerouslySetInnerHTML={{ __html: blogByName?.description }}
                 />
               </>
             ) : (
               <>
-                <div className="w-full h-96 mb-2">
+                <div className="w-full h-[400px] mb-2">
                   <SkeletonLoading />
                 </div>
-                <div className="w-[300px] h-8 mb-2">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-[300px] h-4 mb-8">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-full h-4 mb-2">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-full h-4 mb-2">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-full h-4 mb-2">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-full h-4 mb-2">
-                  <SkeletonLoading />
-                </div>
-                <div className="w-full h-4 mb-2">
-                  <SkeletonLoading />
+                <div className="grid grid-cols-2 lg:grid-cols-4 mb-2 gap-4">
+                  <div className="h-[200px]">
+                    <SkeletonLoading />
+                  </div>
+                  <div className="h-[200px]">
+                    <SkeletonLoading />
+                  </div>
+                  <div className="h-[200px] lg:block hidden">
+                    <SkeletonLoading />
+                  </div>
+                  <div className="h-[200px] lg:block hidden">
+                    <SkeletonLoading />
+                  </div>
                 </div>
               </>
             )}

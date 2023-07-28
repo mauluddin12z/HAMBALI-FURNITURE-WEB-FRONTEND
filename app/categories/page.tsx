@@ -148,34 +148,35 @@ export default function Page() {
             ))}
           {!productsByCategory && <>{renderItems}</>}
         </div>
-        <button
-          type="button"
-          className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${
-            limit >= TotalCategories?.length
-              ? "text-gray-400"
-              : "text-gray-900 hover:text-blue-700"
-          }  bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
-          onClick={() => handleLoadMore()}
-          disabled={limitThreshold}
-        >
-          {loadMoreDataIsLoading ? (
-            <>
-              <div className="rounded-lg flex items-center flex-col">
-                <div className="loader-dots block relative w-20 h-5 mt-2">
-                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                </div>
-                <div className="text-gray-500 text-xs font-light mt-2 text-center">
-                  Please wait...
-                </div>
+        {!loadMoreDataIsLoading && (
+          <button
+            type="button"
+            className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${
+              limit >= TotalCategories?.length
+                ? "text-gray-400"
+                : "text-gray-900 hover:text-blue-700"
+            } bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
+            onClick={() => handleLoadMore()}
+            disabled={limitThreshold}
+          >
+            Load More
+          </button>
+        )}
+        {loadMoreDataIsLoading && (
+          <>
+            <div className="rounded-lg flex items-center flex-col">
+              <div className="loader-dots block relative w-20 h-5 mt-2">
+                <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
               </div>
-            </>
-          ) : (
-            "Load More"
-          )}
-        </button>
+              <div className="text-gray-500 text-xs font-light mt-2 text-center">
+                Please wait...
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

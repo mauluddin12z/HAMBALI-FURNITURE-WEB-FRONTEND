@@ -55,12 +55,12 @@ export default function BlogsSection() {
   return (
     <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto lg:px-0 px-2">
       <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-between items-center w-full mb-8 overflow-hidden">
+        <div className="flex justify-between items-center w-full mb-8 overflow-hidden lg:overflow-visible">
           <div
             ref={ref}
             className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${
               inView
-                ? "translate-x-[0%] opacity-100"
+                ? "opacity-100"
                 : "translate-x-[-100%] opacity-0"
             }`}
           >
@@ -71,7 +71,7 @@ export default function BlogsSection() {
             ref={ref}
             className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2 transition-all duration-1000 ${
               inView
-                ? "translate-x-[0%] opacity-100"
+                ? "opacity-100"
                 : "translate-x-[100%] opacity-0"
             }`}
           >

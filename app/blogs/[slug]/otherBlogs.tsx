@@ -4,9 +4,6 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import BlogCard from "../BlogCard";
-import Image, { ImageLoader } from "next/image";
-import Link from "next/link";
-import URLGenerator from "@/app/utils/URLGenerator";
 import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
 
@@ -18,9 +15,6 @@ const getOtherBlogs = async (blogId: string) => {
 };
 
 export default function OtherBlogs({ blogId }: any) {
-  const myLoader: ImageLoader = ({ src }) => {
-    return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
-  };
   const { data: otherBlogs }: any = useSWR(
     blogId ? ["otherBlogs", blogId] : null,
     () => blogId && getOtherBlogs(blogId)

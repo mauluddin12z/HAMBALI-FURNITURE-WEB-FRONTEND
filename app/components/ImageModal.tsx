@@ -13,6 +13,7 @@ export default function Modal({ isVisible, onClose, children }: any) {
       document.body.classList.remove("modal-open");
     };
   }, [isVisible]);
+
   if (!isVisible) return null;
 
   const handleClose = (e: any) => {
@@ -24,19 +25,17 @@ export default function Modal({ isVisible, onClose, children }: any) {
   return (
     <div
       id="wrapper"
-      className="fixed inset-0 bg-black/25 backdrop-blur-sm flex justify-center items-center z-50 w-full h-screen"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50 w-full h-screen"
       onClick={handleClose}
     >
-      <div className="lg:w-[600px] w-[350px] h-auto max-h-[80%] lg:h-auto bg-white rounded flex flex-col p-4 overflow-hidden">
-        <button
-          className="text-gray-600 hover:text-black text-xl place-self-end text-[32px] fixed z-40"
-          onClick={() => onClose()}
-        >
-          <i className="fa-solid fa-xmark"></i>
-        </button>
-        <div className="overflow-y-scroll lg:overflow-hidden z-30 h-full w-full">
-          {children}
-        </div>
+      <button
+        className="text-white hover:text-gray-200 transition-all text-[32px] fixed z-[60] top-0 right-0 flex w-20 h-20 justify-center items-center"
+        onClick={() => onClose()}
+      >
+        <i className="fa-solid fa-xmark"></i>
+      </button>
+      <div className="overflow-y-scroll lg:overflow-hidden z-30 h-full w-full flex justify-center items-center">
+        {children}
       </div>
     </div>
   );

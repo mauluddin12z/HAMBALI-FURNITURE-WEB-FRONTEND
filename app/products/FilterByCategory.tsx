@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,6 +19,17 @@ export default function FilterByCategory({
   categoryQuery,
   setCategoryQuery,
 }: any) {
+  useEffect(() => {
+    if (filterVisible) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+    return () => {
+      document.body.classList.remove("modal-open");
+    };
+  }, [filterVisible]);
   const router = useRouter();
   const pathname = usePathname();
   const { data: categories } = useSWR("categories", getCategories);
@@ -66,8 +77,8 @@ export default function FilterByCategory({
       <div className="font-semibold text-[24px] mb-6 text-center">
         Categories
       </div>
-      <div className="p-2 overflow-y-auto lg:overflow-visible">
-        <div className="flex flex-col items-center justify-center gap-y-2">
+      <div className="p-2 h-[67%]">
+        <div className="flex flex-col items-center gap-y-2 max-h-[80%] overflow-y-auto lg:overflow-visible">
           {categories?.map((categories: any, index: number) => (
             <button
               key={index}

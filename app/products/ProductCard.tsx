@@ -20,7 +20,7 @@ export default function ProductCard({ data }: any) {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
 
-  const [productId, setProductId] = useState(data?.product_id);
+  const [productId, setProductId] = useState(0);
 
   const { data: productById } = useSWR(
     productId ? ["productById", productId] : null,

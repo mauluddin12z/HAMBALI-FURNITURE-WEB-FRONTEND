@@ -11,7 +11,6 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
-
   const router = useRouter();
   return (
     <>
@@ -31,7 +30,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                 <Image
                   className={`absolute w-full h-full`}
                   loader={myLoader}
-                  src={data?.imageUrl}
+                  src={data?.blog_images[0]?.imageUrl}
                   width={500}
                   height={500}
                   alt={data?.title}
@@ -40,7 +39,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                 <Image
                   className={`object-contain w-full h-full z-20 transition-transform duration-500 hover:opacity-80`}
                   loader={myLoader}
-                  src={data?.imageUrl}
+                  src={data?.blog_images[0]?.imageUrl}
                   width={500}
                   height={500}
                   alt={data?.title}
@@ -75,7 +74,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   router.push(`/blogs/${URLGenerator(data?.title)}`)
                 }
                 type="button"
-                className="w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+                className="place-self-end w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
               >
                 Read More <i className="fa-solid fa-arrow-right ml-4"></i>
               </button>
@@ -94,7 +93,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
             <Image
               className={`absolute w-full h-full`}
               loader={myLoader}
-              src={data?.imageUrl}
+              src={data?.blog_images[0]?.imageUrl}
               width={500}
               height={500}
               alt={data?.title}
@@ -103,7 +102,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
             <Image
               className={`object-contain w-full h-full z-20 transition-transform duration-500 hover:opacity-80`}
               loader={myLoader}
-              src={data?.imageUrl}
+              src={data?.blog_images[0]?.imageUrl}
               width={500}
               height={500}
               alt={data?.title}
@@ -136,9 +135,9 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   router.push(`/blogs/${URLGenerator(data?.title)}`)
                 }
                 type="button"
-                className="place-self-end w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300   rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+                className="place-self-end w-40 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300   rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
               >
-                Read More <i className="fa-solid fa-arrow-right ml-4"></i>
+                Read More <i className="fa-solid fa-arrow-right ml-3"></i>
               </button>
             </div>
           </div>
