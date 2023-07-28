@@ -6,6 +6,8 @@ import SkeletonLoading from "../components/SkeletonLoading";
 import Link from "next/link";
 import Image, { ImageLoader } from "next/image";
 import ImageModal from "../components/ImageModal";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
 
 const getBlogImages = async () => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogImages`;
@@ -88,38 +90,48 @@ export default function Page() {
           </div>
         </div>
         <div className="w-full flex flex-col rounded-lg items-center justify-between">
-          <div className="w-full grid lg:grid-cols-4 grid-cols-2 gap-2 mb-10">
+          <div className="w-full grid lg:grid-cols-4 grid-cols-2 gap-y-2 gap-x-4 mb-10">
             {blogImages ? (
               blogImages?.map((blogImages: any, index: number) => (
-                <div
-                  key={index}
-                  className="relative w-full h-[300px] overflow-hidden z-20 flex justify-center items-center hover:opacity-90 hover:cursor-pointer"
-                  onClick={() => {
-                    setShowModal(true);
-                    setBlogImageId(blogImages?.blogImage_id);
-                  }}
-                >
+                <div key={index} className="flex flex-col">
                   <div
-                    className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
-                  ></div>
-                  <Image
-                    className={`absolute w-full h-full`}
-                    loader={myLoader}
-                    src={blogImages?.imageUrl}
-                    width={500}
-                    height={500}
-                    alt={"blogImages" + { index }}
-                    priority
-                  />
-                  <Image
-                    className={`object-contain w-full h-full z-20 transition-transform duration-500`}
-                    loader={myLoader}
-                    src={blogImages?.imageUrl}
-                    width={500}
-                    height={500}
-                    alt={"blogImages" + { index }}
-                    priority
-                  />
+                    className="relative w-full h-[300px] overflow-hidden z-20 flex justify-center items-center hover:opacity-90 hover:cursor-pointer"
+                    onClick={() => {
+                      setShowModal(true);
+                      setBlogImageId(blogImages?.blogImage_id);
+                    }}
+                  >
+                    <div
+                      className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
+                    ></div>
+                    <Image
+                      className={`absolute w-full h-full`}
+                      loader={myLoader}
+                      src={blogImages?.imageUrl}
+                      width={500}
+                      height={500}
+                      alt={"blogImages" + { index }}
+                      priority
+                    />
+                    <Image
+                      className={`object-contain w-full h-full z-20 transition-transform duration-500`}
+                      loader={myLoader}
+                      src={blogImages?.imageUrl}
+                      width={500}
+                      height={500}
+                      alt={"blogImages" + { index }}
+                      priority
+                    />
+                  </div>
+                  <div className="text-[16px] text-gray-400 text-center">
+                    {format(
+                      new Date(blogImages?.createdAt),
+                      "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                      {
+                        locale: id,
+                      }
+                    )}
+                  </div>
                 </div>
               ))
             ) : (
@@ -160,9 +172,9 @@ export default function Page() {
       <ImageModal isVisible={showModal} onClose={() => setShowModal(false)}>
         <div className="h-[80%] w-[80%] flex justify-center items-center">
           {blogImageById && (
-            <>
+            <div className="flex flex-col h-full">
               <Image
-                className={`object-contain w-full h-full z-20 transition-transform duration-500`}
+                className={`object-contain h-full z-20 transition-transform duration-500`}
                 loader={myLoader}
                 src={blogImageById?.imageUrl}
                 width={500}
@@ -170,7 +182,16 @@ export default function Page() {
                 alt={"blogImages" + blogImageById?.blogImage_id}
                 priority
               />
-            </>
+              <div className="text-[16px] text-white text-center">
+                {format(
+                  new Date(blogImageById?.createdAt),
+                  "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                  {
+                    locale: id,
+                  }
+                )}
+              </div>
+            </div>
           )}
         </div>
       </ImageModal>
