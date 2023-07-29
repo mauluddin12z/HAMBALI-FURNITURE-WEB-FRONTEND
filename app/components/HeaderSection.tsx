@@ -144,9 +144,10 @@ export default function HeaderSection() {
                 <li key={index}>
                   <Link
                     href={navItem.link}
-                    className={`text-black hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
-                      "/" + pathname.split("/")[1] == navItem.link &&
-                      "bg-secondary-color text-primary-color"
+                    className={`hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
+                      "/" + pathname.split("/")[1] == navItem.link
+                        ? "bg-secondary-color text-primary-color"
+                        : "text-black"
                     }`}
                   >
                     {navItem.name}

@@ -3,9 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/free-mode";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { FreeMode, Navigation, Pagination, Thumbs } from "swiper";
+import { EffectFade, FreeMode, Navigation, Pagination, Thumbs } from "swiper";
 import Image, { ImageLoader } from "next/image";
 
 const SwiperComponent = ({ data }: any) => {
@@ -29,12 +30,13 @@ const SwiperComponent = ({ data }: any) => {
       <div className="w-full h-full relative">
         <Swiper
           spaceBetween={10}
+          effect={"fade"}
           navigation={{
             prevEl: ".swiper-button-prev-custom",
             nextEl: ".swiper-button-next-custom",
           }}
           thumbs={{ swiper: thumbsSwiper }}
-          modules={[FreeMode, Navigation, Thumbs, Pagination]}
+          modules={[FreeMode, Navigation, Thumbs, Pagination, EffectFade]}
           pagination={true}
           className="mb-2"
         >

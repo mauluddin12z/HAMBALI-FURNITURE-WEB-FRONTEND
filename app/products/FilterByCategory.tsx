@@ -78,7 +78,7 @@ export default function FilterByCategory({
         Categories
       </div>
       <div className="p-2 h-[67%]">
-        <div className="flex flex-col items-center gap-y-2 max-h-[80%] overflow-y-auto lg:overflow-visible">
+        <div className="flex flex-col items-center gap-y-2 max-h-[80%] lg:max-h-full overflow-y-auto lg:overflow-visible">
           {categories?.map((categories: any, index: number) => (
             <button
               key={index}

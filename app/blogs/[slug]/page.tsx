@@ -54,17 +54,16 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <div className="text-gray-400">{blogByName?.title}</div>
         </div>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 mt-10">
           <div className="flex flex-col w-full">
-            <div className="font-semibold text-[32px] mb-8">Blogs</div>
+            <div className="font-bold text-[30px] mb-10">
+              {blogByName?.title}
+            </div>
             {blogByName ? (
               <>
                 {blogByName.blog_images && (
                   <BlogImageSwiper data={blogByName} />
                 )}
-                <div className="font-bold text-[26px] mt-10">
-                  {blogByName?.title}
-                </div>
                 <div className="mt-2 text-[16px] text-gray-400">
                   {format(
                     new Date(blogByName?.createdAt),

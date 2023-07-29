@@ -172,16 +172,7 @@ export default function Page() {
       <ImageModal isVisible={showModal} onClose={() => setShowModal(false)}>
         <div className="h-[80%] w-[80%] flex justify-center items-center">
           {blogImageById && (
-            <div className="flex flex-col h-full">
-              <Image
-                className={`object-contain h-full z-20 transition-transform duration-500`}
-                loader={myLoader}
-                src={blogImageById?.imageUrl}
-                width={500}
-                height={500}
-                alt={"blogImages" + blogImageById?.blogImage_id}
-                priority
-              />
+            <div className="flex flex-col h-full w-full justify-center items-center">
               <div className="text-[16px] text-white text-center">
                 {format(
                   new Date(blogImageById?.createdAt),
@@ -191,6 +182,15 @@ export default function Page() {
                   }
                 )}
               </div>
+              <Image
+                className={`object-contain w-full h-full z-20 transition-transform duration-500`}
+                loader={myLoader}
+                src={blogImageById?.imageUrl}
+                width={500}
+                height={500}
+                alt={"blogImages" + blogImageById?.blogImage_id}
+                priority
+              />
             </div>
           )}
         </div>

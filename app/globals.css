@@ -104,3 +104,7 @@ path.installationIcon_svg__color {
 .mySwiper .swiper-slide-thumb-active .my-swiper-slide-active {
   opacity: 0;
 }
+.mySwiper .my-swiper-slide-active:hover {
+  opacity: 0;
+  cursor: pointer;
+}
