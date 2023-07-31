@@ -10,6 +10,7 @@ import Link from "next/link";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import OtherBlogs from "./otherBlogs";
 import BlogImageSwiper from "./BlogImageSwiper";
+import Loading from "@/app/components/Loading";
 
 const getBlogByTitle = async (blogTitleQuery: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
@@ -19,9 +20,6 @@ const getBlogByTitle = async (blogTitleQuery: string) => {
 };
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const myLoader: ImageLoader = ({ src }) => {
-    return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
-  };
   const [titleQuery, setTitleQuery] = useState(
     URLToStringGenerator(params.slug)
   );
@@ -36,6 +34,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     setCurrentUrl(typeof window !== "undefined" ? window.location.href : "");
   }, []);
 
+  if (!blogByName) return <Loading />;
   return (
     <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
       <div className="flex flex-col w-full">
@@ -56,9 +55,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col gap-10 mt-10">
           <div className="flex flex-col w-full">
-            <div className="font-bold text-[30px]">
-              {blogByName?.title}
-            </div>
+            <div className="font-bold text-[30px]">{blogByName?.title}</div>
             <div className="mt-2 mb-2 text-[16px] text-gray-400">
               {format(
                 new Date(blogByName?.createdAt),
