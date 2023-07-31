@@ -27,11 +27,23 @@ export default function Page() {
   const [limit, setLimit] = useState(2);
   const [loadMoreDataIsLoading, setLoadMoreDataIsLoading] = useState(false);
   let { data: categories } = useSWR("categories", getCategories);
-  const { data: TotalCategories } = useSWR("categories", getTotalCategories);
-  const { data: productsByCategory } = useSWR(
+  let { data: TotalCategories } = useSWR("categories", getTotalCategories);
+  let { data: productsByCategory } = useSWR(
     "productsByCategory",
     getProductByCategory
   );
+  categories = categories?.filter((category: any) => {
+    const productsCount = productsByCategory?.filter(
+      (product: any) => product.category_id === category.category_id
+    ).length;
+    return productsCount && productsCount > 0;
+  });
+  TotalCategories = categories?.filter((category: any) => {
+    const productsCount = productsByCategory?.filter(
+      (product: any) => product.category_id === category.category_id
+    ).length;
+    return productsCount && productsCount > 0;
+  });
 
   const [limitThreshold, setLimitThreshold] = useState(
     limit >= TotalCategories?.length
@@ -134,15 +146,6 @@ export default function Page() {
                           <ProductCard data={products} />
                         </div>
                       ))}
-                  {productsByCategory &&
-                    productsByCategory?.filter(
-                      (product: any) =>
-                        product.category_id === category.category_id
-                    ).length == 0 && (
-                      <div className="w-full flex justify-center items-center col-span-4 h-[100px]">
-                        No product available.
-                      </div>
-                    )}
                 </div>
               </div>
             ))}

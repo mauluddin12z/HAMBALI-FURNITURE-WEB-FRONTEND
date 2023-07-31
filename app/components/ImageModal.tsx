@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 
-export default function Modal({ isVisible, onClose, children }: any) {
+export default function Modal({
+  isVisible,
+  onClose,
+  children,
+  setIsZoom,
+}: any) {
   useEffect(() => {
     if (isVisible) {
       document.body.classList.add("modal-open");
@@ -30,7 +35,10 @@ export default function Modal({ isVisible, onClose, children }: any) {
     >
       <button
         className="text-white hover:text-gray-200 transition-all text-[32px] fixed z-[60] top-0 right-0 flex w-20 h-20 justify-center items-center"
-        onClick={() => onClose()}
+        onClick={() => {
+          onClose();
+          setIsZoom(false);
+        }}
       >
         <i className="fa-solid fa-xmark"></i>
       </button>

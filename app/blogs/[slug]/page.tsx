@@ -56,25 +56,25 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col gap-10 mt-10">
           <div className="flex flex-col w-full">
-            <div className="font-bold text-[30px] mb-10">
+            <div className="font-bold text-[30px]">
               {blogByName?.title}
+            </div>
+            <div className="mt-2 mb-2 text-[16px] text-gray-400">
+              {format(
+                new Date(blogByName?.createdAt),
+                "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                {
+                  locale: id,
+                }
+              )}
             </div>
             {blogByName ? (
               <>
                 {blogByName.blog_images && (
                   <BlogImageSwiper data={blogByName} />
                 )}
-                <div className="mt-2 text-[16px] text-gray-400">
-                  {format(
-                    new Date(blogByName?.createdAt),
-                    "EEEE, d MMMM yyyy HH:mm 'WIB'",
-                    {
-                      locale: id,
-                    }
-                  )}
-                </div>
                 <div
-                  className="text-[14px] text-gray-600 mt-4 text-justify leading-8 flex flex-col description"
+                  className="text-[14px] text-gray-600 mt-10 text-justify leading-8 flex flex-col description"
                   dangerouslySetInnerHTML={{ __html: blogByName?.description }}
                 />
               </>

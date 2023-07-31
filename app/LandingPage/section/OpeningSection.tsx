@@ -59,7 +59,7 @@ export default function OpeningSection() {
                 <Link
                   href={"https://wa.me/6281274278235"}
                   target="_blank"
-                  className="text-white bg-gradient-to-r from-primary-color via-blue-400 to-primary-color hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  shadow-lg shadow-blue-500/50 font-medium rounded-full text-sm px-7 py-4 text-center mr-2 mb-2 "
+                  className="text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300  shadow-lg shadow-blue-500/50 font-medium rounded-full text-sm px-7 py-4 text-center mr-2 mb-2 "
                 >
                   Contact Us
                 </Link>
