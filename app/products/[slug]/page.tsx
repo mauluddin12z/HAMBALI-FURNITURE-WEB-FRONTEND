@@ -41,7 +41,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
       <div className="flex flex-col w-full">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
             Home
           </Link>

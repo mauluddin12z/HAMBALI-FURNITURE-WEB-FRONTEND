@@ -90,7 +90,7 @@ export default function Page() {
   return (
     <div className="xl:max-w-7xl lg:max-w-6xl min-h-[600px] mx-auto lg:px-0 px-2 mt-44">
       <div className="flex flex-col justify-center items-center">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color/60 rounded-lg p-10 text-[12px] lg:text-[16px]">
+        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
           <Link href={"/"} className="text-black hover:text-primary-color">
             Home
           </Link>
