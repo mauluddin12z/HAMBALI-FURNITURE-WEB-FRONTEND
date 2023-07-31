@@ -147,7 +147,7 @@ export default function Page() {
                       />
                     </div>
                     <div
-                      className={`absolute z-[60] bottom-0 w-full py-3 bg-black/80 transition-all ${
+                      className={`lg:block hidden z-[60] absolute bottom-0 w-full py-3 bg-black/80 transition-all ${
                         cardIsHovered === blogImages?.blogImage_id
                           ? ""
                           : "translate-y-[100%] opacity-0"
