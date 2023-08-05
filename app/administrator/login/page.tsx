@@ -6,7 +6,6 @@ import LoadingForButton from '../components/LoadingForButton'
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import useAuth from "../utils/useAuth"
-import Cookies from "js-cookie"
 
 export default function Page() {
     const { isUserLoggedIn } = useAuth()
