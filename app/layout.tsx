@@ -1,7 +1,5 @@
-/* eslint-disable @next/next/no-page-custom-font */ import FooterSection from "./components/FooterSection";
-import HeaderSection from "./components/HeaderSection";
+/* eslint-disable @next/next/no-page-custom-font */
 import "./globals.css";
-
 export const metadata = {
   title: "Hambali Furniture",
   description: "Hambali Furniture",
@@ -15,7 +13,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="./favicon.ico" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -30,21 +27,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-
       <body>
-        <div className="flex flex-col justify-between min-h-screen">
-          <div>
-            <section>
-              <HeaderSection />
-            </section>
-            {children}
-          </div>
-          <div className="mt-28">
-            <section>
-              <FooterSection />
-            </section>
-          </div>
-        </div>
+        {children}
       </body>
     </html>
   );

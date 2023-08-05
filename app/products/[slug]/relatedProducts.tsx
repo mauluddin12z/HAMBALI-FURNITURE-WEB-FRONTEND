@@ -41,7 +41,15 @@ export default function OtherBlogs({ categoryQuery, productNameQuery }: any) {
 
   const [visibleRelatedItem, setvisibleRelatedItem] = useState(5);
   const relatedProductSliced = relatedProduct?.slice(0, visibleRelatedItem);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
 
+    if (mediaQuery.matches) {
+      setvisibleRelatedItem(4);
+    } else {
+      setvisibleRelatedItem(5);
+    }
+  }, []);
   const renderItems = [];
 
   for (let i = 0; i < visibleRelatedItem; i++) {
@@ -65,49 +73,45 @@ export default function OtherBlogs({ categoryQuery, productNameQuery }: any) {
       <div className="grid gap-2 grid-cols-2 lg:grid-cols-5">
         {relatedProductSliced
           ? relatedProductSliced?.map((product: any, index: number) => (
-              <Link href={URLGenerator(product?.product_name)} key={index}>
-                <div className="flex flex-col justify-center items-center h-[300px] relative rounded-lg overflow-hidden border shadow">
-                  <div className="drop-shadow-[0px_0px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)] transition-all cursor-pointer w-full h-full">
-                    <Image
-                      className={`object-contain w-full h-full rounded-t-lg transition-all duration-300 ${
-                        cardIsHovered === index ? "scale-100" : "scale-75 "
+            <Link href={URLGenerator(product?.product_name)} key={index}>
+              <div className="flex flex-col justify-center items-center h-[300px] relative rounded-lg overflow-hidden border shadow">
+                <div className="drop-shadow-[0px_0px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[0px_0px_5px_rgba(0,0,0,0.5)] transition-all cursor-pointer w-full h-full">
+                  <Image
+                    className={`object-contain w-full h-full rounded-t-lg transition-all duration-300 ${cardIsHovered === index ? "scale-100" : "scale-75 "
                       } transition-all`}
-                      loader={myLoader}
-                      src={product.imageUrl}
-                      width={500}
-                      height={500}
-                      alt={product.category}
-                    />
-                  </div>
-                  <div
-                    className={`absolute bottom-[-40px] flex justify-center items-center w-[80%] h-10 transition-all duration-200 hover:bg-white/20 ${
-                      cardIsHovered === index
-                        ? "border-[2px] border-white bottom-[50%] translate-y-[50%]"
-                        : ""
-                    } transition- z-20`}
-                    onMouseEnter={() => handleOutsideLayerHover(index)}
-                    onMouseLeave={handleOutsideLayerLeave}
-                  >
-                    <div
-                      className={`text-[16px] tracking-tight text-white hover:text-blue text-center z-30 flex justify-center items-center opacity-0 transition-all duration-200 ${
-                        cardIsHovered === index ? "opacity-100" : ""
-                      }`}
-                    >
-                      View More
-                    </div>
-                  </div>
-                  <div
-                    className={`absolute w-full h-full z-10 transition-all duration-200 ${
-                      cardIsHovered === index
-                        ? "bg-black/80 backdrop-blur-sm"
-                        : ""
-                    }`}
-                    onMouseEnter={() => handleOutsideLayerHover(index)}
-                    onMouseLeave={handleOutsideLayerLeave}
-                  ></div>
+                    loader={myLoader}
+                    src={product.imageUrl}
+                    width={500}
+                    height={500}
+                    alt={product.category}
+                  />
                 </div>
-              </Link>
-            ))
+                <div
+                  className={`absolute bottom-[-40px] flex justify-center items-center w-[80%] h-10 transition-all duration-200 hover:bg-white/20 ${cardIsHovered === index
+                    ? "border-[2px] border-white bottom-[50%] translate-y-[50%]"
+                    : ""
+                    } transition- z-20`}
+                  onMouseEnter={() => handleOutsideLayerHover(index)}
+                  onMouseLeave={handleOutsideLayerLeave}
+                >
+                  <div
+                    className={`text-[16px] tracking-tight text-white hover:text-blue text-center z-30 flex justify-center items-center opacity-0 transition-all duration-200 ${cardIsHovered === index ? "opacity-100" : ""
+                      }`}
+                  >
+                    View More
+                  </div>
+                </div>
+                <div
+                  className={`absolute w-full h-full z-10 transition-all duration-200 ${cardIsHovered === index
+                    ? "bg-black/80 backdrop-blur-sm"
+                    : ""
+                    }`}
+                  onMouseEnter={() => handleOutsideLayerHover(index)}
+                  onMouseLeave={handleOutsideLayerLeave}
+                ></div>
+              </div>
+            </Link>
+          ))
           : renderItems}
       </div>
     </div>

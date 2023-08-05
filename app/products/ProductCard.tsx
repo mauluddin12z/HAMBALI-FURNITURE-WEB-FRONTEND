@@ -169,10 +169,10 @@ export default function ProductCard({ data }: any) {
             </>
           ) : (
             <>
-              <div className="w-full h-[400px] pr-4">
+              <div className="w-full h-[400px] lg:pr-4 lg:mb-0 mb-4">
                 <SkeletonLoading />
               </div>
-              <div className="w-full flex flex-col gap-4 h-[400px]">
+              <div className="w-full flex flex-col gap-4 lg:h-[400px]">
                 <div className="w-full h-6">
                   <SkeletonLoading />
                 </div>

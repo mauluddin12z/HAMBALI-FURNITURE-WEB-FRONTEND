@@ -8,6 +8,7 @@ import URLGenerator from "@/app/utils/URLGenerator";
 import ProductCard from "@/app/products/ProductCard";
 import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
 import Pagination from "@/app/components/Pagination";
+import MainLayout from "@/app/components/MainLayout";
 
 const getCategoryByName = async (categoryParams: string) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}categoryByName?categoryQuery=${categoryParams}`;
@@ -121,58 +122,60 @@ export default function Page({ params }: { params: { slug: string } }) {
     );
   }
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-          <Link href={"/"} className="text-black hover:text-primary-color">
-            Home
-          </Link>
-          <div className="text-black lg:text-[14px]">
-            <i className="fa-solid fa-chevron-right"></i>
+    <MainLayout>
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
+            <Link href={"/"} className="text-black hover:text-primary-color">
+              Home
+            </Link>
+            <div className="text-black lg:text-[14px]">
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <Link
+              href={"/categories"}
+              className="text-black hover:text-primary-color"
+            >
+              Categories
+            </Link>
+            <div className="text-black lg:text-[14px]">
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <div className="text-gray-400">{categoryParams}</div>
           </div>
-          <Link
-            href={"/categories"}
-            className="text-black hover:text-primary-color"
-          >
-            Categories
-          </Link>
-          <div className="text-black lg:text-[14px]">
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="text-gray-400">{categoryParams}</div>
-        </div>
-        <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-          {categoryByName && (
-            <div className="flex flex-col w-full mb-28">
-              <div className="mb-6">
-                <div className="font-bold text-[24px] mb-4">
-                  {categoryByName.category.toUpperCase()}
+          <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
+            {categoryByName && (
+              <div className="flex flex-col w-full mb-28">
+                <div className="mb-6">
+                  <div className="font-bold text-[24px] mb-4">
+                    {categoryByName.category.toUpperCase()}
+                  </div>
+                </div>
+                <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b pb-10">
+                  {productsByCategory &&
+                    productsByCategory?.map((products: any, index: number) => (
+                      <div key={index} className={`w-full h-full`}>
+                        <ProductCard data={products} />
+                      </div>
+                    ))}
+                  {productsByCategory && productsByCategory?.length == 0 && (
+                    <div className="w-full flex justify-center items-center col-span-4 h-[400px]">
+                      No product available.
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b pb-10">
-                {productsByCategory &&
-                  productsByCategory?.map((products: any, index: number) => (
-                    <div key={index} className={`w-full h-full`}>
-                      <ProductCard data={products} />
-                    </div>
-                  ))}
-                {productsByCategory && productsByCategory?.length == 0 && (
-                  <div className="w-full flex justify-center items-center col-span-4 h-[400px]">
-                    No product available.
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {!productsByCategory && <>{renderItems}</>}
-          <Pagination
-            totalData={totalProductsByCategory}
-            start={start}
-            setStart={setStart}
-            limit={limit}
-          />
+            )}
+            {!productsByCategory && <>{renderItems}</>}
+            <Pagination
+              totalData={totalProductsByCategory}
+              start={start}
+              setStart={setStart}
+              limit={limit}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

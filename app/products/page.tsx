@@ -8,6 +8,7 @@ import FilterIcon from "@/public/images/filterIcon.svg";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import FilterByCategory from "./FilterByCategory";
+import MainLayout from "../components/MainLayout";
 
 const getProducts = async (
   start: number,
@@ -88,67 +89,69 @@ export default function Page() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl min-h-[600px] mx-auto lg:px-0 px-2 mt-44">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-          <Link href={"/"} className="text-black hover:text-primary-color">
-            Home
-          </Link>
-          <div className="text-black text-[14px]">
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="text-gray-400">Products</div>
-        </div>
-        <div className="flex lg:justify-start justify-between items-center w-full mb-8">
-          <div className="font-semibold lg:text-[36px] text-[28px]">
-            Products
-          </div>
-          <button
-            className="border border-gray-200/80 rounded-lg p-2 flex justify-center items-center lg:hidden"
-            onClick={() => setFilterVisible(true)}
-          >
-            <div className="w-6 h-6">
-              <FilterIcon />
+    <MainLayout>
+      <div className="xl:max-w-7xl lg:max-w-6xl min-h-[600px] mx-auto lg:px-0 px-2 mt-44">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
+            <Link href={"/"} className="text-black hover:text-primary-color">
+              Home
+            </Link>
+            <div className="text-black text-[14px]">
+              <i className="fa-solid fa-chevron-right"></i>
             </div>
-            <span className="ml-2">Filter</span>
-          </button>
-        </div>
-        <div className={`flex w-full h-full justify-center`}>
-          <FilterByCategory
-            filterVisible={filterVisible}
-            setFilterVisible={setFilterVisible}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            setStart={setStart}
-            categoryQuery={categoryQuery}
-            setCategoryQuery={setCategoryQuery}
-          />
-          <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-            {products?.length == 0 ? (
-              <div className="w-full h-[500px] flex justify-center items-center">
-                No product available.
+            <div className="text-gray-400">Products</div>
+          </div>
+          <div className="flex lg:justify-start justify-between items-center w-full mb-8">
+            <div className="font-semibold lg:text-[36px] text-[28px]">
+              Products
+            </div>
+            <button
+              className="border border-gray-200/80 rounded-lg p-2 flex justify-center items-center lg:hidden"
+              onClick={() => setFilterVisible(true)}
+            >
+              <div className="w-6 h-6">
+                <FilterIcon />
               </div>
-            ) : (
-              <div className="hidden"></div>
-            )}
-            <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
-              {products ? (
-                products?.map((products: any, index: number) => (
-                  <ProductCard key={index} data={products} />
-                ))
-              ) : (
-                <>{renderItems}</>
-              )}
-            </div>
-            <Pagination
-              totalData={totalProducts}
-              start={start}
+              <span className="ml-2">Filter</span>
+            </button>
+          </div>
+          <div className={`flex w-full h-full justify-center`}>
+            <FilterByCategory
+              filterVisible={filterVisible}
+              setFilterVisible={setFilterVisible}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
               setStart={setStart}
-              limit={limit}
+              categoryQuery={categoryQuery}
+              setCategoryQuery={setCategoryQuery}
             />
+            <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
+              {products?.length == 0 ? (
+                <div className="w-full h-[500px] flex justify-center items-center">
+                  No product available.
+                </div>
+              ) : (
+                <div className="hidden"></div>
+              )}
+              <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
+                {products ? (
+                  products?.map((products: any, index: number) => (
+                    <ProductCard key={index} data={products} />
+                  ))
+                ) : (
+                  <>{renderItems}</>
+                )}
+              </div>
+              <Pagination
+                totalData={totalProducts}
+                start={start}
+                setStart={setStart}
+                limit={limit}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

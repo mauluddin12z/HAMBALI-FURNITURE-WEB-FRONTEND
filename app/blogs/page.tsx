@@ -7,7 +7,7 @@ import Pagination from "../components/Pagination";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import { useRouter } from "next/navigation";
-import Loading from "../components/Loading";
+import MainLayout from "../components/MainLayout";
 
 const getBlogs = async (start: number, limit: number) => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredBlogs?start=${start}&limit=${limit}`;
@@ -63,19 +63,31 @@ export default function Page() {
     renderItems.push(
       <div
         key={i}
-        className="h-[350px] w-full border border-gray-200 rounded-lg shadow"
+        className="h-[440px] w-full border border-gray-200 rounded-lg shadow"
       >
-        <div className="flex flex-col w-full h-[350px] justify-center items-center p-3">
+        <div className="flex flex-col w-full h-full p-3">
           <div className="w-full h-full aspect-square rounded-lg">
             <SkeletonLoading />
           </div>
-          <div className="w-full h-[5%]">
-            <div className="w-[50%] h-full rounded-lg mt-1">
+          <div className="w-[50%] h-[13px] rounded-lg mt-1">
+            <SkeletonLoading />
+          </div>
+          <div className="w-[80%] h-[25px] rounded-lg mt-3">
+            <SkeletonLoading />
+          </div>
+          <div className="flex flex-col w-full gap-y-3 mt-4">
+            <div className="w-full h-[13px] rounded-lg">
               <SkeletonLoading />
             </div>
-          </div>
-          <div className="w-full h-[10%] rounded-lg mt-4">
-            <SkeletonLoading />
+            <div className="w-full h-[13px] rounded-lg">
+              <SkeletonLoading />
+            </div>
+            <div className="w-full h-[13px] rounded-lg">
+              <SkeletonLoading />
+            </div>
+            <div className="w-full h-[13px] rounded-lg">
+              <SkeletonLoading />
+            </div>
           </div>
         </div>
       </div>
@@ -83,84 +95,83 @@ export default function Page() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-          <Link href={"/"} className="text-black hover:text-primary-color">
-            Home
-          </Link>
-          <div className="text-black lg:text-[14px]">
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="text-gray-400">Blogs</div>
-        </div>
-        <div className="flex lg:justify-start justify-between items-center w-full mb-4">
-          <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
-        </div>
-        <div className="flex gap-x-2 w-full mb-4 lg:h-10">
-          {gridButtonShow && (
-            <>
-              <button
-                className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
-                  gridCols === 3 ? "text-primary-color" : "text-gray-900"
-                }`}
-                onClick={() => {
-                  handleGridCols(3);
-                }}
-              >
-                <div className="w-6 h-6 text-[20px] flex justify-center items-center">
-                  <i className="fa-solid fa-grip"></i>
-                </div>
-              </button>
-              <button
-                className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
-                  gridCols === 1 ? "text-primary-color" : "text-gray-900"
-                }`}
-                onClick={() => {
-                  handleGridCols(1);
-                }}
-              >
-                <div className="w-6 h-6 text-[20px] flex justify-center items-center">
-                  <i className="fa-solid fa-list"></i>
-                </div>
-              </button>
-            </>
-          )}
-        </div>
-        <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-          {blogs?.length == 0 ? (
-            <div className="w-full h-[500px] flex justify-center items-center border">
-              No blog available.
+    <MainLayout>
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
+            <Link href={"/"} className="text-black hover:text-primary-color">
+              Home
+            </Link>
+            <div className="text-black lg:text-[14px]">
+              <i className="fa-solid fa-chevron-right"></i>
             </div>
-          ) : (
-            <div className="hidden"></div>
-          )}
-          <div
-            className={`w-full grid lg:grid-cols-${
-              gridCols === null ? 3 : gridCols
-            } grid-cols-1 gap-4 mb-4`}
-          >
-            {blogs ? (
-              blogs?.map((blogs: any, index: number) => (
-                <BlogCard
-                  key={index}
-                  gridCols={gridCols}
-                  gridButtonShow={gridButtonShow}
-                  data={blogs}
-                />
-              ))
-            ) : (
-              <>{renderItems}</>
+            <div className="text-gray-400">Blogs</div>
+          </div>
+          <div className="flex lg:justify-start justify-between items-center w-full mb-4">
+            <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
+          </div>
+          <div className="flex gap-x-2 w-full mb-4 lg:h-10">
+            {gridButtonShow && (
+              <>
+                <button
+                  className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${gridCols === 3 ? "text-primary-color" : "text-gray-900"
+                    }`}
+                  onClick={() => {
+                    handleGridCols(3);
+                  }}
+                >
+                  <div className="w-6 h-6 text-[20px] flex justify-center items-center">
+                    <i className="fa-solid fa-grip"></i>
+                  </div>
+                </button>
+                <button
+                  className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${gridCols === 1 ? "text-primary-color" : "text-gray-900"
+                    }`}
+                  onClick={() => {
+                    handleGridCols(1);
+                  }}
+                >
+                  <div className="w-6 h-6 text-[20px] flex justify-center items-center">
+                    <i className="fa-solid fa-list"></i>
+                  </div>
+                </button>
+              </>
             )}
           </div>
-          <Pagination
-            totalData={totalBlogs}
-            start={start}
-            setStart={setStart}
-            limit={limit}
-          />
+          <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
+            {blogs?.length == 0 ? (
+              <div className="w-full h-[500px] flex justify-center items-center border">
+                No blog available.
+              </div>
+            ) : (
+              <div className="hidden"></div>
+            )}
+            <div
+              className={`w-full grid lg:grid-cols-${gridCols === null ? 3 : gridCols
+                } grid-cols-1 gap-4 mb-4`}
+            >
+              {blogs ? (
+                blogs?.map((blogs: any, index: number) => (
+                  <BlogCard
+                    key={index}
+                    gridCols={gridCols}
+                    gridButtonShow={gridButtonShow}
+                    data={blogs}
+                  />
+                ))
+              ) : (
+                <>{renderItems}</>
+              )}
+            </div>
+            <Pagination
+              totalData={totalBlogs}
+              start={start}
+              setStart={setStart}
+              limit={limit}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }
