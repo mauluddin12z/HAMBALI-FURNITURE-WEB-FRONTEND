@@ -1,6 +1,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "@/app/components/Loading";
 
 export default function Pagination({ totalData, start, setStart, limit }: any) {
   const searchParams = useSearchParams();

@@ -11,28 +11,65 @@ body.modal-open {
 }
 
 .description h1 {
-  font-size: 1.5rem !important;
+  font-size: 1.75rem !important;
+  line-height: 1.5 !important;
   font-weight: bold !important;
-  margin-bottom: 0.5rem !important;
-  color: black;
+  margin-bottom: 0.75rem !important;
+  color: #222222;
 }
 
 .description h2 {
-  font-size: 1.25rem !important;
+  font-size: 1.5rem !important;
+  line-height: 1.4 !important;
   font-weight: bold !important;
-  margin-bottom: 0.25rem !important;
-  color: black;
+  margin-bottom: 0.5rem !important;
+  color: #333333;
 }
 
 .description h3 {
-  font-size: 0.5rem !important;
+  font-size: 1.25rem !important;
+  line-height: 1.5 !important;
+  font-weight: bold !important;
+  margin-bottom: 0.5rem !important;
+  color: #444444;
+}
+
+.description p {
+  text-align: justify;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: #555555;
+  margin-bottom: 0.75rem;
+}
+table .description h1 {
+  font-size: 1.5rem !important;
+  line-height: 1.25 !important;
+  font-weight: bold !important;
+  margin-bottom: 0.5rem !important;
+  color: #222222;
+}
+
+table .description h2 {
+  font-size: 1.25rem !important;
+  line-height: 1.2 !important;
   font-weight: bold !important;
   margin-bottom: 0.25rem !important;
-  color: black;
+  color: #333333;
 }
-.description p {
-  font-size: 14px !important;
-  color: black;
+
+table .description h3 {
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: bold !important;
+  margin-bottom: 0.25rem !important;
+  color: #444444;
+}
+
+table .description p {
+  text-align: justify;
+  font-size: 0.8rem !important;
+  line-height: 1.4 !important;
+  color: #555555;
   margin-bottom: 0.5rem;
 }
 

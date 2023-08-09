@@ -47,34 +47,36 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                 />
               </Link>
             </div>
-            <div className="flex flex-col">
-              <div className="z-20 text-gray-400 lg:text-[14px]">
-                {format(
-                  new Date(data?.createdAt),
-                  "EEEE, d MMMM yyyy HH:mm 'WIB'",
-                  {
-                    locale: id,
-                  }
-                )}
+            <div className="flex flex-col justify-between flex-grow">
+              <div className="flex flex-col">
+                <div className="z-20 text-gray-400 lg:text-[14px]">
+                  {format(
+                    new Date(data?.createdAt),
+                    "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                    {
+                      locale: id,
+                    }
+                  )}
+                </div>
+                <div className="flex items-center z-20 mt-1 max-h-[60px]">
+                  <Link
+                    href={`/blogs/${URLGenerator(data?.title)}`}
+                    className="text-[20px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4 truncate line-clamp-1 whitespace-pre-wrap"
+                  >
+                    {data?.title}
+                  </Link>
+                </div>
+                <div
+                  className="text-[14px] text-gray-400 mt-2 text-justify truncate line-clamp-[3] whitespace-pre-wrap leading-8"
+                  dangerouslySetInnerHTML={{ __html: data?.description }}
+                />
               </div>
-              <div className="flex items-center z-20 mt-1 max-h-[60px]">
-                <Link
-                  href={`/blogs/${URLGenerator(data?.title)}`}
-                  className="text-[20px] font-semibold tracking-tight text-gray-900 text-left hover:underline decoration-2 underline-offset-4 truncate line-clamp-1 whitespace-pre-wrap"
-                >
-                  {data?.title}
-                </Link>
-              </div>
-              <div
-                className="text-[14px] text-gray-400 mt-2 text-justify truncate line-clamp-[3] whitespace-pre-wrap leading-8"
-                dangerouslySetInnerHTML={{ __html: data?.description }}
-              />
               <button
                 onClick={() =>
                   router.push(`/blogs/${URLGenerator(data?.title)}`)
                 }
                 type="button"
-                className="place-self-end w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+                className="place-self-end place-items-end w-48 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
               >
                 Read More <i className="fa-solid fa-arrow-right ml-4"></i>
               </button>
@@ -109,33 +111,35 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
               priority
             />
           </Link>
-          <div className="w-[70%] lg:ml-10 py-2 ">
-            <div className="flex flex-col">
-              <Link
-                href={`/blogs/${URLGenerator(data?.title)}`}
-                className="text-[22px] font-semibold tracking-tight text-gray-900 hover:underline decoration-2 underline-offset-4 mb-1"
-              >
-                {data?.title}
-              </Link>
-              <div className="z-20 text-gray-400 mt-1 text-[14px]">
-                {format(
-                  new Date(data?.createdAt),
-                  "EEEE, d MMMM yyyy HH:mm 'WIB'",
-                  {
-                    locale: id,
-                  }
-                )}
+          <div className="w-[70%] lg:ml-10 py-2 flex-grow">
+            <div className="flex flex-col h-full justify-between">
+              <div className="flex flex-col">
+                <Link
+                  href={`/blogs/${URLGenerator(data?.title)}`}
+                  className="text-[22px] font-semibold tracking-tight text-gray-900 hover:underline decoration-2 underline-offset-4 mb-1"
+                >
+                  {data?.title}
+                </Link>
+                <div className="z-20 text-gray-400 mt-1 text-[14px]">
+                  {format(
+                    new Date(data?.createdAt),
+                    "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                    {
+                      locale: id,
+                    }
+                  )}
+                </div>
+                <div
+                  className="text-[14px] text-gray-600 mt-4 text-justify truncate line-clamp-[5] whitespace-pre-wrap leading-8"
+                  dangerouslySetInnerHTML={{ __html: data?.description }}
+                />
               </div>
-              <div
-                className="text-[14px] text-gray-600 mt-4 text-justify truncate line-clamp-[5] whitespace-pre-wrap leading-8"
-                dangerouslySetInnerHTML={{ __html: data?.description }}
-              />
               <button
                 onClick={() =>
                   router.push(`/blogs/${URLGenerator(data?.title)}`)
                 }
                 type="button"
-                className="place-self-end w-40 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300   rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
+                className="place-self-end w-40 text-white bg-blue-700 hover:bg-blue-950 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 mr-2 mt-4"
               >
                 Read More <i className="fa-solid fa-arrow-right ml-3"></i>
               </button>

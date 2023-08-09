@@ -49,7 +49,7 @@ export default function FooterSection() {
                   width={110}
                   height={110}
                   alt="logoHambaliFurnitre"
-                  className="mb-4"
+                  className="w-auto h-auto mb-4"
                   priority
                 />
               </div>

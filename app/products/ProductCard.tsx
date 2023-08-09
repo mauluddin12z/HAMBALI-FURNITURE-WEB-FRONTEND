@@ -4,17 +4,10 @@ import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
 import URLGenerator from "../utils/URLGenerator";
 import Modal from "../components/Modal";
-import useSWR from "swr";
-import axios from "axios";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import SkeletonLoading from "../components/SkeletonLoading";
+import useProductByIdData from "../utils/useProductByIdData";
 
-const getProductById = async (id: number) => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}products/${id}`
-  );
-  return res.data;
-};
 export default function ProductCard({ data }: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
@@ -22,11 +15,7 @@ export default function ProductCard({ data }: any) {
 
   const [productId, setProductId] = useState(0);
 
-  const { data: productById } = useSWR(
-    productId ? ["productById", productId] : null,
-    () => productId && getProductById(productId)
-  );
-
+  const { productById } = useProductByIdData(productId);
   const [showModal, setShowModal] = useState(false);
   return (
     <>

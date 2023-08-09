@@ -30,7 +30,7 @@ export default function Modal({
   return (
     <div
       id="wrapper"
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50 w-full h-screen"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-[90] w-full h-screen"
       onClick={handleClose}
     >
       <button

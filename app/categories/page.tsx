@@ -1,46 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import URLGenerator from "../utils/URLGenerator";
 import ProductCard from "../products/ProductCard";
 import MainLayout from "../components/MainLayout";
-const getCategories = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
-  const res = await axios.get(url);
-  return res.data;
-};
-const getTotalCategories = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`;
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getProductByCategory = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}products`;
-  const res = await axios.get(url);
-  return res.data;
-};
+import useProductsData from "../utils/useProductsData";
+import useCategoriesData from "../utils/useCategoriesData";
 
 export default function Page() {
   const [limit, setLimit] = useState(2);
   const [loadMoreDataIsLoading, setLoadMoreDataIsLoading] = useState(false);
-  let { data: categories } = useSWR("categories", getCategories);
-  let { data: TotalCategories } = useSWR("categories", getTotalCategories);
-  let { data: productsByCategory } = useSWR(
-    "productsByCategory",
-    getProductByCategory
-  );
+  let { categories } = useCategoriesData();
+  let { products } = useProductsData();
   categories = categories?.filter((category: any) => {
-    const productsCount = productsByCategory?.filter(
+    const productsCount = products?.filter(
       (product: any) => product.category_id === category.category_id
     ).length;
     return productsCount && productsCount > 0;
   });
-  TotalCategories = categories?.filter((category: any) => {
-    const productsCount = productsByCategory?.filter(
+
+  const TotalCategories = categories?.filter((category: any) => {
+    const productsCount = products?.filter(
       (product: any) => product.category_id === category.category_id
     ).length;
     return productsCount && productsCount > 0;
@@ -136,8 +117,8 @@ export default function Page() {
                     </Link>
                   </div>
                   <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 border-b py-10 mb-10">
-                    {productsByCategory &&
-                      productsByCategory
+                    {products &&
+                      products
                         ?.filter(
                           (products: any) =>
                             products.category_id === category.category_id
@@ -151,15 +132,16 @@ export default function Page() {
                   </div>
                 </div>
               ))}
-            {!productsByCategory && <>{renderItems}</>}
+            {!products && <>{renderItems}</>}
           </div>
           {!loadMoreDataIsLoading && (
             <button
               type="button"
-              className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${limit >= TotalCategories?.length
+              className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${
+                limit >= TotalCategories?.length
                   ? "text-gray-400"
-                  : "text-gray-900 hover:text-blue-700"
-                } bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
+                  : "text-gray-900 hover:text-blue-700 hover:bg-gray-100"
+              } bg-white rounded-lg border border-gray-200`}
               onClick={() => handleLoadMore()}
               disabled={limitThreshold}
             >

@@ -1,56 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import Link from "next/link";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
-import URLGenerator from "@/app/utils/URLGenerator";
 import ProductCard from "@/app/products/ProductCard";
 import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
 import Pagination from "@/app/components/Pagination";
 import MainLayout from "@/app/components/MainLayout";
-
-const getCategoryByName = async (categoryParams: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}categoryByName?categoryQuery=${categoryParams}`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getProductsByCategory = async (
-  start: number,
-  limit: number,
-  categoryQuery: number,
-  searchQuery: string
-) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?start=${start}&limit=${limit}`;
-
-  if (categoryQuery > 0) {
-    url += `&categoryQuery=${categoryQuery}`;
-  }
-  if (searchQuery !== "") {
-    url += `&searchQuery=${searchQuery}`;
-  }
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getTotalProductsByCategory = async (
-  categoryQuery: number,
-  searchQuery: string
-) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?`;
-
-  if (categoryQuery > 0) {
-    url += `&categoryQuery=${categoryQuery}`;
-  }
-  if (searchQuery !== "") {
-    url += `&searchQuery=${searchQuery}`;
-  }
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useCategoryByNameData from "@/app/utils/useCategoryByNameData";
+import useFilteredProductsData from "@/app/utils/useFilteredProductsData";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [start, setStart] = useState(0);
@@ -68,24 +25,20 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }, []);
 
-  const { data: categoryByName }: any = useSWR(
-    categoryParams ? ["categoryByName", categoryParams] : null,
-    () => categoryParams && getCategoryByName(categoryParams)
-  );
+  const { categoryByName } = useCategoryByNameData(categoryParams);
 
   useEffect(() => {
     setCategoryQuery(categoryByName?.category_id);
   }, [categoryByName]);
 
-  const { data: productsByCategory } = useSWR(
-    ["products", start, limit, categoryQuery, searchQuery],
-    () => getProductsByCategory(start, limit, categoryQuery, searchQuery)
+  const { filteredProducts, totalFilteredProducts } = useFilteredProductsData(
+    start,
+    limit,
+    categoryQuery,
+    searchQuery
   );
-
-  const { data: totalProductsByCategory } = useSWR(
-    ["totalProductsByCategory", categoryQuery, searchQuery],
-    () => getTotalProductsByCategory(categoryQuery, searchQuery)
-  );
+  const productsByCategory = filteredProducts;
+  const totalProductsByCategory = totalFilteredProducts;
 
   const renderItems = [];
 

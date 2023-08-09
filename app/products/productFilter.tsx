@@ -1,16 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
-import axios from "axios";
-import useSWR from "swr";
-import { usePathname, useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Loading from "@/app/components/Loading";
+import useCategoriesData from "../utils/useCategoriesData";
+import useCategoryByNameData from "../utils/useCategoryByNameData";
 
-const getCategories = async () => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`
-  );
-  return res.data;
-};
-export default function FilterByCategory({
+export default function ProductFilter({
   filterVisible,
   setFilterVisible,
   searchQuery,
@@ -30,9 +25,55 @@ export default function FilterByCategory({
       document.body.classList.remove("modal-open");
     };
   }, [filterVisible]);
+
   const router = useRouter();
   const pathname = usePathname();
-  const { data: categories } = useSWR("categories", getCategories);
+  const searchParams = useSearchParams();
+  const [categoryName, setCategoryName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { categories } = useCategoriesData();
+  const { categoryByName } = useCategoryByNameData(categoryName);
+
+  useEffect(() => {
+    setCategoryQuery(
+      categoryByName ? categoryByName?.category_id : categoryQuery
+    );
+  }, [
+    setCategoryQuery,
+    categoryQuery,
+    categoryByName,
+    categoryByName?.category_id,
+  ]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("page");
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const handleCategoryChange = async (categories: any) => {
+    setIsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
+    const newUrl = `${pathname}?${createQueryString(
+      "category",
+      categories.category
+    )}`;
+    setCategoryName(categories.category);
+    setCategoryQuery(categories.category_id);
+    setIsLoading(false);
+    router.push(newUrl);
+  };
+
+  useEffect(() => {
+    setCategoryName(searchParams.get("category") ?? "");
+  }, [searchParams]);
+
   return (
     <div
       className={`lg:w-[20%] w-full flex-grow lg:rounded-lg p-5 lg:flex flex-col ${
@@ -56,7 +97,9 @@ export default function FilterByCategory({
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => {
-                setSearchQuery(e.target.value), setStart(0);
+                setSearchQuery(e.target.value);
+                setStart(0);
+                router.push(pathname);
               }}
             />
           </div>
@@ -88,10 +131,9 @@ export default function FilterByCategory({
                   : "bg-white hover:text-primary-color"
               } rounded-lg border border-gray-200 focus:z-10 focus:ring-4 focus:ring-blue-200 cursor-pointer w-full"`}
               onClick={() => {
-                setCategoryQuery(categories.category_id);
                 setStart(0);
                 setSearchQuery("");
-                router.push(pathname);
+                handleCategoryChange(categories);
               }}
             >
               {categories.category}
@@ -101,6 +143,7 @@ export default function FilterByCategory({
         <button
           className="w-full my-2 py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 cursor-pointer"
           onClick={() => {
+            setCategoryName("");
             setCategoryQuery(-1);
             setStart(0);
             setSearchQuery("");
@@ -126,6 +169,11 @@ export default function FilterByCategory({
           </button>
         </div>
       </div>
+      {isLoading && (
+        <span>
+          <Loading />
+        </span>
+      )}
     </div>
   );
 }

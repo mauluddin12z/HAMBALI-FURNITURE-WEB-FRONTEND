@@ -1,31 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import BlogCard from "./BlogCard";
 import Pagination from "../components/Pagination";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import MainLayout from "../components/MainLayout";
-
-const getBlogs = async (start: number, limit: number) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredBlogs?start=${start}&limit=${limit}`;
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getTotalBlogs = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useFilteredBlogsData from "../utils/useFilteredBlogsData";
+import useBlogsData from "../utils/useBlogsData";
 
 export default function Page() {
   const router = useRouter();
+  const pathname = usePathname();
   const [start, setStart] = useState(0);
   const [limit, setLimit] = useState(6);
+  const [searchQuery, setSearchQuery] = useState("");
   const [gridCols, setGridCols] = useState<number | null>(null);
 
   useEffect(() => {
@@ -52,11 +41,11 @@ export default function Page() {
     }
   }, [router]);
 
-  const { data: blogs } = useSWR(["blogs", start, limit], () =>
-    getBlogs(start, limit)
+  const { filteredBlogs, totalFilteredBlogs } = useFilteredBlogsData(
+    start,
+    limit,
+    searchQuery
   );
-
-  const { data: totalBlogs } = useSWR("totalBlogs", getTotalBlogs);
 
   const renderItems = [];
   for (let i = 0; i < limit; i++) {
@@ -108,38 +97,61 @@ export default function Page() {
             <div className="text-gray-400">Blogs</div>
           </div>
           <div className="flex lg:justify-start justify-between items-center w-full mb-4">
-            <div className="font-semibold lg:text-[36px] text-[28px]">Blogs</div>
+            <div className="font-semibold lg:text-[36px] text-[28px]">
+              Blogs
+            </div>
           </div>
-          <div className="flex gap-x-2 w-full mb-4 lg:h-10">
-            {gridButtonShow && (
-              <>
-                <button
-                  className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${gridCols === 3 ? "text-primary-color" : "text-gray-900"
+          <div className="flex justify-between w-full mb-4 items-center">
+            <div className="flex gap-x-2 w-full lg:h-10">
+              {gridButtonShow && (
+                <>
+                  <button
+                    className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
+                      gridCols === 3 ? "text-primary-color" : "text-gray-900"
                     }`}
-                  onClick={() => {
-                    handleGridCols(3);
-                  }}
-                >
-                  <div className="w-6 h-6 text-[20px] flex justify-center items-center">
-                    <i className="fa-solid fa-grip"></i>
-                  </div>
-                </button>
-                <button
-                  className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${gridCols === 1 ? "text-primary-color" : "text-gray-900"
+                    onClick={() => {
+                      handleGridCols(3);
+                    }}
+                  >
+                    <div className="w-6 h-6 text-[20px] flex justify-center items-center">
+                      <i className="fa-solid fa-grip"></i>
+                    </div>
+                  </button>
+                  <button
+                    className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
+                      gridCols === 1 ? "text-primary-color" : "text-gray-900"
                     }`}
-                  onClick={() => {
-                    handleGridCols(1);
-                  }}
-                >
-                  <div className="w-6 h-6 text-[20px] flex justify-center items-center">
-                    <i className="fa-solid fa-list"></i>
-                  </div>
-                </button>
-              </>
-            )}
+                    onClick={() => {
+                      handleGridCols(1);
+                    }}
+                  >
+                    <div className="w-6 h-6 text-[20px] flex justify-center items-center">
+                      <i className="fa-solid fa-list"></i>
+                    </div>
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="relative h-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <input
+                type="text"
+                id="table-search"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 w-full bg-gray-50 focus:ring-2 focus:ring-blue-100 focus:outline-none"
+                placeholder="Search for items"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setStart(0);
+                  router.push(pathname);
+                }}
+              />
+            </div>
           </div>
           <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-            {blogs?.length == 0 ? (
+            {filteredBlogs?.length == 0 ? (
               <div className="w-full h-[500px] flex justify-center items-center border">
                 No blog available.
               </div>
@@ -147,11 +159,12 @@ export default function Page() {
               <div className="hidden"></div>
             )}
             <div
-              className={`w-full grid lg:grid-cols-${gridCols === null ? 3 : gridCols
-                } grid-cols-1 gap-4 mb-4`}
+              className={`w-full grid lg:grid-cols-${
+                gridCols === null ? 3 : gridCols
+              } grid-cols-1 gap-4 mb-4`}
             >
-              {blogs ? (
-                blogs?.map((blogs: any, index: number) => (
+              {filteredBlogs ? (
+                filteredBlogs?.map((blogs: any, index: number) => (
                   <BlogCard
                     key={index}
                     gridCols={gridCols}
@@ -164,7 +177,7 @@ export default function Page() {
               )}
             </div>
             <Pagination
-              totalData={totalBlogs}
+              totalData={totalFilteredBlogs}
               start={start}
               setStart={setStart}
               limit={limit}

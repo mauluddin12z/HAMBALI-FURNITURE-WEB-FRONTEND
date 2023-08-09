@@ -1,38 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
-import ProductCard from "../products/ProductCard";
 import Pagination from "../components/Pagination";
-import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import ProductSearchResultsCard from "./ProductSearchResultsCard";
-
-const getProductSearchResults = async (
-  start: number,
-  limit: number,
-  searchQuery: string
-) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productSearchResults?start=${start}&limit=${limit}`;
-
-  if (searchQuery !== null) {
-    url += `&searchQuery=${searchQuery}`;
-  }
-
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getTotalProductSearchResults = async (searchQuery: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productSearchResults?`;
-
-  if (searchQuery !== null) {
-    url += `&searchQuery=${searchQuery}`;
-  }
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useProductSearchResultsData from "../utils/useProductSearchResultsData";
 
 export default function ProductSearchResults(generalSearchQuery: any) {
   const [start, setStart] = useState(0);
@@ -51,15 +22,8 @@ export default function ProductSearchResults(generalSearchQuery: any) {
     }
   }, []);
 
-  const { data: productSearchResults } = useSWR(
-    ["productSearchResults", start, limit, searchQuery],
-    () => getProductSearchResults(start, limit, searchQuery)
-  );
-
-  const { data: totalProductSearchResults } = useSWR(
-    ["totalProductSearchResults", searchQuery],
-    () => getTotalProductSearchResults(searchQuery)
-  );
+  const { productSearchResults, totalProductSearchResults } =
+    useProductSearchResultsData(start, limit, searchQuery);
 
   const renderItems = [];
   for (let i = 0; i < limit; i++) {

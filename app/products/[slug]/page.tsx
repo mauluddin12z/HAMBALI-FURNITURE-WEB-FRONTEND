@@ -1,7 +1,5 @@
 "use client";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
 import Image, { ImageLoader } from "next/image";
 import { FormatRupiah } from "@arismun/format-rupiah";
@@ -10,13 +8,7 @@ import URLGenerator from "@/app/utils/URLGenerator";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import RelatedProducts from "./relatedProducts";
 import MainLayout from "@/app/components/MainLayout";
-
-const getProductByName = async (productNameQuery: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}productByName?productNameQuery=${productNameQuery}`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useProductByNameData from "@/app/utils/useProductByNameData";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const myLoader: ImageLoader = ({ src }) => {
@@ -25,10 +17,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [productNameQuery, setProductNameQuery] = useState(
     URLToStringGenerator(params.slug)
   );
-  const { data: productByName }: any = useSWR(
-    productNameQuery ? ["productByName", productNameQuery] : null,
-    () => productNameQuery && getProductByName(productNameQuery)
-  );
+  const { productByName } = useProductByNameData(productNameQuery);
 
   const [categoryQuery, setCategoryQuery] = useState();
 
@@ -37,7 +26,6 @@ export default function Page({ params }: { params: { slug: string } }) {
       setCategoryQuery(productByName.category_id);
     }
   }, [productByName]);
-
 
   return (
     <MainLayout>
@@ -80,7 +68,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                         productByName?.category.category
                       )}`}
                     >
-                      {productByName.category.category.toUpperCase()}
+                      {productByName.category.category}
                     </Link>
                   </div>
                 ) : null}
@@ -110,15 +98,18 @@ export default function Page({ params }: { params: { slug: string } }) {
                           productByName?.category.category
                         )}`}
                       >
-                        {productByName.category.category.toUpperCase()}
+                        {productByName.category.category}
                       </Link>
                     </div>
                   ) : null}
                   {productByName?.description ? (
                     <div className="mb-3">
-                      <div className="text-justify text-gray-600 text-[14px]">
-                        {productByName.description}
-                      </div>
+                      <div
+                        className="description"
+                        dangerouslySetInnerHTML={{
+                          __html: productByName?.description,
+                        }}
+                      />
                     </div>
                   ) : null}
                   {productByName?.dimensions ? (

@@ -9,39 +9,19 @@ import ImageModal from "../components/ImageModal";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import MainLayout from "../components/MainLayout";
-
-const getBlogs = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`;
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getTotalBlogImages = async () => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogImages`;
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getBlogImageById = async (id: number) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogImages/${id}`;
-  const res = await axios.get(url);
-  return res.data;
-};
+import useBlogsData from "../utils/useBlogsData";
+import useTotalBlogImages from "../utils/useTotalBlogImagesData";
+import useBlogImageByIdData from "../utils/useBlogImageByIdData";
 
 export default function Page() {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
 
-  const [isZoom, setIsZoom] = useState(false);
   const [limit, setLimit] = useState(12);
   const [loadMoreDataIsLoading, setLoadMoreDataIsLoading] = useState(false);
-  let { data: blogs } = useSWR("blogs", getBlogs);
-  const { data: totalBlogImages } = useSWR(
-    "totalBlogImages",
-    getTotalBlogImages
-  );
-
+  let { blogs } = useBlogsData();
+  const { totalBlogImages } = useTotalBlogImages();
   const [limitThreshold, setLimitThreshold] = useState(
     limit >= totalBlogImages?.length
   );
@@ -71,14 +51,11 @@ export default function Page() {
     setcardIsHovered(-1);
   };
 
-  const [blogImageId, setBlogImageId] = useState(0);
-
-  const { data: blogImageById } = useSWR(
-    blogImageId ? ["blogImageById", blogImageId] : null,
-    () => blogImageId && getBlogImageById(blogImageId)
-  );
-
   const [showModal, setShowModal] = useState(false);
+  const [blogImageId, setBlogImageId] = useState(0);
+  const [isZoom, setIsZoom] = useState(false);
+
+  const { blogImageById } = useBlogImageByIdData(blogImageId);
   const renderItems = [];
   for (let i = 0; i < 8; i++) {
     renderItems.push(
@@ -149,10 +126,11 @@ export default function Page() {
                         />
                       </div>
                       <div
-                        className={`lg:block hidden z-[60] absolute bottom-0 w-full py-3 bg-black/80 transition-all ${cardIsHovered === blogImages?.blogImage_id
-                          ? ""
-                          : "translate-y-[100%] opacity-0"
-                          }`}
+                        className={`lg:block hidden z-[60] absolute bottom-0 w-full py-3 bg-black/80 transition-all ${
+                          cardIsHovered === blogImages?.blogImage_id
+                            ? ""
+                            : "translate-y-[100%] opacity-0"
+                        }`}
                         onMouseEnter={() =>
                           handleOutsideLayerHover(blogImages?.blogImage_id)
                         }
@@ -178,10 +156,11 @@ export default function Page() {
             {!loadMoreDataIsLoading && (
               <button
                 type="button"
-                className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${limit >= totalBlogImages?.length
-                  ? "text-gray-400"
-                  : "text-gray-900 hover:text-blue-700"
-                  } bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
+                className={`py-2.5 px-5 mr-2 mb-2 text-sm font-medium ${
+                  limit >= totalBlogImages?.length
+                    ? "text-gray-400"
+                    : "text-gray-900 hover:text-blue-700"
+                } bg-white rounded-lg border border-gray-200 hover:bg-gray-100`}
                 onClick={() => handleLoadMore()}
                 disabled={limitThreshold}
               >
@@ -224,10 +203,11 @@ export default function Page() {
                   )}
                 </div>
                 <Image
-                  className={`object-contain w-auto h-full z-20 transition-transform duration-200 ${isZoom
-                    ? "scale-150 cursor-zoom-out"
-                    : "scale-100 cursor-zoom-in"
-                    }`}
+                  className={`object-contain w-auto h-full z-20 transition-transform duration-200 ${
+                    isZoom
+                      ? "scale-150 cursor-zoom-out"
+                      : "scale-100 cursor-zoom-in"
+                  }`}
                   loader={myLoader}
                   src={blogImageById?.imageUrl}
                   width={500}

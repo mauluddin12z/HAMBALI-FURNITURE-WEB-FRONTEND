@@ -133,7 +133,7 @@ export default function HeaderSection() {
             width={90}
             height={90}
             alt="logoHambaliFurnitre"
-            className="h-full"
+            className="w-auto h-auto"
             priority
           />
         </Link>

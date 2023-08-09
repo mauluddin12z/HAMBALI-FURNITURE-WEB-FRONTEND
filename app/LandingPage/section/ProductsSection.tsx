@@ -1,24 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import Link from "next/link";
 import ProductCard from "@/app/products/ProductCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import { useInView } from "react-intersection-observer";
-
-const getProducts = async () => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}products`
-  );
-  return res.data;
-};
+import useProductsData from "@/app/utils/useProductsData";
 
 export default function ProductsSection() {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
-  const { data: products } = useSWR("products", getProducts);
+  const { products } = useProductsData();
   const [limit, setLimit] = useState(8);
 
   useEffect(() => {

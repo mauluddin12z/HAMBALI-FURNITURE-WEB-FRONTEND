@@ -1,74 +1,45 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import ProductCard from "../products/ProductCard";
 import Pagination from "../components/Pagination";
 import FilterIcon from "@/public/images/filterIcon.svg";
 import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
-import FilterByCategory from "./FilterByCategory";
+import ProductFilter from "./productFilter";
 import MainLayout from "../components/MainLayout";
-
-const getProducts = async (
-  start: number,
-  limit: number,
-  categoryQuery: number,
-  searchQuery: string
-) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?start=${start}&limit=${limit}`;
-
-  if (categoryQuery > 0) {
-    url += `&categoryQuery=${categoryQuery}`;
-  }
-  if (searchQuery !== "") {
-    url += `&searchQuery=${searchQuery}`;
-  }
-
-  const res = await axios.get(url);
-  return res.data;
-};
-
-const getTotalProducts = async (categoryQuery: number, searchQuery: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?`;
-
-  if (categoryQuery > 0) {
-    url += `&categoryQuery=${categoryQuery}`;
-  }
-  if (searchQuery !== "") {
-    url += `&searchQuery=${searchQuery}`;
-  }
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useFilteredProductsData from "../utils/useFilteredProductsData";
 
 export default function Page() {
   const [start, setStart] = useState(0);
   const [limit, setLimit] = useState(6);
   const [categoryQuery, setCategoryQuery] = useState(-1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filter, setFilter] = useState({});
+  useEffect(() => {
+    setFilter({
+      start: start,
+      limit: limit,
+      categoryQuery: categoryQuery,
+      searchQuery: searchQuery,
+    });
+  }, [start, limit, categoryQuery, searchQuery]);
+
+  const { filteredProducts, totalFilteredProducts } =
+    useFilteredProductsData(filter);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1024px)");
-    if (mediaQuery.matches) {
+    const mediaQueryMD = window.matchMedia("(max-width: 1024px)");
+    const mediaQuerySM = window.matchMedia("(max-width: 768px)");
+    if (mediaQueryMD.matches) {
+      setLimit(4);
+    } else if (mediaQuerySM.matches) {
       setLimit(3);
     }
   }, []);
 
-  const { data: products } = useSWR(
-    ["products", start, limit, categoryQuery, searchQuery],
-    () => getProducts(start, limit, categoryQuery, searchQuery)
-  );
-
-  const { data: totalProducts } = useSWR(
-    ["totalProducts", categoryQuery, searchQuery],
-    () => getTotalProducts(categoryQuery, searchQuery)
-  );
+  const [filterVisible, setFilterVisible] = useState(false);
 
   const renderItems = [];
-
-  const [filterVisible, setFilterVisible] = useState(false);
 
   for (let i = 0; i < limit; i++) {
     renderItems.push(
@@ -116,7 +87,7 @@ export default function Page() {
             </button>
           </div>
           <div className={`flex w-full h-full justify-center`}>
-            <FilterByCategory
+            <ProductFilter
               filterVisible={filterVisible}
               setFilterVisible={setFilterVisible}
               searchQuery={searchQuery}
@@ -126,16 +97,16 @@ export default function Page() {
               setCategoryQuery={setCategoryQuery}
             />
             <div className="lg:w-[80%] w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
-              {products?.length == 0 ? (
+              {filteredProducts?.length == 0 ? (
                 <div className="w-full h-[500px] flex justify-center items-center">
                   No product available.
                 </div>
               ) : (
                 <div className="hidden"></div>
               )}
-              <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-4 mb-4">
-                {products ? (
-                  products?.map((products: any, index: number) => (
+              <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-4">
+                {filteredProducts ? (
+                  filteredProducts?.map((products: any, index: number) => (
                     <ProductCard key={index} data={products} />
                   ))
                 ) : (
@@ -143,7 +114,7 @@ export default function Page() {
                 )}
               </div>
               <Pagination
-                totalData={totalProducts}
+                totalData={totalFilteredProducts}
                 start={start}
                 setStart={setStart}
                 limit={limit}

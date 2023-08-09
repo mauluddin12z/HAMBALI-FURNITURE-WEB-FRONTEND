@@ -6,17 +6,13 @@ import Link from "next/link";
 import BlogCard from "@/app/blogs/BlogCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import { useInView } from "react-intersection-observer";
-
-const getBlogs = async () => {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogs`);
-  return res.data;
-};
+import useBlogsData from "@/app/utils/useBlogsData";
 
 export default function BlogsSection() {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
-  const { data: blogs } = useSWR("blogs", getBlogs);
+  const { blogs } = useBlogsData();
   const [limit, setLimit] = useState(3);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
@@ -59,9 +55,7 @@ export default function BlogsSection() {
           <div
             ref={ref}
             className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${
-              inView
-                ? "opacity-100"
-                : "translate-x-[-100%] opacity-0"
+              inView ? "opacity-100" : "translate-x-[-100%] opacity-0"
             }`}
           >
             Newest Blogs
@@ -70,9 +64,7 @@ export default function BlogsSection() {
             href={"/blogs"}
             ref={ref}
             className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2 transition-all duration-1000 ${
-              inView
-                ? "opacity-100"
-                : "translate-x-[100%] opacity-0"
+              inView ? "opacity-100" : "translate-x-[100%] opacity-0"
             }`}
           >
             View All

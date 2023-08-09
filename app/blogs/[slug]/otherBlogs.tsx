@@ -1,24 +1,13 @@
 "use client";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import BlogCard from "../BlogCard";
 import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
-
-const getOtherBlogs = async (blogId: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}otherBlogs?blogIdQuery=${blogId}`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useOtherBlogsData from "@/app/utils/useOtherBlogsData";
 
 export default function OtherBlogs({ blogId }: any) {
-  const { data: otherBlogs }: any = useSWR(
-    blogId ? ["otherBlogs", blogId] : null,
-    () => blogId && getOtherBlogs(blogId)
-  );
+  const { otherBlogs }: any = useOtherBlogsData(blogId);
   const [visibleRelatedItem, setvisibleRelatedItem] = useState(4);
   const otherProductSliced = otherBlogs?.slice(0, visibleRelatedItem);
 

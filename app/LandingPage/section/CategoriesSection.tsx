@@ -9,13 +9,7 @@ import { SwiperSlide } from "swiper/react";
 import SwiperComponent from "@/app/components/SwiperComponent";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import { useInView } from "react-intersection-observer";
-
-const getCategories = async () => {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}category`
-  );
-  return res.data;
-};
+import useCategoriesData from "@/app/utils/useCategoriesData";
 
 export default function CategoriesSection() {
   const myLoader: ImageLoader = ({ src }) => {
@@ -34,7 +28,7 @@ export default function CategoriesSection() {
     setcardIsHovered(-1);
   };
 
-  const { data: categories } = useSWR("categories", getCategories);
+  const { categories } = useCategoriesData();
 
   const [slidePerViewSwiper, setSlidePerViewSwiper] = useState(4);
 

@@ -1,9 +1,7 @@
 "use client";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
-import Image, { ImageLoader } from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import Link from "next/link";
@@ -12,22 +10,13 @@ import OtherBlogs from "./otherBlogs";
 import BlogImageSwiper from "./BlogImageSwiper";
 import Loading from "@/app/components/Loading";
 import MainLayout from "@/app/components/MainLayout";
-
-const getBlogByTitle = async (blogTitleQuery: string) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}blogByTitle?blogTitleQuery=${blogTitleQuery}`;
-
-  const res = await axios.get(url);
-  return res.data;
-};
+import useBlogByTitle from "@/app/utils/useBlogByTitleData";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [titleQuery, setTitleQuery] = useState(
     URLToStringGenerator(params.slug)
   );
-  const { data: blogByName }: any = useSWR(
-    titleQuery ? ["blogByName", titleQuery] : null,
-    () => titleQuery && getBlogByTitle(titleQuery)
-  );
+  const { blogByTitle } = useBlogByTitle(titleQuery);
 
   const [currentUrl, setCurrentUrl] = useState("");
 
@@ -35,7 +24,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     setCurrentUrl(typeof window !== "undefined" ? window.location.href : "");
   }, []);
 
-  if (!blogByName) return <Loading />;
+  if (!blogByTitle) return <Loading />;
   return (
     <MainLayout>
       <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
@@ -47,34 +36,39 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="text-black lg:text-[14px]">
               <i className="fa-solid fa-chevron-right"></i>
             </div>
-            <Link href={"/blogs"} className="text-black hover:text-primary-color">
+            <Link
+              href={"/blogs"}
+              className="text-black hover:text-primary-color"
+            >
               Blogs
             </Link>
             <div className="text-black">
               <i className="fa-solid fa-chevron-right"></i>
             </div>
-            <div className="text-gray-400">{blogByName?.title}</div>
+            <div className="text-gray-400">{blogByTitle?.title}</div>
           </div>
           <div className="flex flex-col gap-10 mt-10">
             <div className="flex flex-col w-full">
-              <div className="font-bold text-[30px]">{blogByName?.title}</div>
+              <div className="font-bold text-[30px]">{blogByTitle?.title}</div>
               <div className="mt-2 mb-2 text-[16px] text-gray-400">
                 {format(
-                  new Date(blogByName?.createdAt),
+                  new Date(blogByTitle?.createdAt),
                   "EEEE, d MMMM yyyy HH:mm 'WIB'",
                   {
                     locale: id,
                   }
                 )}
               </div>
-              {blogByName ? (
+              {blogByTitle ? (
                 <>
-                  {blogByName.blog_images && (
-                    <BlogImageSwiper data={blogByName} />
+                  {blogByTitle.blog_images && (
+                    <BlogImageSwiper data={blogByTitle} />
                   )}
                   <div
-                    className="text-[14px] text-gray-600 mt-10 text-justify leading-8 flex flex-col description"
-                    dangerouslySetInnerHTML={{ __html: blogByName?.description }}
+                    className="text-gray-600 mt-10 flex flex-col description"
+                    dangerouslySetInnerHTML={{
+                      __html: blogByTitle?.description,
+                    }}
                   />
                 </>
               ) : (
@@ -119,7 +113,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
             </div>
             <div className="w-full">
-              <OtherBlogs blogId={blogByName?.blog_id} />
+              <OtherBlogs blogId={blogByTitle?.blog_id} />
             </div>
           </div>
         </div>
