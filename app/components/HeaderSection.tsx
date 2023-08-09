@@ -130,10 +130,10 @@ export default function HeaderSection() {
         <Link href="/" className="flex flex-col justify-center">
           <Image
             src={LogoHambaliFurniture}
-            width={90}
-            height={90}
+            width={500}
+            height={500}
             alt="logoHambaliFurnitre"
-            className="w-auto h-auto"
+            className="w-[100px] h-auto"
             priority
           />
         </Link>
