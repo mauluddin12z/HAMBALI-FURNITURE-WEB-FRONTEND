@@ -16,6 +16,16 @@ export default function Page() {
   const [limit, setLimit] = useState(6);
   const [searchQuery, setSearchQuery] = useState("");
   const [gridCols, setGridCols] = useState<number | null>(null);
+  const [filter, setFilter] = useState({});
+  useEffect(() => {
+    setFilter({
+      start: start,
+      limit: limit,
+      searchQuery: searchQuery,
+    });
+  }, [start, limit, searchQuery]);
+
+  const { filteredBlogs, totalFilteredBlogs } = useFilteredBlogsData(filter);
 
   useEffect(() => {
     const savedCols = localStorage.getItem("gridCols");
@@ -40,12 +50,6 @@ export default function Page() {
       setGridButtonShow(true);
     }
   }, [router]);
-
-  const { filteredBlogs, totalFilteredBlogs } = useFilteredBlogsData(
-    start,
-    limit,
-    searchQuery
-  );
 
   const renderItems = [];
   for (let i = 0; i < limit; i++) {
