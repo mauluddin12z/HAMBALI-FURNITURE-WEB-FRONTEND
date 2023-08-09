@@ -31,12 +31,18 @@ export default function Page({ params }: { params: { slug: string } }) {
     setCategoryQuery(categoryByName?.category_id);
   }, [categoryByName]);
 
-  const { filteredProducts, totalFilteredProducts } = useFilteredProductsData(
-    start,
-    limit,
-    categoryQuery,
-    searchQuery
-  );
+  const [filter, setFilter] = useState({});
+  useEffect(() => {
+    setFilter({
+      start: start,
+      limit: limit,
+      categoryQuery: categoryQuery,
+      searchQuery: searchQuery,
+    });
+  }, [start, limit, categoryQuery, searchQuery]);
+
+  const { filteredProducts, totalFilteredProducts } =
+    useFilteredProductsData(filter);
   const productsByCategory = filteredProducts;
   const totalProductsByCategory = totalFilteredProducts;
 
