@@ -11,7 +11,7 @@ export default function BenefitSection() {
   });
 
   return (
-    <div className="lg:max-w-5xl md:max-w-6xl mx-auto lg:px-0 px-2">
+    <div className="lg:max-w-5xl md:max-w-6xl mx-auto 2xl px-0 xl:px-4 px-2">
       <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-4">
         <div
           ref={ref}

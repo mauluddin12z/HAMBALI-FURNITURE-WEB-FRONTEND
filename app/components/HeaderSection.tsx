@@ -118,7 +118,7 @@ export default function HeaderSection() {
     <nav
       className={
         mediaQuery?.matches
-          ? `w-full h-[16%] bg-white shadow-sm border-b fixed z-50 flex justify-center items-center`
+          ? `w-full h-[16%] bg-white shadow-sm border-b fixed top-0 z-50 flex justify-center items-center`
           : `w-full z-50 transition-all ${
               scrolled
                 ? " bg-white shadow-[0px_0px_10px] shadow-black/10 border-b fixed -top-[100px] translate-y-[100px]"
@@ -126,7 +126,7 @@ export default function HeaderSection() {
             }`
       }
     >
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl w-full flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-0">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl w-full flex items-center justify-between mx-auto lg:py-6 py-4 px-8 lg:px-4">
         <Link href="/" className="flex flex-col justify-center">
           <Image
             src={LogoHambaliFurniture}

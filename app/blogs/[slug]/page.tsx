@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   if (!blogByTitle) return <Loading />;
   return (
     <MainLayout>
-      <div className="max-w-7xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
+      <div className="max-w-7xl min-h-screen mx-auto 2xl px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col w-full">
           <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
             <Link href={"/"} className="text-black hover:text-primary-color">

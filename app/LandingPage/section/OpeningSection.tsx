@@ -17,7 +17,7 @@ export default function OpeningSection() {
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
       </div>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl h-screen mx-auto lg:px-0 px-2">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl h-screen mx-auto 2xl:px-0 px-4">
         <div className="absolute w-[600px] aspect-square bg-blue-100/30 blur-2xl rounded-full left-0 top-0"></div>
         <div className="absolute w-[500px] aspect-square bg-primary-color/5 blur-3xl rounded-full left-1/2"></div>
         <div className="absolute lg:w-[400px] w-[200px] aspect-square bg-primary-color/10 blur-3xl rounded-full right-0.5 bottom-[5%]"></div>
@@ -68,21 +68,23 @@ export default function OpeningSection() {
           </div>
           <div className="lg:block hidden w-6/12 pl-10">
             <div
-              className={`flex justify-center items-center relative transition-all duration-1000 ${
+              className={`flex justify-center items-center transition-all duration-1000 ${
                 inView
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
               }`}
             >
-              <div className="w-[600px] h-[600px] border-[10px] border-secondary-color absolute -top-[50px] -right-[50px]"></div>
-              <Image
-                className="z-10 w-[600px] h-[600px]"
-                src={backgroundOpening}
-                width={1000}
-                height={1000}
-                alt="background"
-                priority
-              />
+              <div className="2xl:w-[600px] lg:w-[500px] aspect-square relative">
+                <Image
+                  className="z-[20] w-full h-full absolute"
+                  src={backgroundOpening}
+                  width={1000}
+                  height={1000}
+                  alt="background"
+                  priority
+                />
+                <div className="z-[10] w-full aspect-square border-[10px] border-secondary-color absolute -top-[50px] -right-[50px]"></div>
+              </div>
             </div>
           </div>
         </div>

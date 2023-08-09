@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import SkeletonLoading from "../components/SkeletonLoading";
 import Link from "next/link";
 import Image, { ImageLoader } from "next/image";
@@ -67,7 +65,7 @@ export default function Page() {
 
   return (
     <MainLayout>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col justify-center items-center">
           <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
             <Link href={"/"} className="text-black hover:text-primary-color">
@@ -137,13 +135,14 @@ export default function Page() {
                         onMouseLeave={handleOutsideLayerLeave}
                       >
                         <div className="text-[14px] text-gray-300 text-center">
-                          {format(
-                            new Date(blogImages?.createdAt),
-                            "EEEE, d MMMM yyyy HH:mm 'WIB'",
-                            {
-                              locale: id,
-                            }
-                          )}
+                          {blogImages?.createdAt &&
+                            format(
+                              new Date(blogImages?.createdAt),
+                              "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                              {
+                                locale: id,
+                              }
+                            )}
                         </div>
                       </div>
                     </div>
@@ -194,13 +193,14 @@ export default function Page() {
             {blogImageById && (
               <div className="flex flex-col h-full w-full justify-center items-center">
                 <div className="text-[16px] text-white text-center">
-                  {format(
-                    new Date(blogImageById?.createdAt),
-                    "EEEE, d MMMM yyyy HH:mm 'WIB'",
-                    {
-                      locale: id,
-                    }
-                  )}
+                  {blogImageById?.createdAt &&
+                    format(
+                      new Date(blogImageById?.createdAt),
+                      "EEEE, d MMMM yyyy HH:mm 'WIB'",
+                      {
+                        locale: id,
+                      }
+                    )}
                 </div>
                 <Image
                   className={`object-contain w-auto h-full z-20 transition-transform duration-200 ${

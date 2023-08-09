@@ -8,7 +8,7 @@ import MainLayout from "../components/MainLayout";
 export default function Page() {
   return (
     <MainLayout>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto lg:px-0 px-2 mt-44">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col">
           <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
             <Link href={"/"} className="text-black hover:text-primary-color">
@@ -26,14 +26,18 @@ export default function Page() {
           </div>
           <div className="w-full min-h-[500px] flex-col">
             <div className="flex lg:flex-row flex-col">
-              <Image
-                src={FurnitureImg}
-                width={500}
-                height={500}
-                className="object-contain h-full"
-                alt="Furniture Img"
-                priority
-              />
+              <div className="w-full">
+                <div className="lg:w-[500px] w-full lg:aspect-square flex justify-center items-center">
+                  <Image
+                    src={FurnitureImg}
+                    width={500}
+                    height={500}
+                    className="object-contain h-full"
+                    alt="Furniture Img"
+                    priority
+                  />
+                </div>
+              </div>
               <div className="text-gray-600 text-[16px] text-justify lg:ml-20 ml-0 lg:mt-0 mt-10 flex flex-col gap-y-2 mb-20">
                 <p>
                   Hambali Furniture adalah perusahaan penjualan furniture yang
