@@ -10,6 +10,7 @@ import MainLayout from "../components/MainLayout";
 import useBlogsData from "../utils/useBlogsData";
 import useTotalBlogImages from "../utils/useTotalBlogImagesData";
 import useBlogImageByIdData from "../utils/useBlogImageByIdData";
+import BreadcrumbNavigation from "../components/breadcrumbNavigation";
 
 export default function Page() {
   const myLoader: ImageLoader = ({ src }) => {
@@ -63,19 +64,25 @@ export default function Page() {
     );
   }
 
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+    ],
+    currentPath: {
+      pathname: "Gallery",
+    },
+  };
+
   return (
     <MainLayout>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl 2xl:px-0 xl:px-4 px-2 mt-44">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col justify-center items-center">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">Gallery</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="flex lg:justify-start justify-between items-center w-full mb-8">
             <div className="font-semibold lg:text-[36px] text-[28px]">
               Gallery

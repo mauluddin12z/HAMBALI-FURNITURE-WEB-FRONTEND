@@ -24,7 +24,7 @@ export default function Modal({ isVisible, onClose, children }: any) {
   return (
     <div
       id="wrapper"
-      className="fixed inset-0 bg-black/25 backdrop-blur-sm flex justify-center items-center z-[100] w-full h-screen"
+      className="fixed inset-0 bg-black/25 backdrop-blur-sm flex justify-center items-center z-[999] w-full h-screen"
       onClick={handleClose}
     >
       <div className="xl:w-[40%] lg:w-[60%] md:w-[80%] w-[90%] h-auto max-h-[80%] bg-white rounded flex flex-col p-4 overflow-hidden">

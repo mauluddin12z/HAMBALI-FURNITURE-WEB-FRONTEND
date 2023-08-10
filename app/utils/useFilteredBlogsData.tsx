@@ -14,18 +14,24 @@ const useFilteredBlogsData = (filter: any) => {
 
   if (filter.searchQuery?.length > 0) {
     urlBlogs += `&searchQuery=${filter.searchQuery}`;
-    urlTotalBlogs += `&searchQuery=${filter.searchQuery}`;
+    urlTotalBlogs += `?searchQuery=${filter.searchQuery}`;
   }
 
   const { data: filteredBlogs, mutate: mutateBlogs } = useSWR(
     ["blogs", urlBlogs, filter.start, filter.limit],
     () => fetcher(`${urlBlogs}`),
-    { revalidateOnMount: true, refreshInterval: 1000 }
+    {
+      revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+      refreshInterval: filter.revalidate ? 1000 : 0,
+    }
   );
   const { data: totalFilteredBlogs, mutate: mutateTotalBlogs } = useSWR(
     ["blogs", urlTotalBlogs],
     () => fetcher(`${urlTotalBlogs}`),
-    { revalidateOnMount: true, refreshInterval: 1000 }
+    {
+      revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+      refreshInterval: filter.revalidate ? 1000 : 0,
+    }
   );
 
   useEffect(() => {

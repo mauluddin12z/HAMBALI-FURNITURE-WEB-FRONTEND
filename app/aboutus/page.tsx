@@ -1,24 +1,30 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FurnitureImg from "@/public/images/background_opening.jpg";
 import MainLayout from "../components/MainLayout";
+import BreadcrumbNavigation from "../components/breadcrumbNavigation";
 
 export default function Page() {
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+    ],
+    currentPath: {
+      pathname: "About Us",
+    },
+  };
   return (
     <MainLayout>
       <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">About Us</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="flex justify-center items-center w-full mb-8">
             <div className="font-semibold lg:text-[36px] text-[28px]">
               About Us

@@ -11,6 +11,7 @@ import BlogImageSwiper from "../../components/BlogImageSwiper";
 import Loading from "@/app/components/Loading";
 import MainLayout from "@/app/components/MainLayout";
 import useBlogByTitle from "@/app/utils/useBlogByTitleData";
+import BreadcrumbNavigation from "@/app/components/breadcrumbNavigation";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [titleQuery, setTitleQuery] = useState(
@@ -24,29 +25,30 @@ export default function Page({ params }: { params: { slug: string } }) {
     setCurrentUrl(typeof window !== "undefined" ? window.location.href : "");
   }, []);
 
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+      {
+        pathname: "Blogs",
+        link: "/",
+      },
+    ],
+    currentPath: {
+      pathname: blogByTitle?.title,
+    },
+  };
+
   if (!blogByTitle) return <Loading />;
   return (
     <MainLayout>
       <div className="max-w-7xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col w-full">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <Link
-              href={"/blogs"}
-              className="text-black hover:text-primary-color"
-            >
-              Blogs
-            </Link>
-            <div className="text-black">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">{blogByTitle?.title}</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="flex flex-col gap-10 mt-10">
             <div className="flex flex-col w-full">
               <div className="font-bold text-[30px]">{blogByTitle?.title}</div>

@@ -5,23 +5,41 @@ import useSWR from "swr";
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const useFilteredCategoriesData = (filter: any) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredCategory?start=${
-    filter.start ? filter.start : 0
-  }&limit=${filter.limit ? filter.limit : 6}`;
+  let urlCategories = `${
+    process.env.NEXT_PUBLIC_MY_BACKEND_URL
+  }filteredCategory?start=${filter.start ? filter.start : 0}&limit=${
+    filter.limit ? filter.limit : 6
+  }`;
+  let urlTotalCategories = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredCategory`;
+
   if (filter.searchQuery?.length > 0) {
-    url += `&searchQuery=${filter?.searchQuery}`;
+    urlCategories += `&searchQuery=${filter?.searchQuery}`;
+    urlTotalCategories += `?searchQuery=${filter?.searchQuery}`;
   }
   const { data: filteredCategories, mutate: mutateCategories } = useSWR(
-    ["categories", url, filter?.start, filter?.limit],
-    () => fetcher(`${url}`),
-    { revalidateOnMount: true, refreshInterval: 1000 }
+    ["categories", urlCategories, filter?.start, filter?.limit],
+    () => fetcher(`${urlCategories}`),
+    {
+      revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+      refreshInterval: filter.revalidate ? 1000 : 0,
+    }
   );
+  const { data: totalFilteredCategories, mutate: mutateTotalCategories } =
+    useSWR(
+      ["categories", urlTotalCategories, filter?.start, filter?.limit],
+      () => fetcher(`${urlTotalCategories}`),
+      {
+        revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+        refreshInterval: filter.revalidate ? 1000 : 0,
+      }
+    );
 
   useEffect(() => {
     mutateCategories();
-  }, [filter?.start, filter?.limit, mutateCategories]);
+    mutateTotalCategories();
+  }, [filter?.start, filter?.limit, mutateCategories, mutateTotalCategories]);
 
-  return { filteredCategories };
+  return { filteredCategories, totalFilteredCategories };
 };
 
 export default useFilteredCategoriesData;

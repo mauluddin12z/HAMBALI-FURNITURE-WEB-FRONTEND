@@ -20,7 +20,7 @@ const useFilteredUsersData = (filter: any) => {
   let urlTotalFilteredUsers = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredUsers`;
   if (filter.searchQuery?.length > 0) {
     urlFilteredUsers += `&searchQuery=${filter?.searchQuery}`;
-    urlTotalFilteredUsers += `&searchQuery=${filter?.searchQuery}`;
+    urlTotalFilteredUsers += `?searchQuery=${filter?.searchQuery}`;
   }
   const { data: filteredUsers, mutate: mutateFilteredUsers } = useSWR(
     [

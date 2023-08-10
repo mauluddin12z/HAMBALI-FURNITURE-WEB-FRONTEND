@@ -11,9 +11,8 @@ const useProductByNameData = (productNameQuery: string) => {
   }
 
   const { data: productByName, mutate: mutateProductByName } = useSWR(
-    [url, productNameQuery],
-    () => fetcher(`${url}`),
-    { revalidateOnMount: true }
+    ["products", url, productNameQuery],
+    () => fetcher(`${url}`)
   );
 
   useEffect(() => {

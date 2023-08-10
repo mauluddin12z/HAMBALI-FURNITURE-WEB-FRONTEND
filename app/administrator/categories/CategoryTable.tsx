@@ -46,12 +46,12 @@ export default function ProductTable() {
       start: start,
       limit: limit,
       searchQuery: searchQuery,
+      revalidate: true,
     });
   }, [start, limit, searchQuery]);
 
-  const { filteredCategories } = useFilteredCategoriesData(filter);
-
-  const { categories } = useCategoriesData();
+  const { filteredCategories, totalFilteredCategories } =
+    useFilteredCategoriesData(filter);
 
   const { categoryById } = useCategoryByIdData(categoryId);
   const alertTimeoutRef = useRef<any>(null);
@@ -265,7 +265,7 @@ export default function ProductTable() {
         )}
       </div>
       <Pagination
-        totalData={categories}
+        totalData={totalFilteredCategories}
         start={start}
         setStart={setStart}
         limit={limit}

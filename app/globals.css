@@ -74,7 +74,6 @@ table .description p {
 }
 
 .section-transition-on {
-  transform: translateY(0);
   opacity: 1;
 }
 

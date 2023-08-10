@@ -46,6 +46,7 @@ export default function BlogTable() {
       start: start,
       limit: limit,
       searchQuery: searchQuery,
+      revalidate: true,
     });
   }, [start, limit, searchQuery]);
 

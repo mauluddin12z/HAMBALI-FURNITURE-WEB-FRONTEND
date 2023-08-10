@@ -10,7 +10,7 @@ const useCategoriesData = () => {
   const { data: categories, mutate: mutateCategories } = useSWR(
     ["categories", url],
     () => fetcher(`${url}`),
-    { revalidateOnMount: true, refreshInterval: 1000 }
+    { revalidateOnMount: true }
   );
 
   useEffect(() => {

@@ -11,7 +11,7 @@ export default function ProductSearchResults(generalSearchQuery: any) {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    setSearchQuery(generalSearchQuery.generalSearchQuery);
+    setSearchQuery(generalSearchQuery?.generalSearchQuery);
   }, [generalSearchQuery]);
 
   useEffect(() => {
@@ -22,8 +22,18 @@ export default function ProductSearchResults(generalSearchQuery: any) {
     }
   }, []);
 
+  const [filter, setFilter] = useState({});
+
+  useEffect(() => {
+    setFilter({
+      start: start,
+      limit: limit,
+      searchQuery: searchQuery,
+    });
+  }, [start, limit, searchQuery]);
+
   const { productSearchResults, totalProductSearchResults } =
-    useProductSearchResultsData(start, limit, searchQuery);
+    useProductSearchResultsData(filter);
 
   const renderItems = [];
   for (let i = 0; i < limit; i++) {

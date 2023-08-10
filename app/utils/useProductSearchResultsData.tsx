@@ -4,35 +4,53 @@ import useSWR from "swr";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-const useProductSearchResultsData = (
-  start: number,
-  limit: number,
-  searchQuery: string
-) => {
-  let urlProductsSearchResult = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?start=${start}&limit=${limit}`;
+const useProductSearchResultsData = (filter: any) => {
+  let urlProductsSearchResult = `${
+    process.env.NEXT_PUBLIC_MY_BACKEND_URL
+  }filteredProducts?start=${filter.start ? filter.start : 0}&limit=${
+    filter.limit ? filter.limit : 6
+  }`;
   let urlTotalProductsSearchResult = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredProducts?`;
-  if (searchQuery !== "") {
-    urlProductsSearchResult += `&searchQuery=${searchQuery}`;
-    urlTotalProductsSearchResult += `&searchQuery=${searchQuery}`;
+  if (filter.searchQuery?.length > 0) {
+    urlProductsSearchResult += `&searchQuery=${filter.searchQuery}`;
+    urlTotalProductsSearchResult += `?searchQuery=${filter.searchQuery}`;
   }
 
   const { data: productSearchResults, mutate: mutateProducts } = useSWR(
-    ["products", urlProductsSearchResult, start, limit, searchQuery],
+    [
+      "products",
+      urlProductsSearchResult,
+      filter.start,
+      filter.limit,
+      filter.searchQuery,
+    ],
     () => fetcher(`${urlProductsSearchResult}`),
-    { revalidateOnMount: true, refreshInterval: 1000 }
+    {
+      revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+      refreshInterval: filter.revalidate ? 1000 : 0,
+    }
   );
 
   const { data: totalProductSearchResults, mutate: mutateTotalProducts } =
     useSWR(
-      ["products", urlTotalProductsSearchResult, searchQuery],
+      ["products", urlTotalProductsSearchResult, filter.searchQuery],
       () => fetcher(`${urlTotalProductsSearchResult}`),
-      { revalidateOnMount: true, refreshInterval: 1000 }
+      {
+        revalidateOnMount: filter.revalidate ? filter.revalidate : false,
+        refreshInterval: filter.revalidate ? 1000 : 0,
+      }
     );
 
   useEffect(() => {
     mutateProducts();
     mutateTotalProducts();
-  }, [mutateProducts, mutateTotalProducts, start, limit, searchQuery]);
+  }, [
+    mutateProducts,
+    mutateTotalProducts,
+    filter.start,
+    filter.limit,
+    filter.searchQuery,
+  ]);
 
   return { productSearchResults, totalProductSearchResults };
 };

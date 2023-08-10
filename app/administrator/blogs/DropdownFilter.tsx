@@ -51,7 +51,6 @@ export default function DropdownFilter({
       "category",
       categories.category
     )}`;
-    setStart(0);
     setCategoryName(categories.category);
     setCategoryQuery(categories.category_id);
     setIsLoading(false);
@@ -85,6 +84,8 @@ export default function DropdownFilter({
                   <button
                     onClick={() => {
                       setisDropdownShowed(false);
+                      setStart(0);
+                      setSearchQuery("");
                       handleCategoryChange(categories);
                     }}
                     className="block px-4 py-2 w-full text-left hover:bg-gray-100"

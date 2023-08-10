@@ -66,8 +66,15 @@ export default function ProductFilter({
     )}`;
     setCategoryName(categories.category);
     setCategoryQuery(categories.category_id);
+    setStart(0);
     setIsLoading(false);
     router.push(newUrl);
+  };
+  const handleSearch = async (e: any) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
+    setSearchQuery(e.target.value);
+    setStart(0);
   };
 
   useEffect(() => {
@@ -97,9 +104,7 @@ export default function ProductFilter({
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setStart(0);
-                router.push(pathname);
+                handleSearch(e);
               }}
             />
           </div>
@@ -131,8 +136,6 @@ export default function ProductFilter({
                   : "bg-white hover:text-primary-color"
               } rounded-lg border border-gray-200 focus:z-10 focus:ring-4 focus:ring-blue-200 cursor-pointer w-full"`}
               onClick={() => {
-                setStart(0);
-                setSearchQuery("");
                 handleCategoryChange(categories);
               }}
             >

@@ -8,6 +8,7 @@ import Pagination from "@/app/components/Pagination";
 import MainLayout from "@/app/components/MainLayout";
 import useCategoryByNameData from "@/app/utils/useCategoryByNameData";
 import useFilteredProductsData from "@/app/utils/useFilteredProductsData";
+import BreadcrumbNavigation from "@/app/components/breadcrumbNavigation";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [start, setStart] = useState(0);
@@ -80,28 +81,29 @@ export default function Page({ params }: { params: { slug: string } }) {
       </div>
     );
   }
+
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+      {
+        pathname: "Categories",
+        link: "/categories",
+      },
+    ],
+    currentPath: {
+      pathname: categoryByName?.category,
+    },
+  };
   return (
     <MainLayout>
       <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col justify-center items-center">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <Link
-              href={"/categories"}
-              className="text-black hover:text-primary-color"
-            >
-              Categories
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">{categoryParams}</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="w-full min-h-[500px] flex flex-col rounded-lg items-center justify-between">
             {categoryByName && (
               <div className="flex flex-col w-full mb-28">

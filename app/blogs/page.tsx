@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import MainLayout from "../components/MainLayout";
 import useFilteredBlogsData from "../utils/useFilteredBlogsData";
 import useBlogsData from "../utils/useBlogsData";
+import BreadcrumbNavigation from "../components/breadcrumbNavigation";
 
 export default function Page() {
   const router = useRouter();
@@ -87,25 +88,30 @@ export default function Page() {
     );
   }
 
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+    ],
+    currentPath: {
+      pathname: "Blogs",
+    },
+  };
   return (
     <MainLayout>
       <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col justify-center items-center">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black lg:text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">Blogs</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="flex lg:justify-start justify-between items-center w-full mb-4">
             <div className="font-semibold lg:text-[36px] text-[28px]">
               Blogs
             </div>
           </div>
-          <div className="flex justify-between w-full mb-4 items-center">
+          <div className="flex flex-wrap lg:flex-nowrap justify-between w-full mb-4 items-center">
             <div className="flex gap-x-2 w-full lg:h-10">
               {gridButtonShow && (
                 <>
@@ -136,7 +142,7 @@ export default function Page() {
                 </>
               )}
             </div>
-            <div className="relative h-full">
+            <div className="relative h-full lg:w-auto w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </div>

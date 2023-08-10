@@ -10,7 +10,7 @@ import useAuth from "@/app/utils/useAuth";
 import Modal from "@/app/components/Modal";
 import LoadingForButton from "@/app/components/LoadingForButton";
 import Alerts from "@/app/components/alerts";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useFilteredProductsData from "@/app/utils/useFilteredProductsData";
 import URLGenerator from "@/app/utils/URLGenerator";
 import useProductByIdData from "@/app/utils/useProductByIdData";
@@ -21,7 +21,7 @@ export default function ProductTable() {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
   const router = useRouter();
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { axiosJWT, token } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
@@ -50,6 +50,7 @@ export default function ProductTable() {
       limit: limit,
       categoryQuery: categoryQuery,
       searchQuery: searchQuery,
+      revalidate: true,
     });
   }, [start, limit, categoryQuery, searchQuery]);
 
@@ -111,6 +112,13 @@ export default function ProductTable() {
       }, 3000);
     }
     setIsLoading(false);
+  };
+
+  const handleSearch = async (e: any) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
+    setSearchQuery(e.target.value);
+    setStart(0);
   };
 
   const renderItems = [];
@@ -216,10 +224,8 @@ export default function ProductTable() {
             className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 w-full bg-gray-50 focus:ring-2 focus:ring-blue-100 focus:outline-none"
             placeholder="Search for items"
             value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setStart(0);
-              router.push(pathname);
+            onChange={(e: any) => {
+              handleSearch(e);
             }}
           />
         </div>

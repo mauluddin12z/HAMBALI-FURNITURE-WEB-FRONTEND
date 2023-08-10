@@ -9,6 +9,7 @@ import SkeletonLoading from "@/app/components/SkeletonLoading";
 import RelatedProducts from "./relatedProducts";
 import MainLayout from "@/app/components/MainLayout";
 import useProductByNameData from "@/app/utils/useProductByNameData";
+import BreadcrumbNavigation from "@/app/components/breadcrumbNavigation";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const myLoader: ImageLoader = ({ src }) => {
@@ -27,28 +28,29 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }, [productByName]);
 
+  const breadcrumbNavigationItem = {
+    pathHistory: [
+      {
+        pathname: "Home",
+        link: "/",
+      },
+      {
+        pathname: "Products",
+        link: "/products",
+      },
+    ],
+    currentPath: {
+      pathname: productByName?.product_name,
+    },
+  };
+
   return (
     <MainLayout>
       <div className="max-w-7xl min-h-screen mx-auto 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col w-full">
-          <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
-            <Link href={"/"} className="text-black hover:text-primary-color">
-              Home
-            </Link>
-            <div className="text-black text-[14px]">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <Link
-              href={"/products"}
-              className="text-black hover:text-primary-color"
-            >
-              Products
-            </Link>
-            <div className="text-black">
-              <i className="fa-solid fa-chevron-right"></i>
-            </div>
-            <div className="text-gray-400">{productByName?.product_name}</div>
-          </div>
+          <BreadcrumbNavigation
+            breadcrumbNavigationItem={breadcrumbNavigationItem}
+          />
           <div className="flex lg:flex-row flex-col mb-16">
             {productByName ? (
               <>

@@ -8,9 +8,8 @@ const useProductsData = () => {
   let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}products`;
 
   const { data: products, mutate: mutateProducts } = useSWR(
-    url,
-    () => fetcher(`${url}`),
-    { revalidateOnMount: true }
+    ["products", url],
+    () => fetcher(`${url}`)
   );
 
   useEffect(() => {
