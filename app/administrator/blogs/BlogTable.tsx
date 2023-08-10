@@ -116,12 +116,12 @@ export default function BlogTable() {
         className="border-b transition duration-300 ease-in-out hover:bg-neutral-100"
       >
         <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          <div className="w-full h-full">
+          <div className="w-[200px] h-full">
             <SkeletonLoading />
           </div>
         </th>
         <td className="px-6 py-4">
-          <div className="flex flex-col w-full gap-y-2">
+          <div className="flex flex-col w-full gap-y-2 lg:w-[700px] md:w-[500px]">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="w-full h-[10px]">
                 <SkeletonLoading />
@@ -130,7 +130,7 @@ export default function BlogTable() {
           </div>
         </td>
         <td className="px-6 py-4">
-          <div className="w-[200px] h-[200px]">
+          <div className="w-[250px] h-[200px]">
             <SkeletonLoading />
           </div>
         </td>

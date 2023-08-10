@@ -122,7 +122,7 @@ export default function ProductTable() {
             <SkeletonLoading />
           </div>
         </th>
-        <td className="px-6 py-4">
+        <td className="px-6 py-4 flex justify-center items-center">
           <div className="w-[200px] h-[200px]">
             <SkeletonLoading />
           </div>
