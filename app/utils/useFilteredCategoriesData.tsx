@@ -5,7 +5,7 @@ import useSWR from "swr";
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const useFilteredCategoriesData = (filter: any) => {
-  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredCategorsy?start=${
+  let url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}filteredCategory?start=${
     filter.start ? filter.start : 0
   }&limit=${filter.limit ? filter.limit : 6}`;
   if (filter.searchQuery?.length > 0) {

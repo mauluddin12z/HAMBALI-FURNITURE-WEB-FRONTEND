@@ -108,12 +108,12 @@ export default function UserTable() {
           </div>
         </th>
         <td className="px-6 py-4">
-          <div className="w-[200px] h-[200px]">
+          <div className="w-full h-full">
             <SkeletonLoading />
           </div>
         </td>
         <td className="px-6 py-4">
-          <div className="w-[200px] h-[200px]">
+          <div className="w-full h-full">
             <SkeletonLoading />
           </div>
         </td>
@@ -185,11 +185,11 @@ export default function UserTable() {
                   key={index}
                   className="border-b transition duration-300 ease-in-out hover:bg-neutral-100"
                 >
-                  <td className="px-6 py-4">{users.name ? users.name : "-"}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-center">{users.name ? users.name : "-"}</td>
+                  <td className="px-6 py-4 text-center">
                     {users.username ? users.username : "-"}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-center">
                     <div className="flex justify-center items-center gap-1">
                       {[...Array(8)].map((_, i) => (
                         <div
@@ -200,7 +200,7 @@ export default function UserTable() {
                       <div className="w-2 aspect-square bg-gray-700 rounded-full"></div>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-center">
                     <div className="flex flex-col justify-center items-center gap-2">
                       <button
                         onClick={() =>

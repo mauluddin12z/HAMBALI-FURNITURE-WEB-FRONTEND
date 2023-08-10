@@ -197,7 +197,7 @@ export default function ProductTable() {
                   <td className="px-6 py-4">
                     <Link
                       href={`/categories/${URLGenerator(categories.category)}`}
-                      className="hover:underline font-semibold text-gray-900 whitespace-nowrap"
+                      className="hover:underline font-semibold text-gray-900"
                     >
                       {categories.category ? categories.category : "-"}
                     </Link>
