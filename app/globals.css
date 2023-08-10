@@ -73,6 +73,16 @@ table .description p {
   margin-bottom: 0.5rem;
 }
 
+.section-transition-on {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.section-transition-off {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
 path.dot_stripe_svg__color {
   @apply fill-primary-color/10;
 }

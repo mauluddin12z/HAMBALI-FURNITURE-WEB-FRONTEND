@@ -17,10 +17,8 @@ const useUserByIdData = (userId: number) => {
     url = `${process.env.NEXT_PUBLIC_MY_BACKEND_URL}user/${userId}`;
   }
 
-  const { data: userById, mutate: mutateUserById } = useSWR(
-    ["users", url, userId],
-    () => fetcher(`${url}`),
-    { revalidateOnMount: true }
+  const { data: userById, mutate: mutateUserById } = useSWR("users", () =>
+    fetcher(`${url}`)
   );
 
   useEffect(() => {

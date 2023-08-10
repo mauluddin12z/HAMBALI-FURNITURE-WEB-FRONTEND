@@ -9,7 +9,7 @@ import "swiper/css/thumbs";
 import { EffectFade, FreeMode, Navigation, Pagination, Thumbs } from "swiper";
 import Image, { ImageLoader } from "next/image";
 
-const SwiperComponent = ({ data }: any) => {
+export default function BlogImageSwiper({ data }: any) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
@@ -45,7 +45,7 @@ const SwiperComponent = ({ data }: any) => {
               <SwiperSlide key={index}>
                 <div className="relative h-[400px] overflow-hidden z-20 flex justify-center items-center">
                   <div
-                    className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
+                    className={`bg-black/80 backdrop-blur-md w-full h-full absolute z-10`}
                   ></div>
                   <Image
                     className={`absolute w-full h-full`}
@@ -121,6 +121,4 @@ const SwiperComponent = ({ data }: any) => {
       </Swiper>
     </div>
   );
-};
-
-export default SwiperComponent;
+}

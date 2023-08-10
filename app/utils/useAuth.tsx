@@ -80,21 +80,6 @@ export default function useAuth() {
     getUserById(userId)
   );
 
-  useEffect(() => {
-    const logout = async () => {
-      try {
-        await axios.delete(`${process.env.NEXT_PUBLIC_MY_BACKEND_URL}logout`, {
-          withCredentials: true,
-        });
-        router.push("/administrator/login");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (userById?.length === 0) {
-      logout();
-    }
-  }, [userById?.length, router]);
 
   return { axiosJWT, refreshToken, token, isUserLoggedIn };
 }

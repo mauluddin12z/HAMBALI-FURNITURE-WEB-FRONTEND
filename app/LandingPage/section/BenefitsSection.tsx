@@ -11,13 +11,17 @@ export default function BenefitSection() {
   });
 
   return (
-    <div className="lg:max-w-5xl md:max-w-6xl mx-auto 2xl px-0 xl:px-4 px-2">
-      <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-4">
+    <div
+      ref={ref}
+      className={`lg:max-w-5xl md:max-w-6xl mx-auto 2xl:px-0 xl:px-4 px-2`}
+    >
+      <div
+        className={`grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-4 transition-all duration-700 ease-in-out ${
+          inView ? "section-transition-on" : "section-transition-off"
+        }`}
+      >
         <div
-          ref={ref}
-          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow`}
         >
           <div className="w-[50px] aspect-square mb-4">
             <CustomizeIcon />
@@ -27,10 +31,7 @@ export default function BenefitSection() {
           </div>
         </div>
         <div
-          ref={ref}
-          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow`}
         >
           <div className="w-[50px] aspect-square mb-4">
             <CraftsMan />
@@ -40,10 +41,7 @@ export default function BenefitSection() {
           </div>
         </div>
         <div
-          ref={ref}
-          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow`}
         >
           <div className="w-[50px] aspect-square mb-4">
             <FurniIcon />
@@ -53,10 +51,7 @@ export default function BenefitSection() {
           </div>
         </div>
         <div
-          ref={ref}
-          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`flex flex-col justify-center items-center rounded-lg bg-secondary-color p-6 shadow`}
         >
           <div className="w-[50px] aspect-square mb-4">
             <InstallationIcon />

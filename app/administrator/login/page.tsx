@@ -33,7 +33,11 @@ export default function Page() {
       setIsLoading(false);
     } catch (error: any) {
       if (error.response) {
-        setMsg(error.response.data.msg);
+        setMsg(
+          error.response
+            ? error.response.data.msg
+            : "Server error, please try again later."
+        );
       } else {
         setMsg("Error");
       }

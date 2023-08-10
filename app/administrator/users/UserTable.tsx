@@ -28,7 +28,6 @@ export default function UserTable() {
   const [limit, setLimit] = useState(6);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [userId, setUserId] = useState(0);
   const [filter, setFilter] = useState({});
   useEffect(() => {
     setFilter({
@@ -79,7 +78,9 @@ export default function UserTable() {
       setShowAlert(false);
       setTimeout(() => {
         setAlert({
-          message: error.response.data.msg,
+          message: error.response
+            ? error.response.data.msg
+            : "Error deleting data, please try again later.",
           textColor: "text-white",
           bgColor: "bg-red-700",
           bgColorHover: "hover:bg-red-800",
@@ -233,7 +234,7 @@ export default function UserTable() {
         </table>
         {filteredUsers?.length == 0 && (
           <div className="w-full h-[500px] flex justify-center items-center">
-            No product available.
+            No user available.
           </div>
         )}
       </div>

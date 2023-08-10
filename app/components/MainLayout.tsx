@@ -6,7 +6,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col justify-between min-h-screen border">
+    <div className="flex flex-col justify-between min-h-screen">
       <div>
         <section>
           <HeaderSection />

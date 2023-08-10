@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
-import { FormatRupiah } from "@arismun/format-rupiah";
 import Pagination from "@/app/components/Pagination";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
 import ImageModal from "@/app/components/ImageModal";
@@ -14,6 +13,7 @@ import URLGenerator from "@/app/utils/URLGenerator";
 import { mutate } from "swr";
 import useFilteredBlogsData from "@/app/utils/useFilteredBlogsData";
 import useBlogByIdData from "@/app/utils/useBlogByIdData";
+import BlogImageSwiper from "@/app/components/BlogImageSwiper";
 
 export default function BlogTable() {
   const myLoader: ImageLoader = ({ src }) => {
@@ -91,7 +91,9 @@ export default function BlogTable() {
       setShowAlert(false);
       setTimeout(() => {
         setAlert({
-          message: error.response.data.msg,
+          message: error.response
+            ? error.response.data.msg
+            : "Error deleting data, please try again later.",
           textColor: "text-white",
           bgColor: "bg-red-700",
           bgColorHover: "hover:bg-red-800",
@@ -310,31 +312,8 @@ export default function BlogTable() {
         onClose={() => setShowModalImage(false)}
         setIsZoom={setIsZoom}
       >
-        <div className="h-[80%] w-[80%] flex justify-center items-center">
-          <div className="grid grid-cols-2">
-            {blogById?.blog_images &&
-              blogById?.blog_images?.map((blogImages: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex flex-col h-full w-full justify-center items-center"
-                >
-                  <Image
-                    className={`object-contain w-auto h-full z-20 transition-transform duration-200 ${
-                      isZoom
-                        ? "scale-150 cursor-zoom-out"
-                        : "scale-100 cursor-zoom-in"
-                    }`}
-                    loader={myLoader}
-                    src={blogImages?.imageUrl}
-                    width={500}
-                    height={500}
-                    alt={"blogImage" + index}
-                    priority
-                    onClick={() => setIsZoom((prev) => !prev)}
-                  />
-                </div>
-              ))}
-          </div>
+        <div className={`w-[70%] transition-transform duration-200`}>
+          <BlogImageSwiper data={blogById} />
         </div>
       </ImageModal>
 

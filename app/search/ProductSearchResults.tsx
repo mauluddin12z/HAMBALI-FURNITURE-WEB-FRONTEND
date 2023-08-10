@@ -63,7 +63,7 @@ export default function ProductSearchResults(generalSearchQuery: any) {
       <div className="w-full lg:min-h-[500px] min-h-[250px] flex flex-col rounded-lg items-center justify-between">
         {productSearchResults?.length == 0 ? (
           <div className="w-full flex justify-center items-center h-full">
-            No product available.
+            No result available.
           </div>
         ) : (
           <div className="hidden"></div>

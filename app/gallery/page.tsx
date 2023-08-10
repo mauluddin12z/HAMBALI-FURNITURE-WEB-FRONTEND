@@ -65,7 +65,7 @@ export default function Page() {
 
   return (
     <MainLayout>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl px-0 xl:px-4 px-2 mt-44">
+      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-screen mx-auto 2xl 2xl:px-0 xl:px-4 px-2 mt-44">
         <div className="flex flex-col justify-center items-center">
           <div className="flex w-full gap-x-4 mb-10 items-center lg:justify-start justify-center bg-secondary-color rounded-lg p-10 text-[12px] lg:text-[16px]">
             <Link href={"/"} className="text-black hover:text-primary-color">

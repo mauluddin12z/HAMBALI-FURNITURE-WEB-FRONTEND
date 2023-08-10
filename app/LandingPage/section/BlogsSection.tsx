@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useSWR from "swr";
 import Link from "next/link";
 import BlogCard from "@/app/blogs/BlogCard";
 import SkeletonLoading from "@/app/components/SkeletonLoading";
@@ -49,33 +47,27 @@ export default function BlogsSection() {
   }
 
   return (
-    <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto xl:px-4 px-2">
-      <div className="flex flex-col justify-center items-center">
+    <div
+      ref={ref}
+      className={`xl:max-w-7xl lg:max-w-6xl md:max-w-6xl min-h-[400px] mx-auto xl:px-4 px-2`}
+    >
+      <div
+        className={`flex flex-col justify-center items-center transition-all duration-700 ease-in-out ${
+          inView ? "section-transition-on" : "section-transition-off"
+        }`}
+      >
         <div className="flex justify-between items-center w-full mb-8 overflow-hidden 2xl:overflow-visible">
-          <div
-            ref={ref}
-            className={`font-semibold lg:text-[32px] text-[28px] transition-all duration-1000 ${
-              inView ? "opacity-100" : "translate-x-[-100%] opacity-0"
-            }`}
-          >
+          <div className={`font-semibold lg:text-[32px] text-[28px]`}>
             Newest Blogs
           </div>
           <Link
             href={"/blogs"}
-            ref={ref}
-            className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2 transition-all duration-1000 ${
-              inView ? "opacity-100" : "translate-x-[100%] opacity-0"
-            }`}
+            className={`font-semibold text-[18px] hover:underline decoration-2 underline-offset-2`}
           >
             View All
           </Link>
         </div>
-        <div
-          ref={ref}
-          className={`w-full grid lg:grid-cols-3 grid-cols-1 gap-4 transition-all duration-1000 ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
+        <div className={`w-full grid lg:grid-cols-3 grid-cols-1 gap-4`}>
           {limitedBlogs ? (
             limitedBlogs?.map((blogs: any, index: number) => (
               <BlogCard key={index} data={blogs} />

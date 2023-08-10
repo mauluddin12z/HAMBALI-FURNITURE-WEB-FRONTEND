@@ -96,7 +96,9 @@ export default function ProductTable() {
       setShowAlert(false);
       setTimeout(() => {
         setAlert({
-          message: error.response.data.msg,
+          message: error.response
+            ? error.response.data.msg
+            : "Error deleting data, please try again later.",
           textColor: "text-white",
           bgColor: "bg-red-700",
           bgColorHover: "hover:bg-red-800",
