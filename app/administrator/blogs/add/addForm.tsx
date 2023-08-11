@@ -146,7 +146,7 @@ export default function AddForm() {
               />
             </div>
             <p className="mt-3 text-sm leading-6 text-gray-600">
-              Write description about the product.
+              Write description about the blog.
             </p>
           </div>
         </div>

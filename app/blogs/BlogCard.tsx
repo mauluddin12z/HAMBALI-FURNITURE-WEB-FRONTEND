@@ -16,7 +16,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
     <>
       {gridCols === 3 || gridCols === 0 || !gridButtonShow ? (
         <div
-          className={`border border-gray-200 rounded-lg transition-all hover:shadow-[0px_2px_16px_0px_rgba(14,30,37,0.32)] overflow-hidden min-h-[440px] p-4`}
+          className={`border border-gray-200 rounded-lg transition-all hover:shadow-[0px_0px_14px_0px_rgba(0,0,5,0.2)] overflow-hidden min-h-[440px] p-4`}
         >
           <div className="flex flex-col h-full">
             <div className="relative h-[270px] overflow-hidden rounded-xl mb-2">

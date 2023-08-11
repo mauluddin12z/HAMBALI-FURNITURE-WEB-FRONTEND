@@ -126,7 +126,7 @@ export default function ProductFilter({
         Categories
       </div>
       <div className="p-2 h-[67%]">
-        <div className="flex flex-col items-center gap-y-2 max-h-[80%] lg:max-h-full overflow-y-auto lg:overflow-visible">
+        <div className="flex flex-col items-center gap-y-2 max-h-[80%] lg:max-h-full overflow-auto lg:overflow-visible lg:p-0 p-2">
           {categories?.map((categories: any, index: number) => (
             <button
               key={index}
@@ -142,24 +142,28 @@ export default function ProductFilter({
               {categories.category}
             </button>
           ))}
+          <button
+            className="sticky bottom-0 w-full py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 cursor-pointer"
+            onClick={() => {
+              setCategoryName("");
+              setCategoryQuery(-1);
+              setStart(0);
+              setSearchQuery("");
+              router.push(pathname);
+            }}
+          >
+            View all
+          </button>
         </div>
-        <button
-          className="w-full my-2 py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 cursor-pointer"
-          onClick={() => {
-            setCategoryName("");
-            setCategoryQuery(-1);
-            setStart(0);
-            setSearchQuery("");
-            router.push(pathname);
-          }}
-        >
-          View all
-        </button>
-        <div className="lg:hidden flex justify-center items-center gap-x-2">
+        <div className="lg:hidden flex justify-center items-center gap-x-2 p-2">
           <button
             className="py-2.5 px-5 text-sm font-medium text-red-600 focus:outline-none bg-white rounded-lg border border-red-600 hover:bg-gray-100 hover:text-red-600 focus:z-10 focus:ring-4 focus:ring-red-200 cursor-pointer w-full"
             onClick={() => {
-              setCategoryQuery(-1), setStart(0), setSearchQuery("");
+              setCategoryName("");
+              setCategoryQuery(-1);
+              setStart(0);
+              setSearchQuery("");
+              router.push(pathname);
             }}
           >
             Clear All
