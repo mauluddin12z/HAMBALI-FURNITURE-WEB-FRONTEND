@@ -201,9 +201,9 @@ export default function BlogTable() {
           </thead>
           <tbody>
             {filteredBlogs ? (
-              filteredBlogs?.map((blogs: any, index: number) => (
+              filteredBlogs?.map((blogs: any) => (
                 <tr
-                  key={index}
+                  key={blogs.blog_id}
                   className="border-b transition duration-300 ease-in-out hover:bg-neutral-100"
                 >
                   <td className="px-6 py-4">
@@ -225,7 +225,7 @@ export default function BlogTable() {
                   <td className="px-6 py-4 flex justify-center h-full">
                     {blogs.blog_images[0] ? (
                       <div
-                        key={index}
+                        key={blogs.blog_id}
                         onClick={() => {
                           setShowModalImage(true);
                           setBlogId(blogs?.blog_id);

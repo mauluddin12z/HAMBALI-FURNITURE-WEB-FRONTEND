@@ -92,9 +92,9 @@ export default function Page() {
             <div className="w-full grid lg:grid-cols-4 grid-cols-2 gap-2 mb-10">
               {blogs ? (
                 blogs?.map((blogs: any) =>
-                  blogs?.blog_images?.map((blogImages: any, index: number) => (
+                  blogs?.blog_images?.map((blogImages: any) => (
                     <div
-                      key={index}
+                      key={blogImages.blogImage_id}
                       className="flex flex-col relative overflow-hidden"
                     >
                       <div
@@ -198,7 +198,7 @@ export default function Page() {
         >
           <div className="h-[80%] w-[80%] flex justify-center items-center">
             {blogImageById && (
-              <div className="flex flex-col h-full w-full justify-center items-center">
+              <div className="flex flex-col justify-center items-center gap-8">
                 <div className="text-[16px] text-white text-center">
                   {blogImageById?.createdAt &&
                     format(

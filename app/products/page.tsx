@@ -112,8 +112,8 @@ export default function Page() {
               )}
               <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-4">
                 {filteredProducts ? (
-                  filteredProducts?.map((products: any, index: number) => (
-                    <ProductCard key={index} data={products} />
+                  filteredProducts?.map((products: any) => (
+                    <ProductCard key={products.product_id} data={products} />
                   ))
                 ) : (
                   <>{renderItems}</>

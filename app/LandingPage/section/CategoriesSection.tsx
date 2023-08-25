@@ -89,7 +89,7 @@ export default function CategoriesSection() {
             >
               {categories ? (
                 categories?.map((categories: any, index: number) => (
-                  <SwiperSlide key={index}>
+                  <SwiperSlide key={categories.category_id}>
                     <Link
                       href={`/categories/${URLGenerator(categories?.category)}`}
                       className="w-full h-full"

@@ -24,6 +24,7 @@ export default function Modal({
   const handleClose = (e: any) => {
     if (e.target.id === "wrapper") {
       onClose();
+      setIsZoom(false);
     }
   };
 
@@ -33,17 +34,19 @@ export default function Modal({
       className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-[90] w-full h-screen"
       onClick={handleClose}
     >
-      <button
-        className="text-white hover:text-gray-200 transition-all text-[32px] fixed z-[60] top-0 right-0 flex w-20 h-20 justify-center items-center"
-        onClick={() => {
-          onClose();
-          setIsZoom(false);
-        }}
-      >
-        <i className="fa-solid fa-xmark"></i>
-      </button>
-      <div className="overflow-y-scroll lg:overflow-hidden z-30 h-full w-full flex justify-center items-center">
-        {children}
+      <div className="h-auto flex flex-col">
+        <button
+          className="text-white hover:text-gray-200 transition-all text-[32px] fixed z-[60] top-0 right-0 flex w-20 h-20 justify-center items-center"
+          onClick={() => {
+            onClose();
+            setIsZoom(false);
+          }}
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+        <div className="z-30 h-screen w-full flex justify-center items-center">
+          {children}
+        </div>
       </div>
     </div>
   );

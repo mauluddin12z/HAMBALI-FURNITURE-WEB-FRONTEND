@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
 import LogoHambaliFurniture from "@/public/images/LogoHambaliFurniture.png";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter} from "next/navigation";
 import Loading from "./Loading";
 
 export default function HeaderSection() {
@@ -139,23 +139,23 @@ export default function HeaderSection() {
         </Link>
         <div className="hidden w-full lg:block lg:w-auto">
           <ul className="font-medium flex items-center gap-x-3">
-            {navItemMenu &&
-              navItemMenu?.map((navItem: any, index: number) => (
-                <li key={index}>
-                  <Link
-                    href={navItem.link}
-                    className={`hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
-                      "/" + pathname.split("/")[1] == navItem.link
-                        ? "bg-secondary-color text-primary-color"
-                        : "text-black"
-                    }`}
-                  >
-                    {navItem.name}
-                  </Link>
-                </li>
-              ))}
+            {navItemMenu?.map?.((navItem: any, index: number) => (
+              <li key={index}>
+                <Link
+                  href={navItem.link}
+                  className={`hover:text-primary-color hover:bg-secondary-color font-medium transition-all px-8 py-3 rounded-full ${
+                    "/" + pathname.split("/")[1] == navItem.link
+                      ? "bg-secondary-color text-primary-color"
+                      : "text-black"
+                  }`}
+                >
+                  {navItem.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
+
         <div className="hidden w-full lg:block lg:w-auto">
           <ul className="font-medium flex items-center gap-x-4">
             <li className="relative">
@@ -193,18 +193,17 @@ export default function HeaderSection() {
                 </form>
               </div>
             </li>
-            {socialMedia &&
-              socialMedia?.map((socialMedia: any, index: number) => (
-                <li key={index}>
-                  <a
-                    href={socialMedia.link}
-                    target="_blank"
-                    className="text-black hover:text-primary-color text-[22px] transition-all"
-                  >
-                    <i className={`fa-brands fa-${socialMedia.icon}`}></i>
-                  </a>
-                </li>
-              ))}
+            {socialMedia?.map((socialMedia: any, index: number) => (
+              <li key={index}>
+                <a
+                  href={socialMedia.link}
+                  target="_blank"
+                  className="text-black hover:text-primary-color text-[22px] transition-all"
+                >
+                  <i className={`fa-brands fa-${socialMedia.icon}`}></i>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -276,33 +275,31 @@ export default function HeaderSection() {
                 </button>
                 <div className="relative flex justify-center items-center w-full h-full">
                   <ul className="font-normal flex flex-col justify-center items-center h-full gap-y-8 text-gray-700 z-20">
-                    {navItemMenu &&
-                      navItemMenu?.map((navItem: any, index: number) => (
+                    {navItemMenu?.map((navItem: any, index: number) => (
+                      <li key={index}>
+                        <Link
+                          href={navItem.link}
+                          className="active:text-primary-color transition-all p-4"
+                          onClick={() => setMenuVisible(false)}
+                        >
+                          {navItem.name}
+                        </Link>
+                      </li>
+                    ))}
+                    <div className="flex gap-x-6 text-gray-700">
+                      {socialMedia?.map((socialMedia: any, index: number) => (
                         <li key={index}>
-                          <Link
-                            href={navItem.link}
-                            className="active:text-primary-color transition-all p-4"
-                            onClick={() => setMenuVisible(false)}
+                          <a
+                            href={socialMedia.link}
+                            target="_blank"
+                            className="hover:text-primary-color text-[24px] transition-all"
                           >
-                            {navItem.name}
-                          </Link>
+                            <i
+                              className={`fa-brands fa-${socialMedia.icon}`}
+                            ></i>
+                          </a>
                         </li>
                       ))}
-                    <div className="flex gap-x-6 text-gray-700">
-                      {socialMedia &&
-                        socialMedia?.map((socialMedia: any, index: number) => (
-                          <li key={index}>
-                            <a
-                              href={socialMedia.link}
-                              target="_blank"
-                              className="hover:text-primary-color text-[24px] transition-all"
-                            >
-                              <i
-                                className={`fa-brands fa-${socialMedia.icon}`}
-                              ></i>
-                            </a>
-                          </li>
-                        ))}
                     </div>
                   </ul>
                 </div>

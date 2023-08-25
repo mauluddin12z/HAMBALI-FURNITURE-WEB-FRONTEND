@@ -17,29 +17,30 @@ export default function OpeningSection() {
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
         <div className="h-[1200px] w-14 bg-gradient-to-b from-primary-color/25 via-primary-color/10 to-primary-color/0"></div>
       </div>
-      <div className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl h-screen mx-auto 2xl:px-0 px-4">
+      <div
+        ref={ref}
+        className="xl:max-w-7xl lg:max-w-6xl md:max-w-6xl h-screen mx-auto 2xl:px-0 px-4 pt-[150px]"
+      >
         <div className="absolute w-[600px] aspect-square bg-blue-100/30 blur-2xl rounded-full left-0 top-0"></div>
         <div className="absolute w-[500px] aspect-square bg-primary-color/5 blur-3xl rounded-full left-1/2"></div>
         <div className="absolute lg:w-[400px] w-[200px] aspect-square bg-primary-color/10 blur-3xl rounded-full right-0.5 bottom-[5%]"></div>
-        <div className="flex items-center w-full h-full lg:mt-8 mt-16">
+        <div className="flex items-center w-full h-full">
           <div className="lg:w-6/12 pr-10 z-10">
             <div className="flex flex-col h-full justify-center overflow-hidden lg:overflow-visible">
               <div
-                ref={ref}
                 className={`font-extrabold lg:text-[52px] text-[36px] text-black text-left lg:mb-14 mb-8 z-10 transition-all duration-1000 ${
                   inView
                     ? "translate-x-[0%] opacity-100"
-                    : "translate-x-[-100%] opacity-0"
+                    : "translate-x-[-50%] opacity-0"
                 }`}
               >
                 Furniture Modern untuk Ruangan Anda
               </div>
               <div
-                ref={ref}
-                className={`text-[18px] text-gray-600 mb-14 transition-all duration-1000 delay-150 ${
+                className={`text-[18px] text-gray-600 mb-14 transition-all duration-1000 ease-in-out delay-150 ${
                   inView
                     ? "translate-x-[0%] opacity-100"
-                    : "translate-x-[-100%] opacity-0"
+                    : "translate-x-[-50%] opacity-0"
                 }`}
               >
                 <span className="font-bold text-black">
@@ -49,7 +50,6 @@ export default function OpeningSection() {
                 Ruangan!. Jika berminat silahkan hubungi kontak dibawah.
               </div>
               <div
-                ref={ref}
                 className={`h-[60px] z-10 transition-all duration-1000 ${
                   inView
                     ? "translate-y-0 opacity-100"
