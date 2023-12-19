@@ -19,14 +19,12 @@ export default function ProductSearchResultsCard({
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
   return (
-    <>
       <div className="border p-4 rounded-lg flex lg:flex-row flex-col">
         <div className="lg:w-[22%] w-full border rounded-lg">
           <Image
             loader={myLoader}
             src={imageUrl}
             alt="ProductImage"
-            priority
             width={400}
             height={400}
           />
@@ -115,6 +113,5 @@ export default function ProductSearchResultsCard({
           </div>
         </div>
       </div>
-    </>
   );
 }

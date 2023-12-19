@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SkeletonLoading from "../components/SkeletonLoading";
-import Link from "next/link";
 import Image, { ImageLoader } from "next/image";
 import ImageModal from "../components/ImageModal";
 import { format } from "date-fns";
@@ -40,14 +39,14 @@ export default function Page() {
     setLoadMoreDataIsLoading(false);
   };
 
-  const [cardIsHovered, setcardIsHovered] = useState(-1);
+  const [cardIsHovered, setCardIsHovered] = useState(-1);
 
   const handleOutsideLayerHover = (blogImage_id: number) => {
-    setcardIsHovered(blogImage_id);
+    setCardIsHovered(blogImage_id);
   };
 
   const handleOutsideLayerLeave = () => {
-    setcardIsHovered(-1);
+    setCardIsHovered(-1);
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -103,6 +102,11 @@ export default function Page() {
                           setShowModal(true);
                           setBlogImageId(blogImages?.blogImage_id);
                         }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setShowModal(true);
+                          }
+                        }}
                         onMouseEnter={() =>
                           handleOutsideLayerHover(blogImages?.blogImage_id)
                         }
@@ -112,13 +116,12 @@ export default function Page() {
                           className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
                         ></div>
                         <Image
-                          className={`absolute w-full h-full`}
+                          className={`absolute w-full h-full object-cover`}
                           loader={myLoader}
                           src={blogImages?.imageUrl}
                           width={500}
                           height={500}
                           alt={"blogImages" + blogImages?.blogImage_id}
-                          priority
                         />
                         <Image
                           className={`object-contain w-full h-full z-20 transition-transform duration-500`}
@@ -127,7 +130,6 @@ export default function Page() {
                           width={500}
                           height={500}
                           alt={"blogImages" + blogImages?.blogImage_id}
-                          priority
                         />
                       </div>
                       <div
@@ -174,19 +176,17 @@ export default function Page() {
               </button>
             )}
             {loadMoreDataIsLoading && (
-              <>
-                <div className="rounded-lg flex items-center flex-col">
-                  <div className="loader-dots block relative w-20 h-5 mt-2">
-                    <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                    <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                    <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                    <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
-                  </div>
-                  <div className="text-gray-500 text-xs font-light mt-2 text-center">
-                    Please wait...
-                  </div>
+              <div className="rounded-lg flex items-center flex-col">
+                <div className="loader-dots block relative w-20 h-5 mt-2">
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
+                  <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-primary-color"></div>
                 </div>
-              </>
+                <div className="text-gray-500 text-xs font-light mt-2 text-center">
+                  Please wait...
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -220,7 +220,6 @@ export default function Page() {
                   width={500}
                   height={500}
                   alt={"blogImages" + blogImageById?.blogImage_id}
-                  priority
                   onClick={() => setIsZoom((prev) => !prev)}
                 />
               </div>

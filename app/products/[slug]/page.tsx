@@ -55,11 +55,9 @@ export default function Page({ params }: { params: { slug: string } }) {
             {productByName ? (
               <>
                 {productByName?.product_name ? (
-                  <>
                     <div className="block lg:hidden font-bold text-[28px]">
                       {productByName?.product_name}
                     </div>
-                  </>
                 ) : null}
 
                 {/* Mobile */}
@@ -87,11 +85,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
                 <div className="flex flex-col flex-grow">
                   {productByName?.product_name ? (
-                    <>
                       <div className="lg:block hidden font-bold lg:text-[24px] text-[14px]">
                         {productByName?.product_name}
                       </div>
-                    </>
                   ) : null}
                   {productByName?.category.category ? (
                     <div className="lg:block hidden text-[16px] font-medium mb-6">

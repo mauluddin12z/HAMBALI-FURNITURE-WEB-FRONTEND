@@ -51,6 +51,11 @@ export default function Sidebar({
     <>
       <div
         onClick={() => sidebarCollapseToggle()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            sidebarCollapseToggle();
+          }
+        }}
         className={`lg:hidden ${
           sidebarCollapse ? "hidden" : "block"
         } fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-[60] w-full h-screen`}
@@ -74,14 +79,18 @@ export default function Sidebar({
                   height={70}
                   alt="logoHambaliFurnitre"
                   className="w-auto h-auto"
-                  priority
                 />
               </Link>
             )}
 
             <div
               onClick={() => sidebarCollapseToggle()}
-              className={`text-[20px] text-gray-500 hover:text-black w-10 h-10 flex justify-center items-center bg-white cursor-pointer transition-all `}
+              className={`text-[20px] text-gray-500 hover:text-black w-10 h-10 flex justify-center items-center bg-white cursor-pointer transition-all`}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sidebarCollapseToggle();
+                }
+              }}
             >
               <i
                 className={`fa-solid fa-angles-${
@@ -96,41 +105,40 @@ export default function Sidebar({
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col">
               <ul className="flex flex-col gap-y-2">
-                {menu &&
-                  menu?.map((menu: any, index: number) => (
-                    <li key={index}>
-                      <Link
-                        href={menu.link}
-                        className={`flex items-center gap-x-4 relative ${
-                          sidebarCollapse
-                            ? "py-4 px-2 justify-center rounded-lg"
-                            : "py-3 px-6 rounded-full"
-                        } hover:text-black hover:bg-secondary-color ${
-                          pathname === menu.link
-                            ? "text-black bg-secondary-color"
-                            : "text-gray-500"
-                        }`}
-                        onMouseEnter={() => setIsMenuHovered(index)}
-                        onMouseLeave={() => setIsMenuHovered(-1)}
-                      >
-                        <div className="text-[20px] w-6 h-auto flex justify-center items-center">
-                          <i className={menu.icon}></i>
+                {menu?.map((menu: any, index: number) => (
+                  <li key={index}>
+                    <Link
+                      href={menu.link}
+                      className={`flex items-center gap-x-4 relative ${
+                        sidebarCollapse
+                          ? "py-4 px-2 justify-center rounded-lg"
+                          : "py-3 px-6 rounded-full"
+                      } hover:text-black hover:bg-secondary-color ${
+                        pathname === menu.link
+                          ? "text-black bg-secondary-color"
+                          : "text-gray-500"
+                      }`}
+                      onMouseEnter={() => setIsMenuHovered(index)}
+                      onMouseLeave={() => setIsMenuHovered(-1)}
+                    >
+                      <div className="text-[20px] w-6 h-auto flex justify-center items-center">
+                        <i className={menu.icon}></i>
+                      </div>
+                      {!sidebarCollapse && (
+                        <div className="text-[14px]">{menu.menu}</div>
+                      )}
+                      {sidebarCollapse && (
+                        <div
+                          className={`absolute text-[14px] translate-x-[70px] bg-white hover:bg-gray-100 text-black px-5 py-2 rounded-full left-0 ${
+                            isMenuHovered === index ? "block" : "hidden"
+                          } border transition-all ease-out`}
+                        >
+                          {menu.menu}
                         </div>
-                        {!sidebarCollapse && (
-                          <div className="text-[14px]">{menu.menu}</div>
-                        )}
-                        {sidebarCollapse && (
-                          <div
-                            className={`absolute text-[14px] translate-x-[70px] bg-white hover:bg-gray-100 text-black px-5 py-2 rounded-full left-0 ${
-                              isMenuHovered === index ? "block" : "hidden"
-                            } border transition-all ease-out`}
-                          >
-                            {menu.menu}
-                          </div>
-                        )}
-                      </Link>
-                    </li>
-                  ))}
+                      )}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <button

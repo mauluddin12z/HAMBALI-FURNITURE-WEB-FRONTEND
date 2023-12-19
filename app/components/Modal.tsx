@@ -3,16 +3,25 @@ import React, { useEffect } from "react";
 
 export default function Modal({ isVisible, onClose, children }: any) {
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isVisible && e.key === "Escape") {
+        onClose();
+      }
+    };
+
     if (isVisible) {
       document.body.classList.add("modal-open");
+      document.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.classList.remove("modal-open");
     }
 
     return () => {
       document.body.classList.remove("modal-open");
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isVisible]);
+  }, [isVisible, onClose]);
+
   if (!isVisible) return null;
 
   const handleClose = (e: any) => {
@@ -26,6 +35,11 @@ export default function Modal({ isVisible, onClose, children }: any) {
       id="wrapper"
       className="fixed inset-0 bg-black/25 backdrop-blur-sm flex justify-center items-center z-[999] w-full h-screen"
       onClick={handleClose}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handleClose(e);
+        }
+      }}
     >
       <div className="xl:w-[40%] lg:w-[60%] md:w-[80%] w-[90%] h-auto max-h-[80%] bg-white rounded flex flex-col p-4 overflow-hidden">
         <button

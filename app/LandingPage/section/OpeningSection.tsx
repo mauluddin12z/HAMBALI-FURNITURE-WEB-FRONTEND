@@ -37,7 +37,7 @@ export default function OpeningSection() {
                 Furniture Modern untuk Ruangan Anda
               </div>
               <div
-                className={`text-[18px] text-gray-600 mb-14 transition-all duration-1000 ease-in-out delay-150 ${
+                className={`text-[18px] mb-14 transition-all duration-1000 ease-in-out delay-150 ${
                   inView
                     ? "translate-x-[0%] opacity-100"
                     : "translate-x-[-50%] opacity-0"
@@ -46,8 +46,10 @@ export default function OpeningSection() {
                 <span className="font-bold text-black">
                   Hambali Furniture,{" "}
                 </span>
-                Menghadirkan Kecantikan Minimalis dan Modern dalam Setiap
-                Ruangan!. Jika berminat silahkan hubungi kontak dibawah.
+                <span className="text-gray-600">
+                  Menghadirkan Kecantikan Minimalis dan Modern dalam Setiap
+                  Ruangan!. Jika berminat silahkan hubungi kontak diba wah.
+                </span>
               </div>
               <div
                 className={`h-[60px] z-10 transition-all duration-1000 ${
@@ -81,7 +83,6 @@ export default function OpeningSection() {
                   width={1000}
                   height={1000}
                   alt="background"
-                  priority
                 />
                 <div className="z-[10] w-full aspect-square border-[10px] border-secondary-color absolute -top-[50px] -right-[50px]"></div>
               </div>

@@ -34,7 +34,6 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   width={500}
                   height={500}
                   alt={data?.title}
-                  priority
                 />
                 <Image
                   className={`object-contain w-full h-full z-20 transition-transform duration-500 hover:opacity-80`}
@@ -43,7 +42,6 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   width={500}
                   height={500}
                   alt={data?.title}
-                  priority
                 />
               </Link>
             </div>
@@ -99,7 +97,6 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
               width={500}
               height={500}
               alt={data?.title}
-              priority
             />
             <Image
               className={`object-contain w-full h-full z-20 transition-transform duration-500 hover:opacity-80`}
@@ -108,7 +105,6 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
               width={500}
               height={500}
               alt={data?.title}
-              priority
             />
           </Link>
           <div className="w-[70%] lg:ml-10 py-2 flex-grow">

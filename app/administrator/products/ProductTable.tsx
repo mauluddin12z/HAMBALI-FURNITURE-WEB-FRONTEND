@@ -10,7 +10,7 @@ import useAuth from "@/app/utils/useAuth";
 import Modal from "@/app/components/Modal";
 import LoadingForButton from "@/app/components/LoadingForButton";
 import Alerts from "@/app/components/alerts";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import useFilteredProductsData from "@/app/utils/useFilteredProductsData";
 import URLGenerator from "@/app/utils/URLGenerator";
 import useProductByIdData from "@/app/utils/useProductByIdData";
@@ -272,6 +272,11 @@ export default function ProductTable() {
                           setShowModalImage(true);
                           setProductId(products?.product_id);
                         }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setShowModalImage(true);
+                          }
+                        }}
                         className="w-[200px] aspect-square overflow-hidden cursor-pointer hover:opacity-90"
                       >
                         <Image
@@ -281,7 +286,6 @@ export default function ProductTable() {
                           width={500}
                           height={500}
                           alt={products?.product_name}
-                          priority
                         />
                       </div>
                     ) : (
@@ -379,7 +383,6 @@ export default function ProductTable() {
                 width={500}
                 height={500}
                 alt={"productImage" + productById?.product_id}
-                priority
                 onClick={() => setIsZoom((prev) => !prev)}
               />
             </div>

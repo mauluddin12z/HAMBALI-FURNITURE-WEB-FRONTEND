@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import FurnitureImg from "@/public/images/background_opening.jpg";
 import MainLayout from "../components/MainLayout";
 import BreadcrumbNavigation from "../components/breadcrumbNavigation";
@@ -40,7 +39,6 @@ export default function Page() {
                     height={500}
                     className="object-contain h-full"
                     alt="Furniture Img"
-                    priority
                   />
                 </div>
               </div>

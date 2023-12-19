@@ -2,12 +2,10 @@
 import React, { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
 import Pagination from "../components/Pagination";
-import Link from "next/link";
 import SkeletonLoading from "../components/SkeletonLoading";
 import { usePathname, useRouter } from "next/navigation";
 import MainLayout from "../components/MainLayout";
 import useFilteredBlogsData from "../utils/useFilteredBlogsData";
-import useBlogsData from "../utils/useBlogsData";
 import BreadcrumbNavigation from "../components/breadcrumbNavigation";
 
 export default function Page() {
@@ -116,6 +114,7 @@ export default function Page() {
               {gridButtonShow && (
                 <>
                   <button
+                    aria-label="grid3cols"
                     className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
                       gridCols === 3 ? "text-primary-color" : "text-gray-900"
                     }`}
@@ -128,6 +127,7 @@ export default function Page() {
                     </div>
                   </button>
                   <button
+                    aria-label="grid1cols"
                     className={`border focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 rounded-lg p-2 flex justify-center items-center hover:text-primary-color shadow ${
                       gridCols === 1 ? "text-primary-color" : "text-gray-900"
                     }`}
@@ -143,8 +143,20 @@ export default function Page() {
               )}
             </div>
             <div className="relative h-full lg:w-auto w-full">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
-                <i className="fa-solid fa-magnifying-glass"></i>
+              <div
+                onClick={() => setSearchQuery("")}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    setSearchQuery("");
+                  }
+                }}
+                className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 cursor-pointer"
+              >
+                <i
+                  className={`fa-solid ${
+                    searchQuery != "" ? "fa-xmark" : "fa-magnifying-glass"
+                  }`}
+                ></i>
               </div>
               <input
                 type="text"
@@ -156,6 +168,11 @@ export default function Page() {
                   setSearchQuery(e.target.value);
                   setStart(0);
                   router.push(pathname);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    setSearchQuery("");
+                  }
                 }}
               />
             </div>
@@ -170,7 +187,7 @@ export default function Page() {
             )}
             <div
               className={`w-full grid lg:grid-cols-${
-                gridCols === null ? 3 : gridCols
+                gridCols ?? 3
               } grid-cols-1 gap-4 mb-4`}
             >
               {filteredBlogs ? (

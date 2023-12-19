@@ -1,7 +1,7 @@
 import React from "react";
 import Image, { ImageLoader } from "next/image";
 
-interface inputImageProps {
+interface InputImageProps {
   setImage: any;
   setPreview: any;
   isRequired: boolean;
@@ -13,7 +13,7 @@ export default function inputImage({
   setPreview,
   isRequired,
   preview,
-}: inputImageProps) {
+}: InputImageProps) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
@@ -51,7 +51,6 @@ export default function inputImage({
             src={preview}
             alt="Image Preview"
             className="w-[200px] h-auto"
-            priority
           />
         </div>
       )}

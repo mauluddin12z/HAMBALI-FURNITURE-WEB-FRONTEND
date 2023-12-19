@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import URLToStringGenerator from "@/app/utils/URLToStringGenerator";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -52,7 +51,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="flex flex-col gap-10 mt-10">
             <div className="flex flex-col w-full">
               <div className="font-bold text-[30px]">{blogByTitle?.title}</div>
-              <div className="mt-2 mb-2 text-[16px] text-gray-400">
+              <div className="mt-2 mb-2 text-[16px] text-gray-500">
                 {format(
                   new Date(blogByTitle?.createdAt),
                   "EEEE, d MMMM yyyy HH:mm 'WIB'",
@@ -98,6 +97,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <div className="font-semibold text-[24px] mt-10">Share:</div>
                 <div className="flex gap-x-4">
                   <Link
+                    aria-label="whatsapp"
                     href={`https://api.whatsapp.com/send?text=${currentUrl}`}
                     target="_blank"
                     className="font-bold text-[24px] text-green-600 hover:text-green-800 transition-colors"
@@ -105,6 +105,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     <i className="fa-brands fa-whatsapp"></i>
                   </Link>
                   <Link
+                    aria-label="facebook"
                     href={`https://www.facebook.com/share.php?u=${currentUrl}`}
                     target="_blank"
                     className="font-bold text-[24px] text-blue-600 hover:text-blue-800 transition-colors"

@@ -8,16 +8,24 @@ export default function Modal({
   setIsZoom,
 }: any) {
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isVisible && e.key === "Escape") {
+        onClose();
+      }
+    };
+
     if (isVisible) {
       document.body.classList.add("modal-open");
+      document.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.classList.remove("modal-open");
     }
 
     return () => {
       document.body.classList.remove("modal-open");
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isVisible]);
+  }, [isVisible, onClose]);
 
   if (!isVisible) return null;
 
@@ -33,6 +41,11 @@ export default function Modal({
       id="wrapper"
       className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-[90] w-full h-screen"
       onClick={handleClose}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handleClose(e);
+        }
+      }}
     >
       <div className="h-auto flex flex-col">
         <button

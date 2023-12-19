@@ -1,7 +1,7 @@
 import React from "react";
 import Image, { ImageLoader } from "next/image";
 
-interface inputMultipleImagesProps {
+interface InputMultipleImagesProps {
   setImage: any;
   setPreview: any;
   isRequired: boolean;
@@ -13,7 +13,7 @@ export default function InputImage({
   setPreview,
   isRequired,
   preview,
-}: inputMultipleImagesProps) {
+}: InputMultipleImagesProps) {
   const myLoader: ImageLoader = ({ src }) => {
     return process.env.NEXT_PUBLIC_MY_BACKEND_URL + src;
   };
@@ -65,7 +65,6 @@ export default function InputImage({
                 width={500}
                 height={500}
                 alt={`Image Preview ${index + 1}`}
-                priority
               />
               <Image
                 className={`object-contain z-[20] h-full transition-transform duration-500`}
@@ -74,7 +73,6 @@ export default function InputImage({
                 width={500}
                 height={500}
                 alt={`Image Preview ${index + 1}`}
-                priority
               />
             </div>
           ))}

@@ -209,6 +209,11 @@ export default function ProductTable() {
                           setShowModalImage(true);
                           setCategoryId(categories?.category_id);
                         }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setShowModalImage(true);
+                          }
+                        }}
                         className="w-[200px] aspect-square overflow-hidden cursor-pointer hover:opacity-90"
                       >
                         <Image
@@ -218,7 +223,6 @@ export default function ProductTable() {
                           width={500}
                           height={500}
                           alt={categories?.category}
-                          priority
                         />
                       </div>
                     ) : (
@@ -290,7 +294,6 @@ export default function ProductTable() {
                 width={500}
                 height={500}
                 alt={"categoryImage" + categoryById?.category_id}
-                priority
                 onClick={() => setIsZoom((prev) => !prev)}
               />
             </div>

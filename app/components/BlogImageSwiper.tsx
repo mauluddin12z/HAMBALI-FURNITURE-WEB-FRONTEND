@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -48,13 +48,12 @@ export default function BlogImageSwiper({ data }: any) {
                     className={`bg-black/80 backdrop-blur-md w-full h-full absolute z-10`}
                   ></div>
                   <Image
-                    className={`absolute w-full h-full`}
+                    className={`absolute w-full h-full object-cover`}
                     loader={myLoader}
                     src={blogImages?.imageUrl}
                     width={500}
                     height={500}
                     alt={data?.title}
-                    priority
                   />
                   <Image
                     className={`object-contain w-full h-full z-20 transition-transform duration-500`}
@@ -63,7 +62,6 @@ export default function BlogImageSwiper({ data }: any) {
                     width={500}
                     height={500}
                     alt={data?.title}
-                    priority
                   />
                 </div>
               </SwiperSlide>
@@ -98,13 +96,12 @@ export default function BlogImageSwiper({ data }: any) {
                   className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
                 ></div>
                 <Image
-                  className={`absolute w-full h-full`}
+                  className={`absolute w-full h-full object-cover`}
                   loader={myLoader}
                   src={blogImages?.imageUrl}
                   width={500}
                   height={500}
                   alt={data?.title}
-                  priority
                 />
                 <Image
                   className={`object-contain w-full h-full z-20 transition-transform duration-500`}
@@ -113,7 +110,6 @@ export default function BlogImageSwiper({ data }: any) {
                   width={500}
                   height={500}
                   alt={data?.title}
-                  priority
                 />
               </div>
             </SwiperSlide>

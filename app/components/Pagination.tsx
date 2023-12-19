@@ -74,6 +74,7 @@ export default function Pagination({ totalData, start, setStart, limit }: any) {
       <ul className="inline-flex -space-x-px">
         <li>
           <button
+            aria-label="previousPage"
             disabled={currentPage <= 1}
             className={`px-3 py-2 leading-tight bg-white border border-gray-300 rounded-l-lg ${
               currentPage <= 1
@@ -102,6 +103,7 @@ export default function Pagination({ totalData, start, setStart, limit }: any) {
         ))}
         <li>
           <button
+            aria-label="nextPage"
             disabled={currentPage >= Math.max(...pageNumbers)}
             className={`px-3 py-2 leading-tight bg-white border border-gray-300 rounded-r-lg ${
               currentPage >= Math.max(...pageNumbers)

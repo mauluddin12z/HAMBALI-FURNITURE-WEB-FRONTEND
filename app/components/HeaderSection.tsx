@@ -134,7 +134,6 @@ export default function HeaderSection() {
             height={500}
             alt="logoHambaliFurnitre"
             className="w-[100px] h-auto"
-            priority
           />
         </Link>
         <div className="hidden w-full lg:block lg:w-auto">
@@ -163,6 +162,11 @@ export default function HeaderSection() {
                 aria-label="searchBtn"
                 className="text-[22px] transition-all w-6 text-black hover:text-primary-color"
                 onClick={() => setSearchFormVisible((prev) => !prev)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || "Escape") {
+                    setSearchFormVisible(false);
+                  }
+                }}
               >
                 <i
                   className={`fa-solid ${
@@ -222,16 +226,12 @@ export default function HeaderSection() {
               }`}
             >
               <div className="relative w-full flex justify-center">
-                <div
-                  className="w-full h-full"
-                  onClick={() => setSearchFormVisible(false)}
+                <form
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === "Escape" || e.key === "Enter") {
                       setSearchFormVisible(false);
                     }
                   }}
-                ></div>
-                <form
                   onSubmit={handleSearch}
                   className="z-50 absolute top-0 w-[90%]"
                 >
@@ -243,6 +243,7 @@ export default function HeaderSection() {
                     placeholder="Cari lemari, meja, rak..."
                   />
                   <button
+                    aria-label="searchBtnForm"
                     type="submit"
                     className="absolute text-[22px] right-4 top-4"
                   >
@@ -253,8 +254,14 @@ export default function HeaderSection() {
             </div>
             <div className="flex gap-x-4">
               <button
+                aria-label="searchBtn"
                 className="text-[22px] transition-all w-6 text-black hover:text-primary-color"
                 onClick={() => setSearchFormVisible((prev) => !prev)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    setSearchFormVisible(false);
+                  }
+                }}
               >
                 <i
                   className={`fa-solid ${
@@ -263,6 +270,7 @@ export default function HeaderSection() {
                 ></i>
               </button>
               <button
+                aria-label="hamburgerBtn"
                 className="p-2 text-black text-[20px]"
                 onClick={toggleMenu}
               >
@@ -276,6 +284,7 @@ export default function HeaderSection() {
             >
               <div className="relative w-full h-full z-10">
                 <button
+                  aria-label="xMark"
                   className={`p-2 transition-opacity duration-300 absolute z-50 text-black text-[20px] opacity-100 top-[5%] right-[10%] ease-out`}
                   onClick={toggleMenu}
                 >
@@ -294,22 +303,24 @@ export default function HeaderSection() {
                         </Link>
                       </li>
                     ))}
-                    <div className="flex gap-x-6 text-gray-700">
-                      {socialMedia?.map((socialMedia: any, index: number) => (
-                        <li key={index}>
-                          <a
-                            aria-label={socialMedia.link}
-                            href={socialMedia.link}
-                            target="_blank"
-                            className="hover:text-primary-color text-[24px] transition-all"
-                          >
-                            <i
-                              className={`fa-brands fa-${socialMedia.icon}`}
-                            ></i>
-                          </a>
-                        </li>
-                      ))}
-                    </div>
+                    <li>
+                      <ul className="flex gap-x-6 text-gray-700">
+                        {socialMedia?.map((socialMedia: any, index: number) => (
+                          <li key={index}>
+                            <a
+                              aria-label={socialMedia.link}
+                              href={socialMedia.link}
+                              target="_blank"
+                              className="hover:text-primary-color text-[24px] transition-all"
+                            >
+                              <i
+                                className={`fa-brands fa-${socialMedia.icon}`}
+                              ></i>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
                   </ul>
                 </div>
               </div>

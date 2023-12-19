@@ -14,7 +14,6 @@ export default function ProductCard({ data }: any) {
   };
 
   const [productId, setProductId] = useState(0);
-
   const { productById } = useProductByIdData(productId);
   const [showModal, setShowModal] = useState(false);
   return (
@@ -37,6 +36,11 @@ export default function ProductCard({ data }: any) {
                   setShowModal(true);
                   setProductId(data?.product_id);
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setShowModal(true);
+                  }
+                }}
               >
                 <Image
                   className={`object-contain h-full rounded-t-lg scale-[110%] hover:scale-[115%] ${
@@ -47,7 +51,6 @@ export default function ProductCard({ data }: any) {
                   width={500}
                   height={500}
                   alt={data?.product_name}
-                  priority
                 />
               </div>
             </div>
@@ -75,7 +78,6 @@ export default function ProductCard({ data }: any) {
                     width={500}
                     height={500}
                     alt={productById?.product_name}
-                    priority
                   />
                 ) : (
                   <div>No image available</div>

@@ -230,6 +230,11 @@ export default function BlogTable() {
                           setShowModalImage(true);
                           setBlogId(blogs?.blog_id);
                         }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setShowModalImage(true);
+                          }
+                        }}
                         className="w-[250px] aspect-square flex justify-center items-center overflow-hidden cursor-pointer relative"
                       >
                         {blogs.blog_images?.length > 1 && (
@@ -247,7 +252,6 @@ export default function BlogTable() {
                           width={500}
                           height={500}
                           alt={blogs?.title}
-                          priority
                         />
                         <Image
                           className={`object-contain z-[20] h-full transition-transform duration-500 hover:opacity-80`}
@@ -256,7 +260,6 @@ export default function BlogTable() {
                           width={500}
                           height={500}
                           alt={blogs?.title}
-                          priority
                         />
                       </div>
                     ) : (
