@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Image, { ImageLoader } from "next/image";
-import useSWR from "swr";
 import Link from "next/link";
 import URLGenerator from "@/app/utils/URLGenerator";
 import { SwiperSlide } from "swiper/react";
@@ -18,14 +16,14 @@ export default function CategoriesSection() {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
-  const [cardIsHovered, setcardIsHovered] = useState(-1);
+  const [cardIsHovered, setCardIsHovered] = useState(-1);
 
   const handleOutsideLayerHover = (index: number) => {
-    setcardIsHovered(index);
+    setCardIsHovered(index);
   };
 
   const handleOutsideLayerLeave = () => {
-    setcardIsHovered(-1);
+    setCardIsHovered(-1);
   };
 
   const { categories } = useCategoriesData();

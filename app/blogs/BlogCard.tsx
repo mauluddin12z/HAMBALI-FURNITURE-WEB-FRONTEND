@@ -33,7 +33,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   src={data?.blog_images[0]?.imageUrl}
                   width={500}
                   height={500}
-                  alt="sss"
+                  alt={data?.title}
                   priority
                 />
                 <Image
@@ -98,7 +98,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
               src={data?.blog_images[0]?.imageUrl}
               width={500}
               height={500}
-              alt="sss"
+              alt={data?.title}
               priority
             />
             <Image
