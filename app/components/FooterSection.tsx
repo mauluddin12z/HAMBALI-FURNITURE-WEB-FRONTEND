@@ -60,17 +60,17 @@ export default function FooterSection() {
                 sentuhan elegan dan fungsional untuk rumah dan ruang kerja Anda.
               </div>
               <div className="flex gap-x-1">
-                {socialMedia &&
-                  socialMedia?.map((socialMedia: any, index: number) => (
-                    <a
-                      key={index}
-                      href={socialMedia.link}
-                      target="_blank"
-                      className="text-gray-600 hover:text-black text-[22px] transition-all p-1"
-                    >
-                      <i className={`fa-brands fa-${socialMedia.icon}`}></i>
-                    </a>
-                  ))}
+                {socialMedia?.map((socialMedia: any, index: number) => (
+                  <a
+                    aria-label={socialMedia.link}
+                    key={index}
+                    href={socialMedia.link}
+                    target="_blank"
+                    className="text-gray-600 hover:text-black text-[22px] transition-all p-1"
+                  >
+                    <i className={`fa-brands fa-${socialMedia.icon}`}></i>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -78,21 +78,18 @@ export default function FooterSection() {
             <div className="flex flex-col">
               <div className="font-bold text-[28px] mb-4">Products</div>
               <ul className="flex flex-col gap-y-1">
-                {limitedProducts &&
-                  limitedProducts?.map((products: any, index: number) => (
-                    <li
-                      key={index}
-                      className="text-gray-600 hover:text-black text-[14px]"
+                {limitedProducts?.map((products: any, index: number) => (
+                  <li
+                    key={index}
+                    className="text-gray-600 hover:text-black text-[14px]"
+                  >
+                    <Link
+                      href={`/products/${URLGenerator(products.product_name)}`}
                     >
-                      <Link
-                        href={`/products/${URLGenerator(
-                          products.product_name
-                        )}`}
-                      >
-                        {products.product_name}
-                      </Link>
-                    </li>
-                  ))}
+                      {products.product_name}
+                    </Link>
+                  </li>
+                ))}
                 <li className="text-gray-600 hover:text-black text-[14px]">
                   <Link href={"/products"}>View more</Link>
                 </li>
@@ -103,8 +100,7 @@ export default function FooterSection() {
             <div className="flex flex-col">
               <div className="font-bold text-[28px] mb-4">Categories</div>
               <ul className="flex flex-col gap-y-1">
-                {limitedCategories &&
-                  limitedCategories?.map((categories: any, index: number) => (
+                {limitedCategories?.map((categories: any, index: number) => (
                     <li
                       key={index}
                       className="text-gray-600 hover:text-black text-[14px]"

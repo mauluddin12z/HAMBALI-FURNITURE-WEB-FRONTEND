@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
 import LogoHambaliFurniture from "@/public/images/LogoHambaliFurniture.png";
 import Image from "next/image";
-import { usePathname, useRouter} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Loading from "./Loading";
 
 export default function HeaderSection() {
@@ -98,7 +98,7 @@ export default function HeaderSection() {
     );
 
     const handleScroll = () => {
-      const position = typeof window !== "undefined" ? window.pageYOffset : 0;
+      const position = typeof window !== "undefined" ? window.scrollY : 0;
       const threshold = 100;
       setScrolled(position > threshold);
     };
@@ -160,6 +160,7 @@ export default function HeaderSection() {
           <ul className="font-medium flex items-center gap-x-4">
             <li className="relative">
               <button
+                aria-label="searchBtn"
                 className="text-[22px] transition-all w-6 text-black hover:text-primary-color"
                 onClick={() => setSearchFormVisible((prev) => !prev)}
               >
@@ -173,7 +174,7 @@ export default function HeaderSection() {
                 className={`absolute -right-4 left-auto transition-all z-20 w-96 ${
                   searchFormVisible
                     ? "opacity-100 top-[90px]"
-                    : "opacity-0 top-32 -z-10 pointer-events-none"
+                    : "opacity-0 top-32 -z-10 pointer-events-none d-none"
                 }`}
               >
                 <form onSubmit={handleSearch} className="relative w-full">
@@ -185,6 +186,7 @@ export default function HeaderSection() {
                     placeholder="Cari lemari, meja, rak..."
                   />
                   <button
+                    aria-label="searchBtnForm"
                     type="submit"
                     className="absolute text-[22px] right-4 top-4"
                   >
@@ -196,6 +198,7 @@ export default function HeaderSection() {
             {socialMedia?.map((socialMedia: any, index: number) => (
               <li key={index}>
                 <a
+                  aria-label={socialMedia.link}
                   href={socialMedia.link}
                   target="_blank"
                   className="text-black hover:text-primary-color text-[22px] transition-all"
@@ -222,6 +225,11 @@ export default function HeaderSection() {
                 <div
                   className="w-full h-full"
                   onClick={() => setSearchFormVisible(false)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setSearchFormVisible(false);
+                    }
+                  }}
                 ></div>
                 <form
                   onSubmit={handleSearch}
@@ -290,6 +298,7 @@ export default function HeaderSection() {
                       {socialMedia?.map((socialMedia: any, index: number) => (
                         <li key={index}>
                           <a
+                            aria-label={socialMedia.link}
                             href={socialMedia.link}
                             target="_blank"
                             className="hover:text-primary-color text-[24px] transition-all"

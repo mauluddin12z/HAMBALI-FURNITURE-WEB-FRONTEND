@@ -28,12 +28,12 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10 rounded-xl`}
                 ></div>
                 <Image
-                  className={`absolute w-full h-full`}
+                  className={`absolute w-full h-full object-cover`}
                   loader={myLoader}
                   src={data?.blog_images[0]?.imageUrl}
                   width={500}
                   height={500}
-                  alt={data?.title}
+                  alt="sss"
                   priority
                 />
                 <Image
@@ -49,7 +49,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
             </div>
             <div className="flex flex-col justify-between flex-grow">
               <div className="flex flex-col">
-                <div className="z-20 text-gray-400 lg:text-[14px]">
+                <div className="z-20 text-gray-600 lg:text-[14px]">
                   {format(
                     new Date(data?.createdAt),
                     "EEEE, d MMMM yyyy HH:mm 'WIB'",
@@ -67,7 +67,7 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
                   </Link>
                 </div>
                 <div
-                  className="text-[14px] text-gray-400 mt-2 text-justify truncate line-clamp-[3] whitespace-pre-wrap leading-8"
+                  className="text-[14px] text-gray-600 mt-2 text-justify truncate line-clamp-[3] whitespace-pre-wrap leading-8"
                   dangerouslySetInnerHTML={{ __html: data?.description }}
                 />
               </div>
@@ -93,12 +93,12 @@ export default function BlogCard({ data, gridCols, gridButtonShow }: any) {
               className={`bg-black/50 backdrop-blur-md w-full h-full absolute z-10`}
             ></div>
             <Image
-              className={`absolute w-full h-full`}
+              className={`absolute w-full h-full object-cover`}
               loader={myLoader}
               src={data?.blog_images[0]?.imageUrl}
               width={500}
               height={500}
-              alt={data?.title}
+              alt="sss"
               priority
             />
             <Image
