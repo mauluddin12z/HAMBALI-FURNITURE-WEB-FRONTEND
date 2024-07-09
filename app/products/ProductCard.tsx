@@ -92,7 +92,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {productById?.product_name}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 {productById?.category?.category ? (
@@ -103,7 +103,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {productById?.category.category}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 {productById?.dimensions ? (
@@ -114,7 +114,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {productById?.dimensions}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 {productById?.material ? (
@@ -125,7 +125,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {productById?.material}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 {productById?.color ? (
@@ -136,7 +136,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {productById?.color}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 {productById?.price ? (
@@ -147,7 +147,7 @@ export default function ProductCard({ data }: any) {
                     <div className="text-gray-600 lg:text-[16px] text-[14px]">
                       {<FormatRupiah value={productById?.price} />}
                     </div>
-                    <div className="w-full h-[1px] bg-black mb-3"></div>
+                    <div className="w-full h-[1px] bg-black/10 mb-3"></div>
                   </>
                 ) : null}
                 <Link
