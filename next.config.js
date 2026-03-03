@@ -5,8 +5,16 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api-hambali-furniture.hidayatmauluddin.my.id/:path*',
+      },
+    ];
   },
 };
 
