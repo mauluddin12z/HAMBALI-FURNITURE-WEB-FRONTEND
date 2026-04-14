@@ -22,7 +22,7 @@ jobs:
               # Load NVM (Node Version Manager)
               export NVM_DIR="$HOME/.nvm"
               [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-              nvm use 24  # Use the Node version you need
+              nvm use 20  # Use the Node version you need
 
               # Navigate to the app folder
               cd /home/hidayatmauluddin/hambali-furniture/frontend
