@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -19,23 +19,31 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             bash -lc '
-              # Load NVM (Node Version Manager)
-              export NVM_DIR="$HOME/.nvm"
-              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-              nvm use 20  # Use the Node version you need
+              set -e
 
-              # Navigate to the app folder
-              cd /home/hidayatmauluddin/hambali-furniture/frontend
+              APP_NAME="${{ github.event.repository.name }}"
+              APP_DIR="/var/www/apps/$APP_NAME"
 
-              # Sync repo
+              echo "Deploying $APP_NAME to $APP_DIR"
+
+              mkdir -p /var/www/apps
+
+              if [ ! -d "$APP_DIR/.git" ]; then
+                git clone git@github.com:${{ github.repository }}.git "$APP_DIR"
+              fi
+
+              cd "$APP_DIR"
+
               git fetch origin
               git reset --hard origin/main
               git clean -fd
 
-              # Install dependencies and build
+              export NVM_DIR="$HOME/.nvm"
+              [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+              nvm use 20
+
               npm ci
               npm run build
 
-              # Restart the app with PM2
-              pm2 reload hambali-furniture-frontend || pm2 start ecosystem.config.js
+              pm2 reload ecosystem.config.cjs || pm2 start ecosystem.config.cjs
             '
